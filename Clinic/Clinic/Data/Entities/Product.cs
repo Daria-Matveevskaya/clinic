@@ -13,6 +13,7 @@ public class Product
 
     public DateTime CreateDate { get; set; }
 
+    [Required]
     [StringLength(100)]
     public required string CategoryName { get; set; }
 
