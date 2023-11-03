@@ -32,13 +32,12 @@
             dataGridViewCategories = new DataGridView();
             categoryBindingSource = new BindingSource(components);
             dataGridViewProducts = new DataGridView();
-            productsBindingSource = new BindingSource(components);
-            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             createDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             categoryNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             categoryDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            productsBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)dataGridViewCategories).BeginInit();
             ((System.ComponentModel.ISupportInitialize)categoryBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).BeginInit();
@@ -49,48 +48,35 @@
             // 
             dataGridViewCategories.AutoGenerateColumns = false;
             dataGridViewCategories.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCategories.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCategories.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn });
             dataGridViewCategories.DataSource = categoryBindingSource;
             dataGridViewCategories.Dock = DockStyle.Left;
             dataGridViewCategories.Location = new Point(0, 0);
+            dataGridViewCategories.Margin = new Padding(3, 2, 3, 2);
             dataGridViewCategories.Name = "dataGridViewCategories";
             dataGridViewCategories.RowHeadersWidth = 51;
             dataGridViewCategories.RowTemplate.Height = 29;
-            dataGridViewCategories.Size = new Size(300, 450);
+            dataGridViewCategories.Size = new Size(248, 338);
             dataGridViewCategories.TabIndex = 0;
             dataGridViewCategories.SelectionChanged += dataGridViewCategories_SelectionChanged;
-            // 
-            // categoryBindingSource
-            // 
-            categoryBindingSource.DataSource = typeof(Data.Entities.Category);
             // 
             // dataGridViewProducts
             // 
             dataGridViewProducts.AutoGenerateColumns = false;
             dataGridViewProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewProducts.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewProducts.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn1, descriptionDataGridViewTextBoxColumn, createDateDataGridViewTextBoxColumn, categoryNameDataGridViewTextBoxColumn, categoryDataGridViewTextBoxColumn });
             dataGridViewProducts.DataSource = productsBindingSource;
             dataGridViewProducts.Dock = DockStyle.Fill;
-            dataGridViewProducts.Location = new Point(300, 0);
+            dataGridViewProducts.Location = new Point(248, 0);
+            dataGridViewProducts.Margin = new Padding(3, 2, 3, 2);
             dataGridViewProducts.Name = "dataGridViewProducts";
             dataGridViewProducts.RowHeadersWidth = 51;
             dataGridViewProducts.RowTemplate.Height = 29;
-            dataGridViewProducts.Size = new Size(500, 450);
+            dataGridViewProducts.Size = new Size(452, 338);
             dataGridViewProducts.TabIndex = 1;
-            // 
-            // productsBindingSource
-            // 
-            productsBindingSource.DataMember = "Products";
-            productsBindingSource.DataSource = categoryBindingSource;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Категория";
-            nameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             // 
             // nameDataGridViewTextBoxColumn1
             // 
@@ -129,13 +115,19 @@
             categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
             categoryDataGridViewTextBoxColumn.Visible = false;
             // 
+            // productsBindingSource
+            // 
+            productsBindingSource.DataMember = "Products";
+            productsBindingSource.DataSource = categoryBindingSource;
+            // 
             // ProductForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(dataGridViewProducts);
             Controls.Add(dataGridViewCategories);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ProductForm";
             Text = "ProductForm";
             ((System.ComponentModel.ISupportInitialize)dataGridViewCategories).EndInit();
