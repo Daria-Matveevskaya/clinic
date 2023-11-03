@@ -46,13 +46,15 @@
             // dataGridViewDirectories
             // 
             dataGridViewDirectories.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewDirectories.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewDirectories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewDirectories.Dock = DockStyle.Fill;
             dataGridViewDirectories.Location = new Point(0, 0);
+            dataGridViewDirectories.Margin = new Padding(3, 2, 3, 2);
             dataGridViewDirectories.Name = "dataGridViewDirectories";
             dataGridViewDirectories.RowHeadersWidth = 51;
             dataGridViewDirectories.RowTemplate.Height = 29;
-            dataGridViewDirectories.Size = new Size(800, 450);
+            dataGridViewDirectories.Size = new Size(700, 338);
             dataGridViewDirectories.TabIndex = 0;
             // 
             // employeeBindingSource
@@ -77,10 +79,11 @@
             // 
             // DirectoryForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(dataGridViewDirectories);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "DirectoryForm";
             Text = "DirectoryForm";
             ((System.ComponentModel.ISupportInitialize)dataGridViewDirectories).EndInit();
