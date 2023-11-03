@@ -27,10 +27,10 @@ namespace Clinic.Forms
         {
             base.OnLoad(e);
 
-            this.applicationDbContext = new ApplicationDbContext();
+            applicationDbContext = new ApplicationDbContext();
 
-            this.dataGridViewDirectories.AutoGenerateColumns = true;
-            this.dataGridViewDirectories.Columns.Clear();
+            dataGridViewDirectories.AutoGenerateColumns = true;
+            dataGridViewDirectories.Columns.Clear();
 
             DataLoad();
         }
@@ -39,8 +39,8 @@ namespace Clinic.Forms
         {
             base.OnClosing(e);
 
-            this.applicationDbContext?.Dispose();
-            this.applicationDbContext = null;
+            applicationDbContext?.Dispose();
+            applicationDbContext = null;
         }
 
         private void DataLoad()
@@ -48,50 +48,50 @@ namespace Clinic.Forms
             switch (selectedCategoryType)
             {
                 case DirectoryTypeEnum.Category:
-                    this.applicationDbContext?.Categories.Load();
-                    this.categoryBindingSource.DataSource = this.applicationDbContext?.Categories.Local.ToBindingList();
-                    this.dataGridViewDirectories.DataSource = this.categoryBindingSource;
-                    this.dataGridViewDirectories.Columns["Name"].HeaderText = "Наименование";
+                    applicationDbContext?.Categories.Load();
+                    categoryBindingSource.DataSource = applicationDbContext?.Categories.Local.ToBindingList();
+                    dataGridViewDirectories.DataSource = categoryBindingSource;
+                    dataGridViewDirectories.Columns["Name"].HeaderText = "Наименование";
                     break;
                 case DirectoryTypeEnum.Product:
-                    this.applicationDbContext?.Products.Load();
-                    this.productBindingSource.DataSource = this.applicationDbContext?.Products.Local.ToBindingList();
-                    this.dataGridViewDirectories.DataSource = this.productBindingSource;
-                    this.dataGridViewDirectories.Columns["Name"].HeaderText = "Наименование";
-                    this.dataGridViewDirectories.Columns["Description"].HeaderText = "Описание";
-                    this.dataGridViewDirectories.Columns["CreateDate"].HeaderText = "Дата создания";
-                    this.dataGridViewDirectories.Columns["CategoryName"].HeaderText = "Категория";
-                    this.dataGridViewDirectories.Columns["CategoryName"].ReadOnly = true;
-                    this.dataGridViewDirectories.Columns["Category"].Visible = false;
+                    applicationDbContext?.Products.Load();
+                    productBindingSource.DataSource = applicationDbContext?.Products.Local.ToBindingList();
+                    dataGridViewDirectories.DataSource = productBindingSource;
+                    dataGridViewDirectories.Columns["Name"].HeaderText = "Наименование";
+                    dataGridViewDirectories.Columns["Description"].HeaderText = "Описание";
+                    dataGridViewDirectories.Columns["CreateDate"].HeaderText = "Дата создания";
+                    dataGridViewDirectories.Columns["CategoryName"].HeaderText = "Категория";
+                    dataGridViewDirectories.Columns["CategoryName"].ReadOnly = true;
+                    dataGridViewDirectories.Columns["Category"].Visible = false;
                     break;
                 case DirectoryTypeEnum.Unit:
-                    this.applicationDbContext?.Units.Load();
-                    this.unitBindingSource.DataSource = this.applicationDbContext?.Units.Local.ToBindingList();
-                    this.dataGridViewDirectories.DataSource = this.unitBindingSource;
-                    this.dataGridViewDirectories.Columns["Name"].HeaderText = "Наименование";
-                    this.dataGridViewDirectories.Columns["Abbreviation"].HeaderText = "Обозначение";
+                    applicationDbContext?.Units.Load();
+                    unitBindingSource.DataSource = applicationDbContext?.Units.Local.ToBindingList();
+                    dataGridViewDirectories.DataSource = unitBindingSource;
+                    dataGridViewDirectories.Columns["Name"].HeaderText = "Наименование";
+                    dataGridViewDirectories.Columns["Abbreviation"].HeaderText = "Обозначение";
                     break;
                 case DirectoryTypeEnum.Provider:
-                    this.applicationDbContext?.Providers.Load();
-                    this.providerBindingSource.DataSource = applicationDbContext?.Providers.Local.ToBindingList();
-                    this.dataGridViewDirectories.DataSource = this.providerBindingSource;
-                    this.dataGridViewDirectories.Columns["Id"].Visible = false;
-                    this.dataGridViewDirectories.Columns["Name"].HeaderText = "Наименование";
-                    this.dataGridViewDirectories.Columns["Address"].HeaderText = "Адрес";
-                    this.dataGridViewDirectories.Columns["Email"].HeaderText = "Электронный адрес";
-                    this.dataGridViewDirectories.Columns["Phone"].HeaderText = "Номер телефона";
+                    applicationDbContext?.Providers.Load();
+                    providerBindingSource.DataSource = applicationDbContext?.Providers.Local.ToBindingList();
+                    dataGridViewDirectories.DataSource = providerBindingSource;
+                    dataGridViewDirectories.Columns["Id"].Visible = false;
+                    dataGridViewDirectories.Columns["Name"].HeaderText = "Наименование";
+                    dataGridViewDirectories.Columns["Address"].HeaderText = "Адрес";
+                    dataGridViewDirectories.Columns["Email"].HeaderText = "Электронный адрес";
+                    dataGridViewDirectories.Columns["Phone"].HeaderText = "Номер телефона";
                     break;
                 case DirectoryTypeEnum.Employee:
-                    this.applicationDbContext?.Employees.Load();
-                    this.employeeBindingSource.DataSource = applicationDbContext?.Employees.Local.ToBindingList();
-                    this.dataGridViewDirectories.DataSource = this.employeeBindingSource;
-                    this.dataGridViewDirectories.Columns["Id"].Visible = false;
-                    this.dataGridViewDirectories.Columns["Surname"].HeaderText = "Фамилия";
-                    this.dataGridViewDirectories.Columns["FirstName"].HeaderText = "Имя";
-                    this.dataGridViewDirectories.Columns["PatronymicName"].HeaderText = "Отчество";
-                    this.dataGridViewDirectories.Columns["GenderAsString"].HeaderText = "Пол";
-                    this.dataGridViewDirectories.Columns["Gender"].Visible = false;
-                    this.dataGridViewDirectories.Columns["BirthDate"].HeaderText = "Дата рождения";
+                    applicationDbContext?.Employees.Load();
+                    employeeBindingSource.DataSource = applicationDbContext?.Employees.Local.ToBindingList();
+                    dataGridViewDirectories.DataSource = employeeBindingSource;
+                    dataGridViewDirectories.Columns["Id"].Visible = false;
+                    dataGridViewDirectories.Columns["Surname"].HeaderText = "Фамилия";
+                    dataGridViewDirectories.Columns["FirstName"].HeaderText = "Имя";
+                    dataGridViewDirectories.Columns["PatronymicName"].HeaderText = "Отчество";
+                    dataGridViewDirectories.Columns["GenderAsString"].HeaderText = "Пол";
+                    dataGridViewDirectories.Columns["Gender"].Visible = false;
+                    dataGridViewDirectories.Columns["BirthDate"].HeaderText = "Дата рождения";
                     break;
                 default:
                     break;

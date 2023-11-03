@@ -18,26 +18,26 @@ namespace Clinic.Forms
         {
             base.OnLoad(e);
 
-            this.applicationDbContext = new ApplicationDbContext();
+            applicationDbContext = new ApplicationDbContext();
 
-            this.applicationDbContext?.Categories.Load();
+            applicationDbContext?.Categories.Load();
 
-            this.categoryBindingSource.DataSource = applicationDbContext?.Categories.Local.ToBindingList();
+            categoryBindingSource.DataSource = applicationDbContext?.Categories.Local.ToBindingList();
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
 
-            this.applicationDbContext?.Dispose();
-            this.applicationDbContext = null;
+            applicationDbContext?.Dispose();
+            applicationDbContext = null;
         }
 
         private void dataGridViewCategories_SelectionChanged(object sender, EventArgs e)
         {
             if (applicationDbContext != null)
             {
-                var category = (Category?)this.dataGridViewCategories.CurrentRow?.DataBoundItem;
+                var category = (Category?)dataGridViewCategories.CurrentRow?.DataBoundItem;
 
                 if (category != null)
                 {

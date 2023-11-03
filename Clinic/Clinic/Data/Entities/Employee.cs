@@ -10,16 +10,16 @@ public class Employee
     public int Id { get; set; }
 
     [Required, MaxLength(50)]
-    public required string Surname { get; set; }
+    public string Surname { get; set; } = string.Empty;
 
     [Required, MaxLength(50)]
-    public required string FirstName { get; set; }
+    public string FirstName { get; set; } = string.Empty;
 
     [MaxLength(50)]
     public string? PatronymicName { get; set; }
 
     [Column(TypeName = "nchar(1)"), Required]
-    public required string GenderAsString { get; set; }
+    public string GenderAsString { get; set; } = "М";
 
     [NotMapped]
     public GenderType Gender
@@ -29,6 +29,7 @@ public class Employee
     }
 
     public DateTime? BirthDate { get; set; }
+
 }
 
 public enum GenderType

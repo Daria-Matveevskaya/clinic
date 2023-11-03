@@ -73,7 +73,6 @@
             toolStripMenuItem3.Name = "toolStripMenuItem3";
             toolStripMenuItem3.Size = new Size(143, 24);
             toolStripMenuItem3.Text = "Справочники";
-            toolStripMenuItem3.DropDownItemClicked += toolStripMenuItem3_DropDownItemClicked;
             // 
             // toolStripMenuItem5
             // 
@@ -104,6 +103,7 @@
             toolStripMenuItem9.Name = "toolStripMenuItem9";
             toolStripMenuItem9.Size = new Size(224, 26);
             toolStripMenuItem9.Text = "Сотрудники";
+            toolStripMenuItem9.Click += toolStripMenuItem9_Click;
             // 
             // toolStripMenuItem2
             // 
