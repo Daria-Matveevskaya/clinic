@@ -7,7 +7,7 @@ namespace Clinic
     public partial class MainForm : Form
     {
         private ApplicationDbContext? applicationDbContext;
-        
+
         private readonly ProductForm productForm = new ProductForm()
         {
             WindowState = FormWindowState.Maximized,
@@ -15,6 +15,12 @@ namespace Clinic
         };
 
         private readonly EmployeeForm employeeForm = new EmployeeForm()
+        {
+            WindowState = FormWindowState.Maximized,
+            ControlBox = false
+        };
+
+        private readonly ProviderForm providerForm = new ProviderForm()
         {
             WindowState = FormWindowState.Maximized,
             ControlBox = false
@@ -55,6 +61,21 @@ namespace Clinic
             }
             productForm.MdiParent = this;
             productForm.Show();
+        }
+
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(ProviderForm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            providerForm.MdiParent = this;
+            providerForm.Show();
         }
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)

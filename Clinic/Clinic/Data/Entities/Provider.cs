@@ -8,7 +8,7 @@ public class Provider
     public int Id { get; set; }
 
     [Required, MaxLength(200)]
-    public required string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [MaxLength(100)]
     public string? Address { get; set; }
