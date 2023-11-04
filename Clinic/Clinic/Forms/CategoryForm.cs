@@ -1,17 +1,17 @@
-﻿using Clinic.Data;
-using Clinic.Data.Entities;
+﻿using Clinic.Data.Entities;
+using Clinic.Data;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace Clinic.Forms
 {
-    public partial class ProviderForm : Form
+    public partial class CategoryForm : Form
     {
         private ApplicationDbContext? applicationDbContext;
 
-        private ProviderEditForm? providerEditForm;
+        private CategoryEditForm? categoryEditForm;
 
-        public ProviderForm()
+        public CategoryForm()
         {
             InitializeComponent();
         }
@@ -21,17 +21,16 @@ namespace Clinic.Forms
             base.OnLoad(e);
 
             applicationDbContext = new ApplicationDbContext();
+            applicationDbContext!.Categories.Load();
 
-            applicationDbContext!.Providers.Load();
+            categoryBindingSource.DataSource = applicationDbContext!.Categories.Local.ToBindingList();
 
-            providerBindingSource.DataSource = applicationDbContext!.Providers.Local.ToBindingList();
+            dataGridViewCategories.ReadOnly = true;
+            dataGridViewCategories.AllowUserToAddRows = false;
+            dataGridViewCategories.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+            dataGridViewCategories.DefaultCellStyle.SelectionForeColor = Color.Black;
 
-            dataGridViewProviders.ReadOnly = true;
-            dataGridViewProviders.AllowUserToAddRows = false;
-            dataGridViewProviders.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
-            dataGridViewProviders.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            providerEditForm = new ProviderEditForm
+            categoryEditForm = new CategoryEditForm
             {
                 StartPosition = FormStartPosition.CenterParent,
             };
@@ -44,32 +43,33 @@ namespace Clinic.Forms
             applicationDbContext!.Dispose();
             applicationDbContext = null;
 
-            providerEditForm!.Dispose();
-            providerEditForm = null;
+            categoryEditForm!.Dispose();
+            categoryEditForm = null;
         }
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            providerEditForm!.provider = new Provider();
+            categoryEditForm!.category = new Category();
 
-            if (providerEditForm.ShowDialog(this) == DialogResult.OK)
+            if (categoryEditForm.ShowDialog(this) == DialogResult.OK)
             {
-                providerBindingSource.Add(providerEditForm.provider);
+                categoryBindingSource.Add(categoryEditForm.category);
                 applicationDbContext!.SaveChanges();
             }
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            providerEditForm!.provider = (Provider)providerBindingSource.Current;
-            if (providerEditForm.ShowDialog(this) == DialogResult.OK)
+            categoryEditForm!.category = (Category)categoryBindingSource.Current;
+
+            if (categoryEditForm.ShowDialog(this) == DialogResult.OK)
             {
                 applicationDbContext!.SaveChanges();
             }
             else
             {
-                providerBindingSource.CancelEdit();
-                applicationDbContext!.Entry((Provider)providerBindingSource.Current).Reload();
+                categoryBindingSource.CancelEdit();
+                applicationDbContext!.Entry((Category)categoryBindingSource.Current).Reload();
             }
         }
 
@@ -79,7 +79,7 @@ namespace Clinic.Forms
 
             if (result == DialogResult.Yes)
             {
-                providerBindingSource.RemoveCurrent();
+                categoryBindingSource.RemoveCurrent();
                 applicationDbContext!.SaveChanges();
             }
         }

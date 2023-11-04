@@ -7,7 +7,7 @@ public class Category
 {
     [Key]
     [StringLength(100)]
-    public required string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     public virtual ObservableCollectionListSource<Product> Products { get; } = new();
 }

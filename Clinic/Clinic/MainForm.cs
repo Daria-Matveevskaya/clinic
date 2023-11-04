@@ -8,6 +8,12 @@ namespace Clinic
     {
         private ApplicationDbContext? applicationDbContext;
 
+        private readonly CategoryForm categoryForm = new CategoryForm()
+        {
+            WindowState = FormWindowState.Maximized,
+            ControlBox = false,
+        };
+
         private readonly ProductForm productForm = new ProductForm()
         {
             WindowState = FormWindowState.Maximized,
@@ -67,6 +73,21 @@ namespace Clinic
             }
             productForm.MdiParent = this;
             productForm.Show();
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(CategoryForm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            categoryForm.MdiParent = this;
+            categoryForm.Show();
         }
 
         private void toolStripMenuItem7_Click(object sender, EventArgs e)

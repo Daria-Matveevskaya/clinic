@@ -79,6 +79,7 @@
             toolStripMenuItem5.Name = "toolStripMenuItem5";
             toolStripMenuItem5.Size = new Size(224, 26);
             toolStripMenuItem5.Text = "Категории";
+            toolStripMenuItem5.Click += toolStripMenuItem5_Click;
             // 
             // toolStripMenuItem6
             // 

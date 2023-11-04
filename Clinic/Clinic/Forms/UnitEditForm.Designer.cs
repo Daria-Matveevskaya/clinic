@@ -129,7 +129,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "UnitEditForm";
-            Text = "Единицы измерения";
+            Text = "Единица измерения";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel1.ResumeLayout(false);

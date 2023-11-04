@@ -33,7 +33,7 @@
             toolStrip1 = new ToolStrip();
             toolStripButtonAdd = new ToolStripButton();
             toolStripButtonEdit = new ToolStripButton();
-            toolStripButtonSave = new ToolStripButton();
+            toolStripButtonRemove = new ToolStripButton();
             employeeBindingSource = new BindingSource(components);
             dataGridViewEmployees = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -51,7 +51,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonAdd, toolStripButtonEdit, toolStripButtonSave });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonAdd, toolStripButtonEdit, toolStripButtonRemove });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 27);
@@ -78,14 +78,14 @@
             toolStripButtonEdit.Text = "Редактировать";
             toolStripButtonEdit.Click += toolStripButtonEdit_Click;
             // 
-            // toolStripButtonSave
+            // toolStripButtonRemove
             // 
-            toolStripButtonSave.Image = (Image)resources.GetObject("toolStripButtonSave.Image");
-            toolStripButtonSave.ImageTransparentColor = Color.Magenta;
-            toolStripButtonSave.Name = "toolStripButtonSave";
-            toolStripButtonSave.Size = new Size(89, 24);
-            toolStripButtonSave.Text = "Удалить";
-            toolStripButtonSave.Click += toolStripButtonRemove_Click;
+            toolStripButtonRemove.Image = (Image)resources.GetObject("toolStripButtonRemove.Image");
+            toolStripButtonRemove.ImageTransparentColor = Color.Magenta;
+            toolStripButtonRemove.Name = "toolStripButtonRemove";
+            toolStripButtonRemove.Size = new Size(89, 24);
+            toolStripButtonRemove.Text = "Удалить";
+            toolStripButtonRemove.Click += toolStripButtonRemove_Click;
             // 
             // employeeBindingSource
             // 
@@ -180,7 +180,7 @@
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButtonAdd;
         private ToolStripButton toolStripButtonEdit;
-        private ToolStripButton toolStripButtonSave;
+        private ToolStripButton toolStripButtonRemove;
         private BindingSource employeeBindingSource;
         private DataGridView dataGridViewEmployees;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
