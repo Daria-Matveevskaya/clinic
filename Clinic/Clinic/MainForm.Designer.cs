@@ -91,6 +91,7 @@
             toolStripMenuItem7.Name = "toolStripMenuItem7";
             toolStripMenuItem7.Size = new Size(224, 26);
             toolStripMenuItem7.Text = "Ед. измерения";
+            toolStripMenuItem7.Click += toolStripMenuItem7_Click;
             // 
             // toolStripMenuItem8
             // 

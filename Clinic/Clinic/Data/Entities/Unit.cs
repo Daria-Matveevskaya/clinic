@@ -7,10 +7,10 @@ public class Unit
 
     [Key]
     [StringLength(50)]
-    public required string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [Required]
     [StringLength(10)]
-    public required string Abbreviation { get; set; }
+    public string Abbreviation { get; set; } = string.Empty;
 
 }

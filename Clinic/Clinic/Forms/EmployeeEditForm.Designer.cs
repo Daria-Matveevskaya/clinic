@@ -70,6 +70,7 @@
             // textBox1
             // 
             textBox1.Location = new Point(140, 34);
+            textBox1.MaxLength = 50;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(485, 27);
             textBox1.TabIndex = 2;
@@ -77,6 +78,7 @@
             // textBox2
             // 
             textBox2.Location = new Point(140, 67);
+            textBox2.MaxLength = 50;
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(485, 27);
             textBox2.TabIndex = 3;
@@ -84,6 +86,7 @@
             // textBox3
             // 
             textBox3.Location = new Point(140, 100);
+            textBox3.MaxLength = 50;
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(485, 27);
             textBox3.TabIndex = 4;
@@ -148,7 +151,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(637, 396);
+            panel2.Size = new Size(637, 253);
             panel2.TabIndex = 1;
             // 
             // button1
@@ -180,7 +183,7 @@
             panel1.Controls.Add(button2);
             panel1.Controls.Add(button1);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 396);
+            panel1.Location = new Point(0, 253);
             panel1.Name = "panel1";
             panel1.Size = new Size(637, 54);
             panel1.TabIndex = 0;
@@ -189,7 +192,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(637, 450);
+            ClientSize = new Size(637, 307);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "EmployeeEditForm";

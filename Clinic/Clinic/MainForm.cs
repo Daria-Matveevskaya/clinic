@@ -14,13 +14,19 @@ namespace Clinic
             ControlBox = false,
         };
 
-        private readonly EmployeeForm employeeForm = new EmployeeForm()
+        private readonly UnitForm unitForm = new UnitForm()
         {
             WindowState = FormWindowState.Maximized,
             ControlBox = false
         };
 
         private readonly ProviderForm providerForm = new ProviderForm()
+        {
+            WindowState = FormWindowState.Maximized,
+            ControlBox = false
+        };
+
+        private readonly EmployeeForm employeeForm = new EmployeeForm()
         {
             WindowState = FormWindowState.Maximized,
             ControlBox = false
@@ -61,6 +67,21 @@ namespace Clinic
             }
             productForm.MdiParent = this;
             productForm.Show();
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(UnitForm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            unitForm.MdiParent = this;
+            unitForm.Show();
         }
 
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
