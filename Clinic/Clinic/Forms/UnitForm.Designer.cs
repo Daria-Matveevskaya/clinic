@@ -47,7 +47,8 @@
             // 
             dataGridViewUnits.AutoGenerateColumns = false;
             dataGridViewUnits.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewUnits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewUnits.BackgroundColor = SystemColors.ButtonHighlight;
+            dataGridViewUnits.ColumnHeadersHeight = 29;
             dataGridViewUnits.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, abbreviationDataGridViewTextBoxColumn });
             dataGridViewUnits.DataSource = unitBindingSource;
             dataGridViewUnits.Dock = DockStyle.Fill;

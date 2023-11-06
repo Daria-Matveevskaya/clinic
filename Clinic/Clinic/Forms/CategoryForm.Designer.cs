@@ -31,12 +31,12 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoryForm));
             dataGridViewCategories = new DataGridView();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             categoryBindingSource = new BindingSource(components);
             toolStrip1 = new ToolStrip();
             toolStripButtonAdd = new ToolStripButton();
             toolStripButtonEdit = new ToolStripButton();
             toolStripButtonRemove = new ToolStripButton();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewCategories).BeginInit();
             ((System.ComponentModel.ISupportInitialize)categoryBindingSource).BeginInit();
             toolStrip1.SuspendLayout();
@@ -46,7 +46,8 @@
             // 
             dataGridViewCategories.AutoGenerateColumns = false;
             dataGridViewCategories.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCategories.BackgroundColor = SystemColors.ButtonHighlight;
+            dataGridViewCategories.ColumnHeadersHeight = 29;
             dataGridViewCategories.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn2 });
             dataGridViewCategories.DataSource = categoryBindingSource;
             dataGridViewCategories.Dock = DockStyle.Fill;
@@ -57,6 +58,13 @@
             dataGridViewCategories.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewCategories.Size = new Size(800, 423);
             dataGridViewCategories.TabIndex = 7;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            dataGridViewTextBoxColumn2.HeaderText = "Наименование";
+            dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // categoryBindingSource
             // 
@@ -90,6 +98,7 @@
             toolStripButtonEdit.RightToLeft = RightToLeft.No;
             toolStripButtonEdit.Size = new Size(135, 24);
             toolStripButtonEdit.Text = "Редактировать";
+            toolStripButtonEdit.Visible = false;
             toolStripButtonEdit.Click += toolStripButtonEdit_Click;
             // 
             // toolStripButtonRemove
@@ -100,13 +109,6 @@
             toolStripButtonRemove.Size = new Size(89, 24);
             toolStripButtonRemove.Text = "Удалить";
             toolStripButtonRemove.Click += toolStripButtonRemove_Click;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            dataGridViewTextBoxColumn2.HeaderText = "Наименование";
-            dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // CategoryForm
             // 

@@ -86,6 +86,7 @@
             toolStripMenuItem6.Name = "toolStripMenuItem6";
             toolStripMenuItem6.Size = new Size(224, 26);
             toolStripMenuItem6.Text = "Товары";
+            toolStripMenuItem6.Click += toolStripMenuItem6_Click;
             // 
             // toolStripMenuItem7
             // 

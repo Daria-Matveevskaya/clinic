@@ -2,7 +2,6 @@
 using Clinic.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
-using System.Reflection.Metadata;
 
 namespace Clinic.Forms
 {
@@ -11,7 +10,6 @@ namespace Clinic.Forms
         private ApplicationDbContext? applicationDbContext;
 
         private EmployeeEditForm? employeeEditForm;
-
 
         public EmployeeForm()
         {
@@ -32,6 +30,7 @@ namespace Clinic.Forms
             dataGridViewEmployees.AllowUserToAddRows = false;
             dataGridViewEmployees.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewEmployees.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             employeeEditForm = new EmployeeEditForm()
             {

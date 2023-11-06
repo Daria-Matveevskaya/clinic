@@ -29,6 +29,7 @@ namespace Clinic.Forms
             dataGridViewCategories.AllowUserToAddRows = false;
             dataGridViewCategories.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewCategories.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             categoryEditForm = new CategoryEditForm
             {

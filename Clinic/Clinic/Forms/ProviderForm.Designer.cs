@@ -50,7 +50,8 @@
             // 
             dataGridViewProviders.AutoGenerateColumns = false;
             dataGridViewProviders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewProviders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewProviders.BackgroundColor = SystemColors.ButtonHighlight;
+            dataGridViewProviders.ColumnHeadersHeight = 29;
             dataGridViewProviders.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, addressDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, phoneDataGridViewTextBoxColumn });
             dataGridViewProviders.DataSource = providerBindingSource;
             dataGridViewProviders.Dock = DockStyle.Fill;

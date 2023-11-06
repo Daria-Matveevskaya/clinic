@@ -29,79 +29,46 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            dataGridViewCategories = new DataGridView();
-            categoryBindingSource = new BindingSource(components);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductForm));
             dataGridViewProducts = new DataGridView();
-            productsBindingSource = new BindingSource(components);
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             createDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             categoryNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             categoryDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewCategories).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)categoryBindingSource).BeginInit();
+            productBindingSource = new BindingSource(components);
+            toolStrip1 = new ToolStrip();
+            toolStripButtonAdd = new ToolStripButton();
+            toolStripButtonEdit = new ToolStripButton();
+            toolStripButtonRemove = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)productsBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)productBindingSource).BeginInit();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // dataGridViewCategories
-            // 
-            dataGridViewCategories.AutoGenerateColumns = false;
-            dataGridViewCategories.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCategories.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridViewCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCategories.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn });
-            dataGridViewCategories.DataSource = categoryBindingSource;
-            dataGridViewCategories.Dock = DockStyle.Left;
-            dataGridViewCategories.Location = new Point(0, 0);
-            dataGridViewCategories.Margin = new Padding(3, 2, 3, 2);
-            dataGridViewCategories.Name = "dataGridViewCategories";
-            dataGridViewCategories.RowHeadersWidth = 51;
-            dataGridViewCategories.RowTemplate.Height = 29;
-            dataGridViewCategories.Size = new Size(248, 338);
-            dataGridViewCategories.TabIndex = 0;
-            dataGridViewCategories.SelectionChanged += dataGridViewCategories_SelectionChanged;
-            // 
-            // categoryBindingSource
-            // 
-            categoryBindingSource.DataSource = typeof(Data.Entities.Category);
             // 
             // dataGridViewProducts
             // 
             dataGridViewProducts.AutoGenerateColumns = false;
             dataGridViewProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewProducts.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewProducts.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn1, descriptionDataGridViewTextBoxColumn, createDateDataGridViewTextBoxColumn, categoryNameDataGridViewTextBoxColumn, categoryDataGridViewTextBoxColumn });
-            dataGridViewProducts.DataSource = productsBindingSource;
+            dataGridViewProducts.ColumnHeadersHeight = 29;
+            dataGridViewProducts.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, createDateDataGridViewTextBoxColumn, categoryNameDataGridViewTextBoxColumn, categoryDataGridViewTextBoxColumn });
+            dataGridViewProducts.DataSource = productBindingSource;
             dataGridViewProducts.Dock = DockStyle.Fill;
-            dataGridViewProducts.Location = new Point(248, 0);
-            dataGridViewProducts.Margin = new Padding(3, 2, 3, 2);
+            dataGridViewProducts.Location = new Point(0, 27);
             dataGridViewProducts.Name = "dataGridViewProducts";
             dataGridViewProducts.RowHeadersWidth = 51;
             dataGridViewProducts.RowTemplate.Height = 29;
-            dataGridViewProducts.Size = new Size(452, 338);
-            dataGridViewProducts.TabIndex = 1;
-            // 
-            // productsBindingSource
-            // 
-            productsBindingSource.DataMember = "Products";
-            productsBindingSource.DataSource = categoryBindingSource;
+            dataGridViewProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewProducts.Size = new Size(800, 423);
+            dataGridViewProducts.TabIndex = 3;
             // 
             // nameDataGridViewTextBoxColumn
             // 
             nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Категория";
+            nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
             nameDataGridViewTextBoxColumn.MinimumWidth = 6;
             nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // nameDataGridViewTextBoxColumn1
-            // 
-            nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn1.HeaderText = "Наименование";
-            nameDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
             // 
             // descriptionDataGridViewTextBoxColumn
             // 
@@ -120,10 +87,9 @@
             // categoryNameDataGridViewTextBoxColumn
             // 
             categoryNameDataGridViewTextBoxColumn.DataPropertyName = "CategoryName";
-            categoryNameDataGridViewTextBoxColumn.HeaderText = "CategoryName";
+            categoryNameDataGridViewTextBoxColumn.HeaderText = "Категория";
             categoryNameDataGridViewTextBoxColumn.MinimumWidth = 6;
             categoryNameDataGridViewTextBoxColumn.Name = "categoryNameDataGridViewTextBoxColumn";
-            categoryNameDataGridViewTextBoxColumn.Visible = false;
             // 
             // categoryDataGridViewTextBoxColumn
             // 
@@ -133,31 +99,75 @@
             categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
             categoryDataGridViewTextBoxColumn.Visible = false;
             // 
+            // productBindingSource
+            // 
+            productBindingSource.DataSource = typeof(Data.Entities.Product);
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonAdd, toolStripButtonEdit, toolStripButtonRemove });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(800, 27);
+            toolStrip1.TabIndex = 2;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButtonAdd
+            // 
+            toolStripButtonAdd.Image = (Image)resources.GetObject("toolStripButtonAdd.Image");
+            toolStripButtonAdd.ImageTransparentColor = Color.Magenta;
+            toolStripButtonAdd.Name = "toolStripButtonAdd";
+            toolStripButtonAdd.Size = new Size(100, 24);
+            toolStripButtonAdd.Text = "Добавить";
+            toolStripButtonAdd.ToolTipText = "Добавить";
+            toolStripButtonAdd.Click += toolStripButtonAdd_Click;
+            // 
+            // toolStripButtonEdit
+            // 
+            toolStripButtonEdit.Image = (Image)resources.GetObject("toolStripButtonEdit.Image");
+            toolStripButtonEdit.ImageTransparentColor = Color.Magenta;
+            toolStripButtonEdit.Name = "toolStripButtonEdit";
+            toolStripButtonEdit.RightToLeft = RightToLeft.No;
+            toolStripButtonEdit.Size = new Size(135, 24);
+            toolStripButtonEdit.Text = "Редактировать";
+            toolStripButtonEdit.Click += toolStripButtonEdit_Click;
+            // 
+            // toolStripButtonRemove
+            // 
+            toolStripButtonRemove.Image = (Image)resources.GetObject("toolStripButtonRemove.Image");
+            toolStripButtonRemove.ImageTransparentColor = Color.Magenta;
+            toolStripButtonRemove.Name = "toolStripButtonRemove";
+            toolStripButtonRemove.Size = new Size(89, 24);
+            toolStripButtonRemove.Text = "Удалить";
+            toolStripButtonRemove.Click += toolStripButtonRemove_Click;
+            // 
             // ProductForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(800, 450);
             Controls.Add(dataGridViewProducts);
-            Controls.Add(dataGridViewCategories);
-            Margin = new Padding(3, 2, 3, 2);
+            Controls.Add(toolStrip1);
             Name = "ProductForm";
-            Text = "ProductForm";
-            ((System.ComponentModel.ISupportInitialize)dataGridViewCategories).EndInit();
-            ((System.ComponentModel.ISupportInitialize)categoryBindingSource).EndInit();
+            Text = "Товары";
             ((System.ComponentModel.ISupportInitialize)dataGridViewProducts).EndInit();
-            ((System.ComponentModel.ISupportInitialize)productsBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)productBindingSource).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dataGridViewCategories;
-        private BindingSource categoryBindingSource;
         private DataGridView dataGridViewProducts;
-        private BindingSource productsBindingSource;
+        private ToolStrip toolStrip1;
+        private ToolStripButton toolStripButtonAdd;
+        private ToolStripButton toolStripButtonEdit;
+        private ToolStripButton toolStripButtonRemove;
+        private BindingSource productBindingSource;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn createDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn categoryNameDataGridViewTextBoxColumn;

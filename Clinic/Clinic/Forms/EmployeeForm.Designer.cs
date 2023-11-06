@@ -95,7 +95,8 @@
             // 
             dataGridViewEmployees.AutoGenerateColumns = false;
             dataGridViewEmployees.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewEmployees.BackgroundColor = SystemColors.ButtonHighlight;
+            dataGridViewEmployees.ColumnHeadersHeight = 29;
             dataGridViewEmployees.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, surnameDataGridViewTextBoxColumn, firstNameDataGridViewTextBoxColumn, patronymicNameDataGridViewTextBoxColumn, genderAsStringDataGridViewTextBoxColumn, genderDataGridViewTextBoxColumn, birthDateDataGridViewTextBoxColumn });
             dataGridViewEmployees.DataSource = employeeBindingSource;
             dataGridViewEmployees.Dock = DockStyle.Fill;

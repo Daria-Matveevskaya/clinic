@@ -30,6 +30,7 @@ namespace Clinic.Forms
             dataGridViewProviders.AllowUserToAddRows = false;
             dataGridViewProviders.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewProviders.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewProviders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             providerEditForm = new ProviderEditForm
             {
