@@ -1,5 +1,6 @@
 using Clinic.Data;
 using Clinic.Forms;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace Clinic
@@ -55,8 +56,7 @@ namespace Clinic
 
             applicationDbContext = new ApplicationDbContext();
 
-            //applicationDbContext!.Database.EnsureDeleted();
-            applicationDbContext!.Database.EnsureCreated();
+            applicationDbContext.Database.Migrate();
         }
 
         protected override void OnClosing(CancelEventArgs e)

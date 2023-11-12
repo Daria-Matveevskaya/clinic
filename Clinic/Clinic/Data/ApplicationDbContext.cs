@@ -5,6 +5,11 @@ namespace Clinic.Data;
 
 public class ApplicationDbContext : DbContext
 {
+    public ApplicationDbContext()
+    {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Unit> Units { get; set; }
@@ -15,8 +20,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Expense> Expenses { get; set; }
     public DbSet<ExpenseItem> ExpenseItems { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
-        => optionsBuilder.UseSqlite("Data Source=Clinic.db");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Clinic;Username=postgres;Password=postgres;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
