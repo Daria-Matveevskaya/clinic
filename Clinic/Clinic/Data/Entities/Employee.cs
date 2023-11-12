@@ -10,10 +10,10 @@ public class Employee
     public int Id { get; set; }
 
     [Required, MaxLength(50)]
-    public string Surname { get; set; } = string.Empty;
+    public string Surname { get; set; } = null!;
 
     [Required, MaxLength(50)]
-    public string FirstName { get; set; } = string.Empty;
+    public string FirstName { get; set; } = null!;
 
     [MaxLength(50)]
     public string? PatronymicName { get; set; }
