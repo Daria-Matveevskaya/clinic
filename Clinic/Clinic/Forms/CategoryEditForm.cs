@@ -17,7 +17,7 @@ namespace Clinic.Forms
 
             textBox1.DataBindings.Add("Text", category, "Name", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            textBox1.Enabled = category!.Name == string.Empty;
+            textBox1.Enabled = category!.Name == null;
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -29,7 +29,7 @@ namespace Clinic.Forms
             comboBox1.ValueMember = "Name";
             comboBox1.SelectedItem = product!.Category;
 
-            textBox1.Enabled = product!.Name == string.Empty;
+            textBox1.Enabled = product!.Name == null;
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -21,7 +21,7 @@ namespace Clinic.Forms
             textBox1.DataBindings.Add("Text", unit, "Name", true, DataSourceUpdateMode.OnPropertyChanged);
             textBox2.DataBindings.Add("Text", unit, "Abbreviation", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            textBox1.Enabled = unit!.Name == string.Empty;
+            textBox1.Enabled = unit!.Name == null;
         }
 
         private void button1_Click(object sender, EventArgs e)
