@@ -11,8 +11,6 @@ public class Product
 
     public string? Description { get; set; }
 
-    public DateTime CreateDate { get; set; }
-
     [StringLength(100)]
     public string CategoryName { get; set; } = null!;
 

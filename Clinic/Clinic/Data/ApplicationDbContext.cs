@@ -32,12 +32,12 @@ public class ApplicationDbContext : DbContext
             );
 
         modelBuilder.Entity<Product>().HasData(
-            new Product { Name = "Ацетилсалициловая кислота 500 мг", CreateDate = DateTime.Now, CategoryName = "Препараты" },
-            new Product { Name = "Парацетамол 500 мг", CreateDate = DateTime.Now, CategoryName = "Препараты" },
-            new Product { Name = "Экспресс-тест на грипп", CreateDate = DateTime.Now, CategoryName = "Экспресс-тесты на грипп и Covid" },
-            new Product { Name = "Экспресс-тест на Covid", CreateDate = DateTime.Now, CategoryName = "Экспресс-тесты на грипп и Covid" },
-            new Product { Name = "Перчатки", CreateDate = DateTime.Now, CategoryName = "Расходные материалы" },
-            new Product { Name = "Маска медицинская", CreateDate = DateTime.Now, CategoryName = "Расходные материалы" }
+            new Product { Name = "Ацетилсалициловая кислота 500 мг", CategoryName = "Препараты" },
+            new Product { Name = "Парацетамол 500 мг", CategoryName = "Препараты" },
+            new Product { Name = "Экспресс-тест на грипп", CategoryName = "Экспресс-тесты на грипп и Covid" },
+            new Product { Name = "Экспресс-тест на Covid", CategoryName = "Экспресс-тесты на грипп и Covid" },
+            new Product { Name = "Перчатки", CategoryName = "Расходные материалы" },
+            new Product { Name = "Маска медицинская", CategoryName = "Расходные материалы" }
             );
         
         modelBuilder.Entity<Unit>().HasData(

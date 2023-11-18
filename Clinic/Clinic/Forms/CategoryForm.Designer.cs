@@ -135,8 +135,6 @@
         private ToolStripButton toolStripButtonEdit;
         private ToolStripButton toolStripButtonRemove;
         private BindingSource categoryBindingSource;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
     }
 }

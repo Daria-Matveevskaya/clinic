@@ -57,7 +57,6 @@ namespace Clinic.Forms
         {
             productEditForm!.product = new Product()
             {
-                CreateDate = DateTime.Now,
                 Category = categories!.First(),
                 CategoryName = categories!.First().Name
             };
