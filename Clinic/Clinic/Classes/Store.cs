@@ -9,5 +9,7 @@
         public double Quantity { get; set; }
 
         public string UnitName { get; set; } = null!;
+
+        public bool IsExpiration { get =>  ExpirationDate != null && (ExpirationDate.Value - DateTime.Now).TotalDays < 60; }
     }
 }

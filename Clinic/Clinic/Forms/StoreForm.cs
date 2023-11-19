@@ -2,7 +2,6 @@
 using Clinic.Data;
 using Clinic.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel;
 
 namespace Clinic.Forms
@@ -45,12 +44,12 @@ namespace Clinic.Forms
                 Quantity = -item.Quantity,
             })).GroupBy(item => new { item.ProductName, item.ExpirationDate, item.UnitName })
                .Select(item => new Store
-                {
-                    ProductName = item.Key.ProductName,
-                    ExpirationDate = item.Key.ExpirationDate,
-                    UnitName = item.Key.UnitName,
-                    Quantity = item.Sum(item => item.Quantity),
-                }).ToList();
+               {
+                   ProductName = item.Key.ProductName,
+                   ExpirationDate = item.Key.ExpirationDate,
+                   UnitName = item.Key.UnitName,
+                   Quantity = item.Sum(item => item.Quantity),
+               }).ToList();
 
             var recipeItemGroups = applicationDbContext!.RecipeItems.GroupBy(item => new { item.ProductName, item.ExpirationDate, item.UnitName });
             var expenseItemGroups = applicationDbContext!.ExpenseItems.GroupBy(item => new { item.ProductName, item.ExpirationDate, item.UnitName });
@@ -70,6 +69,7 @@ namespace Clinic.Forms
             dataGridViewStore.Columns[1].HeaderText = "Срок годности";
             dataGridViewStore.Columns[2].HeaderText = "Количество";
             dataGridViewStore.Columns[3].HeaderText = "Ед. измер.";
+            dataGridViewStore.Columns[4].Visible = false;
 
             dataGridViewStore.ReadOnly = true;
             dataGridViewStore.AllowUserToAddRows = false;
@@ -135,6 +135,15 @@ namespace Clinic.Forms
                 {
                     applicationDbContext.Entry(expense).Collection(e => e.ExpenseItems).Load();
                 }
+            }
+        }
+
+        private void dataGridViewStore_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if ((bool)dataGridViewStore.Rows[e.RowIndex].Cells[4].Value)
+            {
+                dataGridViewStore.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightPink;
+                dataGridViewStore.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightPink;
             }
         }
     }

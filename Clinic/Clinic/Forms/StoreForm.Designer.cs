@@ -69,15 +69,15 @@
             expenseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             productDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             unitDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            expenseItemsBindingSource = new BindingSource(components);
+            expenseBindingSource = new BindingSource(components);
             panel4 = new Panel();
             dataGridViewExpenses = new DataGridView();
             idDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             employeeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             employeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            expenseBindingSource = new BindingSource(components);
             toolStrip3 = new ToolStrip();
-            expenseItemsBindingSource = new BindingSource(components);
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
@@ -92,10 +92,10 @@
             tabPage3.SuspendLayout();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenseItems).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)expenseItemsBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)expenseBindingSource).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenses).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)expenseBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)expenseItemsBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -144,6 +144,7 @@
             dataGridViewStore.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewStore.Size = new Size(786, 386);
             dataGridViewStore.TabIndex = 2;
+            dataGridViewStore.RowPrePaint += dataGridViewStore_RowPrePaint;
             // 
             // toolStrip1
             // 
@@ -461,6 +462,15 @@
             unitDataGridViewTextBoxColumn1.Name = "unitDataGridViewTextBoxColumn1";
             unitDataGridViewTextBoxColumn1.Visible = false;
             // 
+            // expenseItemsBindingSource
+            // 
+            expenseItemsBindingSource.DataMember = "ExpenseItems";
+            expenseItemsBindingSource.DataSource = expenseBindingSource;
+            // 
+            // expenseBindingSource
+            // 
+            expenseBindingSource.DataSource = typeof(Data.Entities.Expense);
+            // 
             // panel4
             // 
             panel4.Controls.Add(dataGridViewExpenses);
@@ -518,10 +528,6 @@
             employeeDataGridViewTextBoxColumn.Name = "employeeDataGridViewTextBoxColumn";
             employeeDataGridViewTextBoxColumn.Visible = false;
             // 
-            // expenseBindingSource
-            // 
-            expenseBindingSource.DataSource = typeof(Data.Entities.Expense);
-            // 
             // toolStrip3
             // 
             toolStrip3.ImageScalingSize = new Size(20, 20);
@@ -530,11 +536,6 @@
             toolStrip3.Size = new Size(786, 25);
             toolStrip3.TabIndex = 0;
             toolStrip3.Text = "toolStrip3";
-            // 
-            // expenseItemsBindingSource
-            // 
-            expenseItemsBindingSource.DataMember = "ExpenseItems";
-            expenseItemsBindingSource.DataSource = expenseBindingSource;
             // 
             // StoreForm
             // 
@@ -561,10 +562,10 @@
             tabPage3.PerformLayout();
             panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenseItems).EndInit();
+            ((System.ComponentModel.ISupportInitialize)expenseItemsBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)expenseBindingSource).EndInit();
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenses).EndInit();
-            ((System.ComponentModel.ISupportInitialize)expenseBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)expenseItemsBindingSource).EndInit();
             ResumeLayout(false);
         }
 
