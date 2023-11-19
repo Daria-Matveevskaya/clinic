@@ -1,6 +1,8 @@
-﻿using Clinic.Data;
+﻿using Clinic.Classes;
+using Clinic.Data;
 using Clinic.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel;
 
 namespace Clinic.Forms
@@ -8,6 +10,8 @@ namespace Clinic.Forms
     public partial class StoreForm : Form
     {
         private ApplicationDbContext? applicationDbContext;
+
+        private List<Store> storeItems = new();
 
         public StoreForm()
         {
@@ -25,8 +29,47 @@ namespace Clinic.Forms
             applicationDbContext!.Expenses.Load();
 
             recipeBindingSource.DataSource = applicationDbContext!.Recipes.Local.ToBindingList();
-            recipeItemBindingSource.DataSource = applicationDbContext!.RecipeItems.Local.ToBindingList();
             expenseBindingSource.DataSource = applicationDbContext!.Expenses.Local.ToBindingList();
+
+            storeItems = applicationDbContext!.RecipeItems.Select(item => new Store
+            {
+                ProductName = item.ProductName,
+                ExpirationDate = item.ExpirationDate,
+                UnitName = item.UnitName,
+                Quantity = item.Quantity,
+            }).Union(applicationDbContext!.RecipeItems.Select(item => new Store
+            {
+                ProductName = item.ProductName,
+                ExpirationDate = item.ExpirationDate,
+                UnitName = item.UnitName,
+                Quantity = -item.Quantity,
+            })).GroupBy(item => new { item.ProductName, item.ExpirationDate, item.UnitName })
+               .Select(item => new Store
+                {
+                    ProductName = item.Key.ProductName,
+                    ExpirationDate = item.Key.ExpirationDate,
+                    UnitName = item.Key.UnitName,
+                    Quantity = item.Sum(item => item.Quantity),
+                }).ToList();
+
+            var recipeItemGroups = applicationDbContext!.RecipeItems.GroupBy(item => new { item.ProductName, item.ExpirationDate, item.UnitName });
+            var expenseItemGroups = applicationDbContext!.ExpenseItems.GroupBy(item => new { item.ProductName, item.ExpirationDate, item.UnitName });
+
+            storeItems = applicationDbContext!.RecipeItems
+                .GroupBy(rec => new { rec.ProductName, rec.ExpirationDate, rec.UnitName })
+                .Select(rec => new Store
+                {
+                    ProductName = rec.Key.ProductName,
+                    ExpirationDate = rec.Key.ExpirationDate,
+                    UnitName = rec.Key.UnitName,
+                    Quantity = rec.Sum(item => item.Quantity) - applicationDbContext!.ExpenseItems.Where(exp => exp.ProductName == rec.Key.ProductName).Sum(exp => exp.Quantity),
+                }).ToList();
+
+            dataGridViewStore.DataSource = storeItems;
+            dataGridViewStore.Columns[0].HeaderText = "Товар";
+            dataGridViewStore.Columns[1].HeaderText = "Срок годности";
+            dataGridViewStore.Columns[2].HeaderText = "Количество";
+            dataGridViewStore.Columns[3].HeaderText = "Ед. измер.";
 
             dataGridViewStore.ReadOnly = true;
             dataGridViewStore.AllowUserToAddRows = false;
