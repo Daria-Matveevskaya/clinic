@@ -18,6 +18,8 @@ namespace Clinic.Data.Entities
 
         public double Quantity { get; set; }
 
+        public DateTime? ExpirationDate { get; set; }
+
         [ForeignKey("ExpenseId")]
         public virtual Expense Expense { get; set; } = null!;
 

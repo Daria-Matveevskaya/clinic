@@ -18,7 +18,7 @@ namespace Clinic.Data.Entities
 
         public double Quantity { get; set; }
 
-        public DateTime ExpirationDate { get; set; }
+        public DateTime? ExpirationDate { get; set; }
 
         [ForeignKey("RecipeId")]
         public virtual Recipe Recipe { get; set; } = null!;

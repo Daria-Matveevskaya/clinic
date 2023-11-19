@@ -62,15 +62,17 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<RecipeItem>().HasData(
             new RecipeItem { Id = 1, RecipeId = 1, ProductName = "Парацетамол 500 мг", UnitName = "Штука", Quantity = 10, ExpirationDate = new DateTime(2023, 12, 01) },
-            new RecipeItem { Id = 2, RecipeId = 1, ProductName = "Парацетамол 500 мг", UnitName = "Штука", Quantity = 20, ExpirationDate = new DateTime(2024, 12, 01) },
-            new RecipeItem { Id = 3, RecipeId = 1, ProductName = "Ацетилсалициловая кислота 500 мг", UnitName = "Штука", Quantity = 15, ExpirationDate = new DateTime(2023, 12, 01) },
-            new RecipeItem { Id = 4, RecipeId = 1, ProductName = "Ацетилсалициловая кислота 500 мг", UnitName = "Штука", Quantity = 25, ExpirationDate = new DateTime(2024, 12, 01) },
-            new RecipeItem { Id = 5, RecipeId = 2, ProductName = "Экспресс-тест на грипп", UnitName = "Штука", Quantity = 10, ExpirationDate = new DateTime(2023, 12, 01) },
-            new RecipeItem { Id = 6, RecipeId = 2, ProductName = "Экспресс-тест на грипп", UnitName = "Штука", Quantity = 12, ExpirationDate = new DateTime(2024, 12, 01) },
-            new RecipeItem { Id = 7, RecipeId = 2, ProductName = "Экспресс-тест на Covid", UnitName = "Штука", Quantity = 16, ExpirationDate = new DateTime(2023, 12, 01) },
-            new RecipeItem { Id = 8, RecipeId = 2, ProductName = "Экспресс-тест на Covid", UnitName = "Штука", Quantity = 14, ExpirationDate = new DateTime(2024, 12, 01) },
-            new RecipeItem { Id = 9, RecipeId = 2, ProductName = "Перчатки", UnitName = "Упаковка", Quantity = 10, ExpirationDate = new DateTime(2026, 12, 01) },
-            new RecipeItem { Id = 10, RecipeId = 2, ProductName = "Маска медицинская", UnitName = "Упаковка", Quantity = 12, ExpirationDate = new DateTime(2028, 12, 01) }
+            new RecipeItem { Id = 2, RecipeId = 2, ProductName = "Парацетамол 500 мг", UnitName = "Штука", Quantity = 20, ExpirationDate = new DateTime(2023, 12, 01) },
+            new RecipeItem { Id = 3, RecipeId = 1, ProductName = "Парацетамол 500 мг", UnitName = "Штука", Quantity = 20, ExpirationDate = new DateTime(2024, 12, 01) },
+            new RecipeItem { Id = 4, RecipeId = 1, ProductName = "Ацетилсалициловая кислота 500 мг", UnitName = "Штука", Quantity = 15, ExpirationDate = new DateTime(2023, 12, 01) },
+            new RecipeItem { Id = 5, RecipeId = 2, ProductName = "Ацетилсалициловая кислота 500 мг", UnitName = "Штука", Quantity = 25, ExpirationDate = new DateTime(2023, 12, 01) },
+            new RecipeItem { Id = 6, RecipeId = 2, ProductName = "Ацетилсалициловая кислота 500 мг", UnitName = "Штука", Quantity = 25, ExpirationDate = new DateTime(2024, 12, 01) },
+            new RecipeItem { Id = 7, RecipeId = 1, ProductName = "Экспресс-тест на грипп", UnitName = "Штука", Quantity = 10, ExpirationDate = new DateTime(2024, 12, 01) },
+            new RecipeItem { Id = 8, RecipeId = 2, ProductName = "Экспресс-тест на грипп", UnitName = "Штука", Quantity = 12, ExpirationDate = new DateTime(2024, 12, 01) },
+            new RecipeItem { Id = 9, RecipeId = 1, ProductName = "Экспресс-тест на Covid", UnitName = "Штука", Quantity = 16, ExpirationDate = new DateTime(2024, 12, 01) },
+            new RecipeItem { Id = 10, RecipeId = 2, ProductName = "Экспресс-тест на Covid", UnitName = "Штука", Quantity = 14, ExpirationDate = new DateTime(2024, 12, 01) },
+            new RecipeItem { Id = 11, RecipeId = 2, ProductName = "Перчатки", UnitName = "Упаковка", Quantity = 10, ExpirationDate = new DateTime(2026, 12, 01) },
+            new RecipeItem { Id = 12, RecipeId = 2, ProductName = "Маска медицинская", UnitName = "Упаковка", Quantity = 12, ExpirationDate = new DateTime(2028, 12, 01) }
             );
 
         modelBuilder.Entity<Expense>().HasData(
@@ -79,12 +81,12 @@ public class ApplicationDbContext : DbContext
             );
 
         modelBuilder.Entity<ExpenseItem>().HasData(
-            new ExpenseItem { Id = 1, ExpenseId = 1, ProductName = "Парацетамол 500 мг", UnitName = "Штука", Quantity = 2},
-            new ExpenseItem { Id = 2, ExpenseId = 1, ProductName = "Ацетилсалициловая кислота 500 мг", UnitName = "Штука", Quantity = 3 },
+            new ExpenseItem { Id = 1, ExpenseId = 1, ProductName = "Парацетамол 500 мг", UnitName = "Штука", Quantity = 3, ExpirationDate = new DateTime(2023, 12, 01) },
+            new ExpenseItem { Id = 2, ExpenseId = 1, ProductName = "Ацетилсалициловая кислота 500 мг", UnitName = "Штука", Quantity = 10, ExpirationDate = new DateTime(2023, 12, 01) },
             new ExpenseItem { Id = 3, ExpenseId = 1, ProductName = "Экспресс-тест на грипп", UnitName = "Штука", Quantity = 2 },
             new ExpenseItem { Id = 4, ExpenseId = 1, ProductName = "Экспресс-тест на Covid", UnitName = "Штука", Quantity = 8 },
-            new ExpenseItem { Id = 5, ExpenseId = 2, ProductName = "Парацетамол 500 мг", UnitName = "Штука", Quantity = 8 },
-            new ExpenseItem { Id = 6, ExpenseId = 2, ProductName = "Ацетилсалициловая кислота 500 мг", UnitName = "Штука", Quantity = 8 },
+            new ExpenseItem { Id = 5, ExpenseId = 2, ProductName = "Парацетамол 500 мг", UnitName = "Штука", Quantity = 7, ExpirationDate = new DateTime(2023, 12, 01) },
+            new ExpenseItem { Id = 6, ExpenseId = 2, ProductName = "Ацетилсалициловая кислота 500 мг", UnitName = "Штука", Quantity = 3, ExpirationDate = new DateTime(2023, 12, 01) },
             new ExpenseItem { Id = 7, ExpenseId = 2, ProductName = "Экспресс-тест на грипп", UnitName = "Штука", Quantity = 3 },
             new ExpenseItem { Id = 8, ExpenseId = 2, ProductName = "Перчатки", UnitName = "Упаковка", Quantity = 1 },
             new ExpenseItem { Id = 9, ExpenseId = 2, ProductName = "Маска медицинская", UnitName = "Упаковка", Quantity = 2 }
