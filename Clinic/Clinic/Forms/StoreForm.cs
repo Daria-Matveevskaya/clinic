@@ -66,9 +66,9 @@ namespace Clinic.Forms
 
             dataGridViewStore.DataSource = storeItems;
             dataGridViewStore.Columns[0].HeaderText = "Наименование";
-            dataGridViewStore.Columns[3].HeaderText = "Единицы измерения";
-            dataGridViewStore.Columns[1].HeaderText = "Срок годности";
-            dataGridViewStore.Columns[2].HeaderText = "Количество";
+            dataGridViewStore.Columns[1].HeaderText = "Единицы измерения";
+            dataGridViewStore.Columns[2].HeaderText = "Срок годности";
+            dataGridViewStore.Columns[3].HeaderText = "Количество";
             
             dataGridViewStore.Columns[4].Visible = false;
 
