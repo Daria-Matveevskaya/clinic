@@ -65,10 +65,11 @@ namespace Clinic.Forms
                 }).ToList();
 
             dataGridViewStore.DataSource = storeItems;
-            dataGridViewStore.Columns[0].HeaderText = "Товар";
+            dataGridViewStore.Columns[0].HeaderText = "Наименование";
+            dataGridViewStore.Columns[3].HeaderText = "Единицы измерения";
             dataGridViewStore.Columns[1].HeaderText = "Срок годности";
             dataGridViewStore.Columns[2].HeaderText = "Количество";
-            dataGridViewStore.Columns[3].HeaderText = "Ед. измер.";
+            
             dataGridViewStore.Columns[4].Visible = false;
 
             dataGridViewStore.ReadOnly = true;
@@ -88,7 +89,6 @@ namespace Clinic.Forms
             dataGridViewRecipeItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewRecipeItems.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewRecipeItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewRecipeItems.Columns[0].Visible = false;
 
             dataGridViewExpenses.ReadOnly = true;
             dataGridViewExpenses.AllowUserToAddRows = false;
@@ -101,7 +101,6 @@ namespace Clinic.Forms
             dataGridViewExpenseItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewExpenseItems.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewExpenseItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewExpenseItems.Columns[0].Visible = false;
         }
 
         protected override void OnClosing(CancelEventArgs e)

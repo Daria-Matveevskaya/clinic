@@ -38,46 +38,46 @@
             splitter1 = new Splitter();
             panel3 = new Panel();
             dataGridViewRecipeItems = new DataGridView();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            recipeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            productNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            expirationDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            unitNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            quantityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            recipeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            productDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            unitDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            recipeItemsBindingSource = new BindingSource(components);
-            recipeBindingSource = new BindingSource(components);
             panel2 = new Panel();
             dataGridViewRecipes = new DataGridView();
             idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             providerIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             providerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            recipeBindingSource = new BindingSource(components);
             toolStrip2 = new ToolStrip();
             tabPage3 = new TabPage();
             splitter2 = new Splitter();
             panel5 = new Panel();
             dataGridViewExpenseItems = new DataGridView();
-            idDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            expenseIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            productNameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            expirationDateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            quantityDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            unitNameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            expenseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            productDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            unitDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            expenseItemsBindingSource = new BindingSource(components);
-            expenseBindingSource = new BindingSource(components);
             panel4 = new Panel();
             dataGridViewExpenses = new DataGridView();
             idDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             employeeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             employeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            expenseBindingSource = new BindingSource(components);
             toolStrip3 = new ToolStrip();
+            recipeItemsBindingSource = new BindingSource(components);
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            recipeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            productNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            unitNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            quantityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            expirationDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            recipeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            productDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            unitDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            expenseItemsBindingSource = new BindingSource(components);
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            expenseIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            productNameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            unitNameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            quantityDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            expirationDateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            expenseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            productDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            unitDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
@@ -85,17 +85,17 @@
             tabPage2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewRecipeItems).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)recipeItemsBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)recipeBindingSource).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewRecipes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)recipeBindingSource).BeginInit();
             tabPage3.SuspendLayout();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenseItems).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)expenseItemsBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)expenseBindingSource).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenses).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)expenseBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)recipeItemsBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)expenseItemsBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -192,7 +192,7 @@
             dataGridViewRecipeItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewRecipeItems.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewRecipeItems.ColumnHeadersHeight = 29;
-            dataGridViewRecipeItems.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, recipeIdDataGridViewTextBoxColumn, productNameDataGridViewTextBoxColumn, expirationDateDataGridViewTextBoxColumn, unitNameDataGridViewTextBoxColumn, quantityDataGridViewTextBoxColumn, recipeDataGridViewTextBoxColumn, productDataGridViewTextBoxColumn, unitDataGridViewTextBoxColumn });
+            dataGridViewRecipeItems.Columns.AddRange(new DataGridViewColumn[] { productNameDataGridViewTextBoxColumn, unitNameDataGridViewTextBoxColumn, expirationDateDataGridViewTextBoxColumn, quantityDataGridViewTextBoxColumn });
             dataGridViewRecipeItems.DataSource = recipeItemsBindingSource;
             dataGridViewRecipeItems.Dock = DockStyle.Fill;
             dataGridViewRecipeItems.Location = new Point(0, 0);
@@ -202,83 +202,6 @@
             dataGridViewRecipeItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewRecipeItems.Size = new Size(536, 386);
             dataGridViewRecipeItems.TabIndex = 0;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
-            idDataGridViewTextBoxColumn.MinimumWidth = 6;
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            idDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // recipeIdDataGridViewTextBoxColumn
-            // 
-            recipeIdDataGridViewTextBoxColumn.DataPropertyName = "RecipeId";
-            recipeIdDataGridViewTextBoxColumn.HeaderText = "RecipeId";
-            recipeIdDataGridViewTextBoxColumn.MinimumWidth = 6;
-            recipeIdDataGridViewTextBoxColumn.Name = "recipeIdDataGridViewTextBoxColumn";
-            recipeIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // productNameDataGridViewTextBoxColumn
-            // 
-            productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
-            productNameDataGridViewTextBoxColumn.HeaderText = "Товар";
-            productNameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
-            // 
-            // expirationDateDataGridViewTextBoxColumn
-            // 
-            expirationDateDataGridViewTextBoxColumn.DataPropertyName = "ExpirationDate";
-            expirationDateDataGridViewTextBoxColumn.HeaderText = "Срок годности";
-            expirationDateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            expirationDateDataGridViewTextBoxColumn.Name = "expirationDateDataGridViewTextBoxColumn";
-            // 
-            // unitNameDataGridViewTextBoxColumn
-            // 
-            unitNameDataGridViewTextBoxColumn.DataPropertyName = "UnitName";
-            unitNameDataGridViewTextBoxColumn.HeaderText = "Ед. измер.";
-            unitNameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            unitNameDataGridViewTextBoxColumn.Name = "unitNameDataGridViewTextBoxColumn";
-            // 
-            // quantityDataGridViewTextBoxColumn
-            // 
-            quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-            quantityDataGridViewTextBoxColumn.HeaderText = "Количество";
-            quantityDataGridViewTextBoxColumn.MinimumWidth = 6;
-            quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            // 
-            // recipeDataGridViewTextBoxColumn
-            // 
-            recipeDataGridViewTextBoxColumn.DataPropertyName = "Recipe";
-            recipeDataGridViewTextBoxColumn.HeaderText = "Recipe";
-            recipeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            recipeDataGridViewTextBoxColumn.Name = "recipeDataGridViewTextBoxColumn";
-            recipeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // productDataGridViewTextBoxColumn
-            // 
-            productDataGridViewTextBoxColumn.DataPropertyName = "Product";
-            productDataGridViewTextBoxColumn.HeaderText = "Product";
-            productDataGridViewTextBoxColumn.MinimumWidth = 6;
-            productDataGridViewTextBoxColumn.Name = "productDataGridViewTextBoxColumn";
-            productDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // unitDataGridViewTextBoxColumn
-            // 
-            unitDataGridViewTextBoxColumn.DataPropertyName = "Unit";
-            unitDataGridViewTextBoxColumn.HeaderText = "Unit";
-            unitDataGridViewTextBoxColumn.MinimumWidth = 6;
-            unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
-            unitDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // recipeItemsBindingSource
-            // 
-            recipeItemsBindingSource.DataMember = "RecipeItems";
-            recipeItemsBindingSource.DataSource = recipeBindingSource;
-            // 
-            // recipeBindingSource
-            // 
-            recipeBindingSource.DataSource = typeof(Data.Entities.Recipe);
             // 
             // panel2
             // 
@@ -337,6 +260,10 @@
             providerDataGridViewTextBoxColumn.Name = "providerDataGridViewTextBoxColumn";
             providerDataGridViewTextBoxColumn.Visible = false;
             // 
+            // recipeBindingSource
+            // 
+            recipeBindingSource.DataSource = typeof(Data.Entities.Recipe);
+            // 
             // toolStrip2
             // 
             toolStrip2.ImageScalingSize = new Size(20, 20);
@@ -383,7 +310,7 @@
             dataGridViewExpenseItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewExpenseItems.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewExpenseItems.ColumnHeadersHeight = 29;
-            dataGridViewExpenseItems.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn2, expenseIdDataGridViewTextBoxColumn, productNameDataGridViewTextBoxColumn1, expirationDateDataGridViewTextBoxColumn1, quantityDataGridViewTextBoxColumn1, unitNameDataGridViewTextBoxColumn1, expenseDataGridViewTextBoxColumn, productDataGridViewTextBoxColumn1, unitDataGridViewTextBoxColumn1 });
+            dataGridViewExpenseItems.Columns.AddRange(new DataGridViewColumn[] { productNameDataGridViewTextBoxColumn1, unitNameDataGridViewTextBoxColumn1, expirationDateDataGridViewTextBoxColumn1, quantityDataGridViewTextBoxColumn1 });
             dataGridViewExpenseItems.DataSource = expenseItemsBindingSource;
             dataGridViewExpenseItems.Dock = DockStyle.Fill;
             dataGridViewExpenseItems.Location = new Point(0, 0);
@@ -393,83 +320,6 @@
             dataGridViewExpenseItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewExpenseItems.Size = new Size(536, 386);
             dataGridViewExpenseItems.TabIndex = 0;
-            // 
-            // idDataGridViewTextBoxColumn2
-            // 
-            idDataGridViewTextBoxColumn2.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn2.HeaderText = "Id";
-            idDataGridViewTextBoxColumn2.MinimumWidth = 6;
-            idDataGridViewTextBoxColumn2.Name = "idDataGridViewTextBoxColumn2";
-            idDataGridViewTextBoxColumn2.Visible = false;
-            // 
-            // expenseIdDataGridViewTextBoxColumn
-            // 
-            expenseIdDataGridViewTextBoxColumn.DataPropertyName = "ExpenseId";
-            expenseIdDataGridViewTextBoxColumn.HeaderText = "ExpenseId";
-            expenseIdDataGridViewTextBoxColumn.MinimumWidth = 6;
-            expenseIdDataGridViewTextBoxColumn.Name = "expenseIdDataGridViewTextBoxColumn";
-            expenseIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // productNameDataGridViewTextBoxColumn1
-            // 
-            productNameDataGridViewTextBoxColumn1.DataPropertyName = "ProductName";
-            productNameDataGridViewTextBoxColumn1.HeaderText = "Товар";
-            productNameDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            productNameDataGridViewTextBoxColumn1.Name = "productNameDataGridViewTextBoxColumn1";
-            // 
-            // expirationDateDataGridViewTextBoxColumn1
-            // 
-            expirationDateDataGridViewTextBoxColumn1.DataPropertyName = "ExpirationDate";
-            expirationDateDataGridViewTextBoxColumn1.HeaderText = "Срок годности";
-            expirationDateDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            expirationDateDataGridViewTextBoxColumn1.Name = "expirationDateDataGridViewTextBoxColumn1";
-            // 
-            // quantityDataGridViewTextBoxColumn1
-            // 
-            quantityDataGridViewTextBoxColumn1.DataPropertyName = "Quantity";
-            quantityDataGridViewTextBoxColumn1.HeaderText = "Количество";
-            quantityDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            quantityDataGridViewTextBoxColumn1.Name = "quantityDataGridViewTextBoxColumn1";
-            // 
-            // unitNameDataGridViewTextBoxColumn1
-            // 
-            unitNameDataGridViewTextBoxColumn1.DataPropertyName = "UnitName";
-            unitNameDataGridViewTextBoxColumn1.HeaderText = "Ед. измер.";
-            unitNameDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            unitNameDataGridViewTextBoxColumn1.Name = "unitNameDataGridViewTextBoxColumn1";
-            // 
-            // expenseDataGridViewTextBoxColumn
-            // 
-            expenseDataGridViewTextBoxColumn.DataPropertyName = "Expense";
-            expenseDataGridViewTextBoxColumn.HeaderText = "Expense";
-            expenseDataGridViewTextBoxColumn.MinimumWidth = 6;
-            expenseDataGridViewTextBoxColumn.Name = "expenseDataGridViewTextBoxColumn";
-            expenseDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // productDataGridViewTextBoxColumn1
-            // 
-            productDataGridViewTextBoxColumn1.DataPropertyName = "Product";
-            productDataGridViewTextBoxColumn1.HeaderText = "Product";
-            productDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            productDataGridViewTextBoxColumn1.Name = "productDataGridViewTextBoxColumn1";
-            productDataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // unitDataGridViewTextBoxColumn1
-            // 
-            unitDataGridViewTextBoxColumn1.DataPropertyName = "Unit";
-            unitDataGridViewTextBoxColumn1.HeaderText = "Unit";
-            unitDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            unitDataGridViewTextBoxColumn1.Name = "unitDataGridViewTextBoxColumn1";
-            unitDataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // expenseItemsBindingSource
-            // 
-            expenseItemsBindingSource.DataMember = "ExpenseItems";
-            expenseItemsBindingSource.DataSource = expenseBindingSource;
-            // 
-            // expenseBindingSource
-            // 
-            expenseBindingSource.DataSource = typeof(Data.Entities.Expense);
             // 
             // panel4
             // 
@@ -528,6 +378,10 @@
             employeeDataGridViewTextBoxColumn.Name = "employeeDataGridViewTextBoxColumn";
             employeeDataGridViewTextBoxColumn.Visible = false;
             // 
+            // expenseBindingSource
+            // 
+            expenseBindingSource.DataSource = typeof(Data.Entities.Expense);
+            // 
             // toolStrip3
             // 
             toolStrip3.ImageScalingSize = new Size(20, 20);
@@ -536,6 +390,142 @@
             toolStrip3.Size = new Size(786, 25);
             toolStrip3.TabIndex = 0;
             toolStrip3.Text = "toolStrip3";
+            // 
+            // recipeItemsBindingSource
+            // 
+            recipeItemsBindingSource.DataMember = "RecipeItems";
+            recipeItemsBindingSource.DataSource = recipeBindingSource;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn1.HeaderText = "Id";
+            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // recipeIdDataGridViewTextBoxColumn
+            // 
+            recipeIdDataGridViewTextBoxColumn.DataPropertyName = "RecipeId";
+            recipeIdDataGridViewTextBoxColumn.HeaderText = "RecipeId";
+            recipeIdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            recipeIdDataGridViewTextBoxColumn.Name = "recipeIdDataGridViewTextBoxColumn";
+            // 
+            // productNameDataGridViewTextBoxColumn
+            // 
+            productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
+            productNameDataGridViewTextBoxColumn.HeaderText = "Наименование";
+            productNameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
+            // 
+            // unitNameDataGridViewTextBoxColumn
+            // 
+            unitNameDataGridViewTextBoxColumn.DataPropertyName = "UnitName";
+            unitNameDataGridViewTextBoxColumn.HeaderText = "Единицы измерения";
+            unitNameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            unitNameDataGridViewTextBoxColumn.Name = "unitNameDataGridViewTextBoxColumn";
+            // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
+            quantityDataGridViewTextBoxColumn.HeaderText = "Количество";
+            quantityDataGridViewTextBoxColumn.MinimumWidth = 6;
+            quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            // 
+            // expirationDateDataGridViewTextBoxColumn
+            // 
+            expirationDateDataGridViewTextBoxColumn.DataPropertyName = "ExpirationDate";
+            expirationDateDataGridViewTextBoxColumn.HeaderText = "Срок годности";
+            expirationDateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            expirationDateDataGridViewTextBoxColumn.Name = "expirationDateDataGridViewTextBoxColumn";
+            // 
+            // recipeDataGridViewTextBoxColumn
+            // 
+            recipeDataGridViewTextBoxColumn.DataPropertyName = "Recipe";
+            recipeDataGridViewTextBoxColumn.HeaderText = "Recipe";
+            recipeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            recipeDataGridViewTextBoxColumn.Name = "recipeDataGridViewTextBoxColumn";
+            // 
+            // productDataGridViewTextBoxColumn
+            // 
+            productDataGridViewTextBoxColumn.DataPropertyName = "Product";
+            productDataGridViewTextBoxColumn.HeaderText = "Product";
+            productDataGridViewTextBoxColumn.MinimumWidth = 6;
+            productDataGridViewTextBoxColumn.Name = "productDataGridViewTextBoxColumn";
+            // 
+            // unitDataGridViewTextBoxColumn
+            // 
+            unitDataGridViewTextBoxColumn.DataPropertyName = "Unit";
+            unitDataGridViewTextBoxColumn.HeaderText = "Unit";
+            unitDataGridViewTextBoxColumn.MinimumWidth = 6;
+            unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
+            // 
+            // expenseItemsBindingSource
+            // 
+            expenseItemsBindingSource.DataMember = "ExpenseItems";
+            expenseItemsBindingSource.DataSource = expenseBindingSource;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn2.HeaderText = "Id";
+            dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // expenseIdDataGridViewTextBoxColumn
+            // 
+            expenseIdDataGridViewTextBoxColumn.DataPropertyName = "ExpenseId";
+            expenseIdDataGridViewTextBoxColumn.HeaderText = "ExpenseId";
+            expenseIdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            expenseIdDataGridViewTextBoxColumn.Name = "expenseIdDataGridViewTextBoxColumn";
+            // 
+            // productNameDataGridViewTextBoxColumn1
+            // 
+            productNameDataGridViewTextBoxColumn1.DataPropertyName = "ProductName";
+            productNameDataGridViewTextBoxColumn1.HeaderText = "Наименование";
+            productNameDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            productNameDataGridViewTextBoxColumn1.Name = "productNameDataGridViewTextBoxColumn1";
+            // 
+            // unitNameDataGridViewTextBoxColumn1
+            // 
+            unitNameDataGridViewTextBoxColumn1.DataPropertyName = "UnitName";
+            unitNameDataGridViewTextBoxColumn1.HeaderText = "Единицы измерения";
+            unitNameDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            unitNameDataGridViewTextBoxColumn1.Name = "unitNameDataGridViewTextBoxColumn1";
+            // 
+            // quantityDataGridViewTextBoxColumn1
+            // 
+            quantityDataGridViewTextBoxColumn1.DataPropertyName = "Quantity";
+            quantityDataGridViewTextBoxColumn1.HeaderText = "Количество";
+            quantityDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            quantityDataGridViewTextBoxColumn1.Name = "quantityDataGridViewTextBoxColumn1";
+            // 
+            // expirationDateDataGridViewTextBoxColumn1
+            // 
+            expirationDateDataGridViewTextBoxColumn1.DataPropertyName = "ExpirationDate";
+            expirationDateDataGridViewTextBoxColumn1.HeaderText = "Срок годности";
+            expirationDateDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            expirationDateDataGridViewTextBoxColumn1.Name = "expirationDateDataGridViewTextBoxColumn1";
+            // 
+            // expenseDataGridViewTextBoxColumn
+            // 
+            expenseDataGridViewTextBoxColumn.DataPropertyName = "Expense";
+            expenseDataGridViewTextBoxColumn.HeaderText = "Expense";
+            expenseDataGridViewTextBoxColumn.MinimumWidth = 6;
+            expenseDataGridViewTextBoxColumn.Name = "expenseDataGridViewTextBoxColumn";
+            // 
+            // productDataGridViewTextBoxColumn1
+            // 
+            productDataGridViewTextBoxColumn1.DataPropertyName = "Product";
+            productDataGridViewTextBoxColumn1.HeaderText = "Product";
+            productDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            productDataGridViewTextBoxColumn1.Name = "productDataGridViewTextBoxColumn1";
+            // 
+            // unitDataGridViewTextBoxColumn1
+            // 
+            unitDataGridViewTextBoxColumn1.DataPropertyName = "Unit";
+            unitDataGridViewTextBoxColumn1.HeaderText = "Unit";
+            unitDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            unitDataGridViewTextBoxColumn1.Name = "unitDataGridViewTextBoxColumn1";
             // 
             // StoreForm
             // 
@@ -554,18 +544,18 @@
             tabPage2.PerformLayout();
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewRecipeItems).EndInit();
-            ((System.ComponentModel.ISupportInitialize)recipeItemsBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)recipeBindingSource).EndInit();
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewRecipes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)recipeBindingSource).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
             panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenseItems).EndInit();
-            ((System.ComponentModel.ISupportInitialize)expenseItemsBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)expenseBindingSource).EndInit();
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenses).EndInit();
+            ((System.ComponentModel.ISupportInitialize)expenseBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)recipeItemsBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)expenseItemsBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -588,9 +578,7 @@
         private DataGridView dataGridViewRecipes;
         private BindingSource recipeBindingSource;
         private DataGridView dataGridViewRecipeItems;
-        private BindingSource recipeItemsBindingSource;
         private DataGridView dataGridViewExpenseItems;
-        private BindingSource expenseItemsBindingSource;
         private BindingSource expenseBindingSource;
         private DataGridView dataGridViewExpenses;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
@@ -602,22 +590,26 @@
         private DataGridViewTextBoxColumn employeeIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn employeeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn recipeIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn expirationDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn unitNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn expirationDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn recipeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn productDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn unitDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
+        private BindingSource recipeItemsBindingSource;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn expenseIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn expirationDateDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn unitNameDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn expirationDateDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn expenseDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn productDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn unitDataGridViewTextBoxColumn1;
+        private BindingSource expenseItemsBindingSource;
     }
 }
