@@ -16,6 +16,8 @@ namespace Clinic.Data.Entities
         [ForeignKey("EmployeeId")]
         public virtual Employee Employee { get; set; } = null!;
 
+        public virtual string EmployeeFullName { get => Employee.FullName; }
+
         public virtual ObservableCollectionListSource<ExpenseItem> ExpenseItems { get; } = new();
     }
 }

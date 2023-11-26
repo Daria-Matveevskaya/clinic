@@ -23,9 +23,9 @@ namespace Clinic.Forms
 
             applicationDbContext = new ApplicationDbContext();
 
-            applicationDbContext!.Recipes.Load();
+            applicationDbContext!.Recipes.Include(r => r.Provider).Load();
             applicationDbContext!.RecipeItems.Load();
-            applicationDbContext!.Expenses.Load();
+            applicationDbContext!.Expenses.Include(r => r.Employee).Load();
 
             recipeBindingSource.DataSource = applicationDbContext!.Recipes.Local.ToBindingList();
             expenseBindingSource.DataSource = applicationDbContext!.Expenses.Local.ToBindingList();
@@ -69,7 +69,7 @@ namespace Clinic.Forms
             dataGridViewStore.Columns[1].HeaderText = "Единицы измерения";
             dataGridViewStore.Columns[2].HeaderText = "Срок годности";
             dataGridViewStore.Columns[3].HeaderText = "Количество";
-            
+
             dataGridViewStore.Columns[4].Visible = false;
 
             dataGridViewStore.ReadOnly = true;

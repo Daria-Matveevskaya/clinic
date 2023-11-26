@@ -16,6 +16,8 @@ namespace Clinic.Data.Entities
         [ForeignKey("ProviderId")]
         public virtual Provider Provider { get; set; } = null!;
 
+        public virtual string ProviderName { get => Provider.Name; }
+
         public virtual ObservableCollectionListSource<RecipeItem> RecipeItems { get; } = new();
     }
 }
