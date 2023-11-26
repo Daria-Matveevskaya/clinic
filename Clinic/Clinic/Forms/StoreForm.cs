@@ -10,6 +10,10 @@ namespace Clinic.Forms
     {
         private ApplicationDbContext? applicationDbContext;
 
+        private RecipeEditForm? recipeEditForm;
+
+        private ExpenseEditForm? expenseEditForm;
+
         private List<Store> storeItems = new();
 
         public StoreForm()
@@ -101,6 +105,16 @@ namespace Clinic.Forms
             dataGridViewExpenseItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewExpenseItems.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewExpenseItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+
+            recipeEditForm = new RecipeEditForm()
+            {
+                StartPosition = FormStartPosition.CenterParent,
+            };
+
+            expenseEditForm = new ExpenseEditForm()
+            {
+                StartPosition = FormStartPosition.CenterParent,
+            };
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -109,6 +123,9 @@ namespace Clinic.Forms
 
             applicationDbContext!.Dispose();
             applicationDbContext = null;
+
+            recipeEditForm!.Dispose();
+            expenseEditForm = null;
         }
 
         private void dataGridViewRecipes_SelectionChanged(object sender, EventArgs e)

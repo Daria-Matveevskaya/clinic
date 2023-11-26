@@ -51,9 +51,9 @@
             dateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             providerNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             toolStrip2 = new ToolStrip();
-            toolStripButtonAdd = new ToolStripButton();
-            toolStripButtonEdit = new ToolStripButton();
-            toolStripButtonRemove = new ToolStripButton();
+            toolStripButtonRecipeAdd = new ToolStripButton();
+            toolStripButtonRecipeEdit = new ToolStripButton();
+            toolStripButtonRecipeRemove = new ToolStripButton();
             tabPage3 = new TabPage();
             splitter2 = new Splitter();
             panel5 = new Panel();
@@ -66,10 +66,13 @@
             expenseItemsBindingSource = new BindingSource(components);
             panel4 = new Panel();
             dataGridViewExpenses = new DataGridView();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            employeeFullNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             toolStrip3 = new ToolStrip();
-            toolStripButton1 = new ToolStripButton();
-            toolStripButton2 = new ToolStripButton();
-            toolStripButton3 = new ToolStripButton();
+            toolStripButtonExpenseAdd = new ToolStripButton();
+            toolStripButtonExpenseEdit = new ToolStripButton();
+            toolStripButtonExpenseRemove = new ToolStripButton();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             recipeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             recipeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -80,9 +83,6 @@
             expenseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             productDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             unitDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            employeeFullNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
@@ -302,38 +302,38 @@
             // toolStrip2
             // 
             toolStrip2.ImageScalingSize = new Size(20, 20);
-            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripButtonAdd, toolStripButtonEdit, toolStripButtonRemove });
+            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripButtonRecipeAdd, toolStripButtonRecipeEdit, toolStripButtonRecipeRemove });
             toolStrip2.Location = new Point(3, 3);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Size = new Size(786, 27);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
             // 
-            // toolStripButtonAdd
+            // toolStripButtonRecipeAdd
             // 
-            toolStripButtonAdd.Image = (Image)resources.GetObject("toolStripButtonAdd.Image");
-            toolStripButtonAdd.ImageTransparentColor = Color.Magenta;
-            toolStripButtonAdd.Name = "toolStripButtonAdd";
-            toolStripButtonAdd.Size = new Size(100, 24);
-            toolStripButtonAdd.Text = "Добавить";
-            toolStripButtonAdd.ToolTipText = "Добавить";
+            toolStripButtonRecipeAdd.Image = (Image)resources.GetObject("toolStripButtonRecipeAdd.Image");
+            toolStripButtonRecipeAdd.ImageTransparentColor = Color.Magenta;
+            toolStripButtonRecipeAdd.Name = "toolStripButtonRecipeAdd";
+            toolStripButtonRecipeAdd.Size = new Size(100, 24);
+            toolStripButtonRecipeAdd.Text = "Добавить";
+            toolStripButtonRecipeAdd.ToolTipText = "Добавить";
             // 
-            // toolStripButtonEdit
+            // toolStripButtonRecipeEdit
             // 
-            toolStripButtonEdit.Image = (Image)resources.GetObject("toolStripButtonEdit.Image");
-            toolStripButtonEdit.ImageTransparentColor = Color.Magenta;
-            toolStripButtonEdit.Name = "toolStripButtonEdit";
-            toolStripButtonEdit.RightToLeft = RightToLeft.No;
-            toolStripButtonEdit.Size = new Size(135, 24);
-            toolStripButtonEdit.Text = "Редактировать";
+            toolStripButtonRecipeEdit.Image = (Image)resources.GetObject("toolStripButtonRecipeEdit.Image");
+            toolStripButtonRecipeEdit.ImageTransparentColor = Color.Magenta;
+            toolStripButtonRecipeEdit.Name = "toolStripButtonRecipeEdit";
+            toolStripButtonRecipeEdit.RightToLeft = RightToLeft.No;
+            toolStripButtonRecipeEdit.Size = new Size(135, 24);
+            toolStripButtonRecipeEdit.Text = "Редактировать";
             // 
-            // toolStripButtonRemove
+            // toolStripButtonRecipeRemove
             // 
-            toolStripButtonRemove.Image = (Image)resources.GetObject("toolStripButtonRemove.Image");
-            toolStripButtonRemove.ImageTransparentColor = Color.Magenta;
-            toolStripButtonRemove.Name = "toolStripButtonRemove";
-            toolStripButtonRemove.Size = new Size(89, 24);
-            toolStripButtonRemove.Text = "Удалить";
+            toolStripButtonRecipeRemove.Image = (Image)resources.GetObject("toolStripButtonRecipeRemove.Image");
+            toolStripButtonRecipeRemove.ImageTransparentColor = Color.Magenta;
+            toolStripButtonRecipeRemove.Name = "toolStripButtonRecipeRemove";
+            toolStripButtonRecipeRemove.Size = new Size(89, 24);
+            toolStripButtonRecipeRemove.Text = "Удалить";
             // 
             // tabPage3
             // 
@@ -449,41 +449,63 @@
             dataGridViewExpenses.TabIndex = 0;
             dataGridViewExpenses.SelectionChanged += dataGridViewExpenses_SelectionChanged;
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Номер";
+            idDataGridViewTextBoxColumn.MinimumWidth = 6;
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // dateDataGridViewTextBoxColumn1
+            // 
+            dateDataGridViewTextBoxColumn1.DataPropertyName = "Date";
+            dateDataGridViewTextBoxColumn1.HeaderText = "Дата";
+            dateDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dateDataGridViewTextBoxColumn1.Name = "dateDataGridViewTextBoxColumn1";
+            // 
+            // employeeFullNameDataGridViewTextBoxColumn
+            // 
+            employeeFullNameDataGridViewTextBoxColumn.DataPropertyName = "EmployeeFullName";
+            employeeFullNameDataGridViewTextBoxColumn.HeaderText = "Получатель";
+            employeeFullNameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            employeeFullNameDataGridViewTextBoxColumn.Name = "employeeFullNameDataGridViewTextBoxColumn";
+            employeeFullNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // toolStrip3
             // 
             toolStrip3.ImageScalingSize = new Size(20, 20);
-            toolStrip3.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3 });
+            toolStrip3.Items.AddRange(new ToolStripItem[] { toolStripButtonExpenseAdd, toolStripButtonExpenseEdit, toolStripButtonExpenseRemove });
             toolStrip3.Location = new Point(3, 3);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Size = new Size(786, 27);
             toolStrip3.TabIndex = 0;
             toolStrip3.Text = "toolStrip3";
             // 
-            // toolStripButton1
+            // toolStripButtonExpenseAdd
             // 
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(100, 24);
-            toolStripButton1.Text = "Добавить";
-            toolStripButton1.ToolTipText = "Добавить";
+            toolStripButtonExpenseAdd.Image = (Image)resources.GetObject("toolStripButtonExpenseAdd.Image");
+            toolStripButtonExpenseAdd.ImageTransparentColor = Color.Magenta;
+            toolStripButtonExpenseAdd.Name = "toolStripButtonExpenseAdd";
+            toolStripButtonExpenseAdd.Size = new Size(100, 24);
+            toolStripButtonExpenseAdd.Text = "Добавить";
+            toolStripButtonExpenseAdd.ToolTipText = "Добавить";
             // 
-            // toolStripButton2
+            // toolStripButtonExpenseEdit
             // 
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.RightToLeft = RightToLeft.No;
-            toolStripButton2.Size = new Size(135, 24);
-            toolStripButton2.Text = "Редактировать";
+            toolStripButtonExpenseEdit.Image = (Image)resources.GetObject("toolStripButtonExpenseEdit.Image");
+            toolStripButtonExpenseEdit.ImageTransparentColor = Color.Magenta;
+            toolStripButtonExpenseEdit.Name = "toolStripButtonExpenseEdit";
+            toolStripButtonExpenseEdit.RightToLeft = RightToLeft.No;
+            toolStripButtonExpenseEdit.Size = new Size(135, 24);
+            toolStripButtonExpenseEdit.Text = "Редактировать";
             // 
-            // toolStripButton3
+            // toolStripButtonExpenseRemove
             // 
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(89, 24);
-            toolStripButton3.Text = "Удалить";
+            toolStripButtonExpenseRemove.Image = (Image)resources.GetObject("toolStripButtonExpenseRemove.Image");
+            toolStripButtonExpenseRemove.ImageTransparentColor = Color.Magenta;
+            toolStripButtonExpenseRemove.Name = "toolStripButtonExpenseRemove";
+            toolStripButtonExpenseRemove.Size = new Size(89, 24);
+            toolStripButtonExpenseRemove.Text = "Удалить";
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -565,28 +587,6 @@
             unitDataGridViewTextBoxColumn1.Name = "unitDataGridViewTextBoxColumn1";
             unitDataGridViewTextBoxColumn1.Width = 125;
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Номер";
-            idDataGridViewTextBoxColumn.MinimumWidth = 6;
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // dateDataGridViewTextBoxColumn1
-            // 
-            dateDataGridViewTextBoxColumn1.DataPropertyName = "Date";
-            dateDataGridViewTextBoxColumn1.HeaderText = "Дата";
-            dateDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dateDataGridViewTextBoxColumn1.Name = "dateDataGridViewTextBoxColumn1";
-            // 
-            // employeeFullNameDataGridViewTextBoxColumn
-            // 
-            employeeFullNameDataGridViewTextBoxColumn.DataPropertyName = "EmployeeFullName";
-            employeeFullNameDataGridViewTextBoxColumn.HeaderText = "Получатель";
-            employeeFullNameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            employeeFullNameDataGridViewTextBoxColumn.Name = "employeeFullNameDataGridViewTextBoxColumn";
-            employeeFullNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // StoreForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -666,12 +666,12 @@
         private DataGridViewTextBoxColumn productDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn unitDataGridViewTextBoxColumn1;
         private BindingSource expenseItemsBindingSource;
-        private ToolStripButton toolStripButtonAdd;
-        private ToolStripButton toolStripButtonEdit;
-        private ToolStripButton toolStripButtonRemove;
-        private ToolStripButton toolStripButton1;
-        private ToolStripButton toolStripButton2;
-        private ToolStripButton toolStripButton3;
+        private ToolStripButton toolStripButtonRecipeAdd;
+        private ToolStripButton toolStripButtonRecipeEdit;
+        private ToolStripButton toolStripButtonRecipeRemove;
+        private ToolStripButton toolStripButtonExpenseAdd;
+        private ToolStripButton toolStripButtonExpenseEdit;
+        private ToolStripButton toolStripButtonExpenseRemove;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn providerNameDataGridViewTextBoxColumn;
