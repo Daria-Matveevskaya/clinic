@@ -9,11 +9,8 @@ namespace Clinic.Forms
     public partial class StoreForm : Form
     {
         private ApplicationDbContext? applicationDbContext;
-
         private RecipeEditForm? recipeEditForm;
-
         private ExpenseEditForm? expenseEditForm;
-
         private List<Store> storeItems = new();
 
         public StoreForm()
@@ -27,8 +24,12 @@ namespace Clinic.Forms
 
             applicationDbContext = new ApplicationDbContext();
 
-            applicationDbContext!.Recipes.Include(r => r.Provider).Load();
+            applicationDbContext!.Units.Load();
+            applicationDbContext!.Products.Load();
+            applicationDbContext!.Providers.Load();
             applicationDbContext!.RecipeItems.Load();
+
+            applicationDbContext!.Recipes.Include(r => r.Provider).Load();
             applicationDbContext!.Expenses.Include(r => r.Employee).Load();
 
             recipeBindingSource.DataSource = applicationDbContext!.Recipes.Local.ToBindingList();
@@ -73,7 +74,6 @@ namespace Clinic.Forms
             dataGridViewStore.Columns[1].HeaderText = "Единицы измерения";
             dataGridViewStore.Columns[2].HeaderText = "Срок годности";
             dataGridViewStore.Columns[3].HeaderText = "Количество";
-
             dataGridViewStore.Columns[4].Visible = false;
 
             dataGridViewStore.ReadOnly = true;
@@ -83,6 +83,7 @@ namespace Clinic.Forms
             dataGridViewStore.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             dataGridViewRecipes.ReadOnly = true;
+            dataGridViewRecipes.MultiSelect = false;
             dataGridViewRecipes.AllowUserToAddRows = false;
             dataGridViewRecipes.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewRecipes.DefaultCellStyle.SelectionForeColor = Color.Black;
@@ -95,6 +96,7 @@ namespace Clinic.Forms
             dataGridViewRecipeItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             dataGridViewExpenses.ReadOnly = true;
+            dataGridViewExpenses.MultiSelect = false;
             dataGridViewExpenses.AllowUserToAddRows = false;
             dataGridViewExpenses.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewExpenses.DefaultCellStyle.SelectionForeColor = Color.Black;
@@ -109,6 +111,9 @@ namespace Clinic.Forms
             recipeEditForm = new RecipeEditForm()
             {
                 StartPosition = FormStartPosition.CenterParent,
+                units = applicationDbContext!.Units.Local.ToList(),
+                products = applicationDbContext!.Products.Local.ToList(),
+                providers = applicationDbContext!.Providers.Local.ToList(),
             };
 
             expenseEditForm = new ExpenseEditForm()
@@ -128,11 +133,107 @@ namespace Clinic.Forms
             expenseEditForm = null;
         }
 
+        private void toolStripButtonRecipeAdd_Click(object sender, EventArgs e)
+        {
+            recipeEditForm!.recipe = new Recipe()
+            {
+                Date = DateTime.Now,
+                Provider = recipeEditForm!.providers!.First(),
+            };
+
+            if (recipeEditForm!.ShowDialog(this) == DialogResult.OK)
+            {
+                applicationDbContext!.Recipes.Add(recipeEditForm.recipe);
+
+                var recipeItemModelsToAdd = recipeEditForm!.recipeItemModels!.Where(r => r.IsChecked);
+                
+                applicationDbContext!.RecipeItems.AddRange(recipeItemModelsToAdd.Select(r => new RecipeItem
+                {
+                    RecipeId = recipeEditForm.recipe.Id,
+                    Recipe = recipeEditForm!.recipe,
+                    UnitName = r.UnitName,
+                    ProductName = r.ProductName,
+                    ExpirationDate = r.ExpirationDate,
+                    Quantity = r.Quantity,
+                }));
+
+                applicationDbContext!.SaveChanges();
+
+                applicationDbContext!.Entry((Recipe)recipeBindingSource.Current).Reload();
+                recipeItemsBindingSource.ResetBindings(false);
+            }
+        }
+
+        private void toolStripButtonRecipeEdit_Click(object sender, EventArgs e)
+        {
+            recipeEditForm!.recipe = (Recipe)recipeBindingSource.Current;
+            if (recipeEditForm.ShowDialog(this) == DialogResult.OK)
+            {
+                var recipeId = recipeEditForm!.recipe.Id;
+                var recipeItemModels = recipeEditForm!.recipeItemModels!.Where(r => r.IsChecked);
+                var recipeItemModelsToAdd = recipeItemModels.Where(r => !r.Id.HasValue);
+                var recipeItemModelsToUpdate = recipeItemModels.Where(r => r.Id.HasValue);
+                var recipeItemModelsToRemove = recipeEditForm!.recipe.RecipeItems.Where(r => !recipeItemModels.Select(ri => ri.Id).Contains(r.Id)).Select(r => r.Id);
+
+                if (recipeItemModelsToAdd != null)
+                {
+                    applicationDbContext!.RecipeItems.AddRange(recipeItemModelsToAdd.Select(r => new RecipeItem
+                    {
+                        RecipeId = recipeId,
+                        Recipe = recipeEditForm!.recipe,
+                        UnitName = r.UnitName,
+                        ProductName = r.ProductName,
+                        ExpirationDate = r.ExpirationDate,
+                        Quantity = r.Quantity,
+                    }));
+                }
+
+                if (recipeItemModelsToUpdate != null)
+                {
+                    foreach (var recipeItemModel in recipeItemModelsToUpdate)
+                    {
+                        var recipeItemToUpdate = applicationDbContext!.RecipeItems.First(recipeItem => recipeItem!.Id == recipeItemModel.Id);
+                        recipeItemToUpdate!.UnitName = recipeItemModel.UnitName;
+                        recipeItemToUpdate.ProductName = recipeItemModel.ProductName;
+                        recipeItemToUpdate.ExpirationDate = recipeItemModel.ExpirationDate;
+                        recipeItemToUpdate.Quantity = recipeItemModel.Quantity;
+
+                        applicationDbContext!.RecipeItems.Update(recipeItemToUpdate);
+                    }
+                }
+
+                if (recipeItemModelsToRemove != null)
+                {
+                    applicationDbContext!.RecipeItems.RemoveRange(applicationDbContext!.RecipeItems.Where(r => recipeItemModelsToRemove.Contains(r.Id)));
+                }
+
+                applicationDbContext!.SaveChanges();
+            }
+            else
+            {
+                recipeBindingSource.CancelEdit();
+            }
+
+            applicationDbContext!.Entry((Recipe)recipeBindingSource.Current).Reload();
+            recipeItemsBindingSource.ResetBindings(false);
+        }
+
+        private void toolStripButtonRecipeRemove_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Удалить запись?", "Подтвердите действие", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                recipeBindingSource.RemoveCurrent();
+                applicationDbContext!.SaveChanges();
+            }
+        }
+
         private void dataGridViewRecipes_SelectionChanged(object sender, EventArgs e)
         {
             if (applicationDbContext != null)
             {
-                var recipe = (Recipe)dataGridViewRecipes.CurrentRow.DataBoundItem;
+                var recipe = (Recipe?)dataGridViewRecipes.CurrentRow?.DataBoundItem;
 
                 if (recipe != null)
                 {
@@ -145,7 +246,7 @@ namespace Clinic.Forms
         {
             if (applicationDbContext != null)
             {
-                var expense = (Expense)dataGridViewExpenses.CurrentRow.DataBoundItem;
+                var expense = (Expense?)dataGridViewExpenses.CurrentRow?.DataBoundItem;
 
                 if (expense != null)
                 {

@@ -39,16 +39,23 @@
             splitter1 = new Splitter();
             panel3 = new Panel();
             dataGridViewRecipeItems = new DataGridView();
+            idDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            recipeIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             productNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             unitNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             expirationDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             quantityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            recipeDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            productDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            unitDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             recipeBindingSource = new BindingSource(components);
             recipeItemsBindingSource = new BindingSource(components);
             panel2 = new Panel();
             dataGridViewRecipes = new DataGridView();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            providerIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            providerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             providerNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             toolStrip2 = new ToolStrip();
             toolStripButtonRecipeAdd = new ToolStripButton();
@@ -200,7 +207,7 @@
             dataGridViewRecipeItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewRecipeItems.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewRecipeItems.ColumnHeadersHeight = 29;
-            dataGridViewRecipeItems.Columns.AddRange(new DataGridViewColumn[] { productNameDataGridViewTextBoxColumn, unitNameDataGridViewTextBoxColumn, expirationDateDataGridViewTextBoxColumn, quantityDataGridViewTextBoxColumn });
+            dataGridViewRecipeItems.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn2, recipeIdDataGridViewTextBoxColumn1, productNameDataGridViewTextBoxColumn, unitNameDataGridViewTextBoxColumn, expirationDateDataGridViewTextBoxColumn, quantityDataGridViewTextBoxColumn, recipeDataGridViewTextBoxColumn1, productDataGridViewTextBoxColumn2, unitDataGridViewTextBoxColumn2 });
             dataGridViewRecipeItems.DataSource = recipeItemsBindingSource;
             dataGridViewRecipeItems.Dock = DockStyle.Fill;
             dataGridViewRecipeItems.Location = new Point(0, 0);
@@ -211,6 +218,22 @@
             dataGridViewRecipeItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewRecipeItems.Size = new Size(386, 384);
             dataGridViewRecipeItems.TabIndex = 0;
+            // 
+            // idDataGridViewTextBoxColumn2
+            // 
+            idDataGridViewTextBoxColumn2.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn2.HeaderText = "Id";
+            idDataGridViewTextBoxColumn2.MinimumWidth = 6;
+            idDataGridViewTextBoxColumn2.Name = "idDataGridViewTextBoxColumn2";
+            idDataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // recipeIdDataGridViewTextBoxColumn1
+            // 
+            recipeIdDataGridViewTextBoxColumn1.DataPropertyName = "RecipeId";
+            recipeIdDataGridViewTextBoxColumn1.HeaderText = "RecipeId";
+            recipeIdDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            recipeIdDataGridViewTextBoxColumn1.Name = "recipeIdDataGridViewTextBoxColumn1";
+            recipeIdDataGridViewTextBoxColumn1.Visible = false;
             // 
             // productNameDataGridViewTextBoxColumn
             // 
@@ -240,6 +263,30 @@
             quantityDataGridViewTextBoxColumn.MinimumWidth = 6;
             quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
             // 
+            // recipeDataGridViewTextBoxColumn1
+            // 
+            recipeDataGridViewTextBoxColumn1.DataPropertyName = "Recipe";
+            recipeDataGridViewTextBoxColumn1.HeaderText = "Recipe";
+            recipeDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            recipeDataGridViewTextBoxColumn1.Name = "recipeDataGridViewTextBoxColumn1";
+            recipeDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // productDataGridViewTextBoxColumn2
+            // 
+            productDataGridViewTextBoxColumn2.DataPropertyName = "Product";
+            productDataGridViewTextBoxColumn2.HeaderText = "Product";
+            productDataGridViewTextBoxColumn2.MinimumWidth = 6;
+            productDataGridViewTextBoxColumn2.Name = "productDataGridViewTextBoxColumn2";
+            productDataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // unitDataGridViewTextBoxColumn2
+            // 
+            unitDataGridViewTextBoxColumn2.DataPropertyName = "Unit";
+            unitDataGridViewTextBoxColumn2.HeaderText = "Unit";
+            unitDataGridViewTextBoxColumn2.MinimumWidth = 6;
+            unitDataGridViewTextBoxColumn2.Name = "unitDataGridViewTextBoxColumn2";
+            unitDataGridViewTextBoxColumn2.Visible = false;
+            // 
             // recipeItemsBindingSource
             // 
             recipeItemsBindingSource.DataMember = "RecipeItems";
@@ -264,7 +311,7 @@
             dataGridViewRecipes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewRecipes.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewRecipes.ColumnHeadersHeight = 29;
-            dataGridViewRecipes.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn3, dateDataGridViewTextBoxColumn, providerNameDataGridViewTextBoxColumn });
+            dataGridViewRecipes.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, dateDataGridViewTextBoxColumn, providerIdDataGridViewTextBoxColumn, providerDataGridViewTextBoxColumn, providerNameDataGridViewTextBoxColumn });
             dataGridViewRecipes.DataSource = recipeBindingSource;
             dataGridViewRecipes.Dock = DockStyle.Fill;
             dataGridViewRecipes.Location = new Point(0, 0);
@@ -277,12 +324,12 @@
             dataGridViewRecipes.TabIndex = 0;
             dataGridViewRecipes.SelectionChanged += dataGridViewRecipes_SelectionChanged;
             // 
-            // dataGridViewTextBoxColumn3
+            // idDataGridViewTextBoxColumn1
             // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "Id";
-            dataGridViewTextBoxColumn3.HeaderText = "Номер";
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn1.HeaderText = "Номер";
+            idDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
             // 
             // dateDataGridViewTextBoxColumn
             // 
@@ -290,6 +337,22 @@
             dateDataGridViewTextBoxColumn.HeaderText = "Дата";
             dateDataGridViewTextBoxColumn.MinimumWidth = 6;
             dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            // 
+            // providerIdDataGridViewTextBoxColumn
+            // 
+            providerIdDataGridViewTextBoxColumn.DataPropertyName = "ProviderId";
+            providerIdDataGridViewTextBoxColumn.HeaderText = "ProviderId";
+            providerIdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            providerIdDataGridViewTextBoxColumn.Name = "providerIdDataGridViewTextBoxColumn";
+            providerIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // providerDataGridViewTextBoxColumn
+            // 
+            providerDataGridViewTextBoxColumn.DataPropertyName = "Provider";
+            providerDataGridViewTextBoxColumn.HeaderText = "Provider";
+            providerDataGridViewTextBoxColumn.MinimumWidth = 6;
+            providerDataGridViewTextBoxColumn.Name = "providerDataGridViewTextBoxColumn";
+            providerDataGridViewTextBoxColumn.Visible = false;
             // 
             // providerNameDataGridViewTextBoxColumn
             // 
@@ -317,6 +380,7 @@
             toolStripButtonRecipeAdd.Size = new Size(100, 24);
             toolStripButtonRecipeAdd.Text = "Добавить";
             toolStripButtonRecipeAdd.ToolTipText = "Добавить";
+            toolStripButtonRecipeAdd.Click += toolStripButtonRecipeAdd_Click;
             // 
             // toolStripButtonRecipeEdit
             // 
@@ -326,6 +390,7 @@
             toolStripButtonRecipeEdit.RightToLeft = RightToLeft.No;
             toolStripButtonRecipeEdit.Size = new Size(135, 24);
             toolStripButtonRecipeEdit.Text = "Редактировать";
+            toolStripButtonRecipeEdit.Click += toolStripButtonRecipeEdit_Click;
             // 
             // toolStripButtonRecipeRemove
             // 
@@ -334,6 +399,7 @@
             toolStripButtonRecipeRemove.Name = "toolStripButtonRecipeRemove";
             toolStripButtonRecipeRemove.Size = new Size(89, 24);
             toolStripButtonRecipeRemove.Text = "Удалить";
+            toolStripButtonRecipeRemove.Click += toolStripButtonRecipeRemove_Click;
             // 
             // tabPage3
             // 
@@ -645,13 +711,8 @@
         private DataGridView dataGridViewExpenseItems;
         private BindingSource expenseBindingSource;
         private DataGridView dataGridViewExpenses;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn recipeIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn unitNameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn expirationDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn recipeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn productDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn unitDataGridViewTextBoxColumn;
@@ -672,12 +733,23 @@
         private ToolStripButton toolStripButtonExpenseAdd;
         private ToolStripButton toolStripButtonExpenseEdit;
         private ToolStripButton toolStripButtonExpenseRemove;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn providerNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn employeeNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn employeeFullNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn providerIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn providerDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn providerNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn recipeIdDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn unitNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn expirationDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn recipeDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn productDataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn unitDataGridViewTextBoxColumn2;
     }
 }

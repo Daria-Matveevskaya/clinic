@@ -1,7 +1,8 @@
-﻿namespace Clinic.Classes
+﻿namespace Clinic.Models
 {
-    public class Store
+    public class RecipeItemModel
     {
+        public bool IsChecked { get; set; }
         public string ProductName { get; set; } = null!;
 
         public string UnitName { get; set; } = null!;
@@ -10,8 +11,6 @@
 
         public double Quantity { get; set; }
 
-        public bool IsExpiration { get =>  ExpirationDate != null && (ExpirationDate.Value - DateTime.Now).TotalDays < 60; }
-
-        public bool IsChecked { get; set; }
+        public int? Id { get; set; }
     }
 }
