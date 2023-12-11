@@ -42,7 +42,7 @@ namespace Clinic.Forms
                 Balance = p.Balance,
                 Quantity = expense.ExpenseItems!.FirstOrDefault(e => e.ProductName == p.ProductName && e.ExpirationDate == p.ExpirationDate && e.UnitName == p.UnitName)?.Quantity ?? 0,
                 IsChecked = expense.ExpenseItems!.FirstOrDefault(e => e.ProductName == p.ProductName && e.ExpirationDate == p.ExpirationDate && e.UnitName == p.UnitName)?.Quantity != null,
-            }).ToList();
+            }).OrderBy(r => r.ProductName).ThenBy(r => r.ExpirationDate).ToList();
 
             expenseItemModelBindingSource.DataSource = expenseItemModels;
 
@@ -72,7 +72,7 @@ namespace Clinic.Forms
                 return;
             }
 
-            if (expenseItemModels!.Where(r => r.IsChecked && r.Quantity >= r.Balance)!.Any())
+            if (expenseItemModels!.Where(r => r.IsChecked && r.Quantity > r.Balance)!.Any())
             {
                 DialogResult result = MessageBox.Show("Количество превышает остаток!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

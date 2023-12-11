@@ -45,7 +45,7 @@ namespace Clinic.Forms
                 ExpirationDate = r.ExpirationDate,
                 Quantity = r.Quantity,
                 Id = r.Id,
-            }).ToList();
+            }).OrderBy(r => r.ProductName).ThenBy(r => r.ExpirationDate).ToList();
 
             recipeItemModels.AddRange(products!.Select(p => p.Name).Except(recipeItemModels.Select(r => r.ProductName)).Select(p => new RecipeItemModel
             {

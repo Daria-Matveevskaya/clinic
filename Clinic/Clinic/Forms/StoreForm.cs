@@ -2,16 +2,21 @@
 using Clinic.Data.Entities;
 using Clinic.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Clinic.Forms
 {
     public partial class StoreForm : Form
     {
-        private ApplicationDbContext? applicationDbContext;
         private RecipeEditForm? recipeEditForm;
         private ExpenseEditForm? expenseEditForm;
+
+        private BindingSource storeBindingSource = new BindingSource();
+
+        private ApplicationDbContext? applicationDbContext;
 
         public StoreForm()
         {
@@ -24,38 +29,6 @@ namespace Clinic.Forms
 
             applicationDbContext = new ApplicationDbContext();
 
-            LoadDataContext();
-            SetDataGridView();
-
-            recipeEditForm = new RecipeEditForm()
-            {
-                StartPosition = FormStartPosition.CenterParent,
-                units = applicationDbContext!.Units.Local.ToList(),
-                products = applicationDbContext!.Products.Local.ToList(),
-                providers = applicationDbContext!.Providers.Local.ToList(),
-            };
-
-            expenseEditForm = new ExpenseEditForm()
-            {
-                StartPosition = FormStartPosition.CenterParent,
-                units = applicationDbContext!.Units.Local.ToList(),
-                employees = applicationDbContext!.Employees.Local.ToList(),
-            };
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
-
-            applicationDbContext!.Dispose();
-            applicationDbContext = null;
-
-            recipeEditForm!.Dispose();
-            expenseEditForm = null;
-        }
-
-        private void LoadDataContext()
-        {
             applicationDbContext!.Units.Load();
             applicationDbContext!.Products.Load();
             applicationDbContext!.Providers.Load();
@@ -68,11 +41,10 @@ namespace Clinic.Forms
 
             recipeBindingSource.DataSource = applicationDbContext!.Recipes.Local.ToBindingList();
             expenseBindingSource.DataSource = applicationDbContext!.Expenses.Local.ToBindingList();
-        }
 
-        private void SetDataGridView()
-        {
-            dataGridViewStore.DataSource = GetStoreItems();
+            RecalcStoreItems();
+            dataGridViewStore.DataSource = storeBindingSource;
+
             dataGridViewStore.Columns[0].HeaderText = "Наименование";
             dataGridViewStore.Columns[1].HeaderText = "Единицы измерения";
             dataGridViewStore.Columns[2].HeaderText = "Срок годности";
@@ -112,14 +84,37 @@ namespace Clinic.Forms
             dataGridViewExpenseItems.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewExpenseItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewExpenseItems.Columns[0].Visible = false;
+
+            recipeEditForm = new RecipeEditForm()
+            {
+                StartPosition = FormStartPosition.CenterParent,
+                units = applicationDbContext!.Units.Local.ToList(),
+                products = applicationDbContext!.Products.Local.ToList(),
+                providers = applicationDbContext!.Providers.Local.ToList(),
+            };
+
+            expenseEditForm = new ExpenseEditForm()
+            {
+                StartPosition = FormStartPosition.CenterParent,
+                units = applicationDbContext!.Units.Local.ToList(),
+                employees = applicationDbContext!.Employees.Local.ToList(),
+            };
         }
 
-        private List<StoreModel> GetStoreItems()
+        protected override void OnClosing(CancelEventArgs e)
         {
-            applicationDbContext!.RecipeItems.Load();
-            applicationDbContext!.ExpenseItems.Load();
+            base.OnClosing(e);
 
-            var result = applicationDbContext!.RecipeItems
+            applicationDbContext!.Dispose();
+            applicationDbContext = null;
+
+            recipeEditForm!.Dispose();
+            expenseEditForm = null;
+        }
+
+        private void RecalcStoreItems()
+        {
+            storeBindingSource.DataSource = applicationDbContext!.RecipeItems
                 .GroupBy(rec => new { rec.ProductName, rec.ExpirationDate, rec.UnitName })
                 .Select(rec => new StoreModel
                 {
@@ -130,9 +125,7 @@ namespace Clinic.Forms
                     applicationDbContext!.ExpenseItems
                     .Where(exp => exp.ProductName == rec.Key.ProductName && exp.ExpirationDate == rec.Key.ExpirationDate && exp.UnitName == rec.Key.UnitName)
                     .Sum(exp => exp.Quantity),
-                }).ToList();
-
-            return result;
+                }).OrderBy(r => r.ProductName).ThenBy(r => r.ExpirationDate).ToList();
         }
 
         private void toolStripButtonRecipeAdd_Click(object sender, EventArgs e)
@@ -160,6 +153,7 @@ namespace Clinic.Forms
                 }));
 
                 applicationDbContext!.SaveChanges();
+                RecalcStoreItems();
 
                 applicationDbContext!.Entry((Recipe)recipeBindingSource.Current).Reload();
                 recipeItemsBindingSource.ResetBindings(false);
@@ -210,6 +204,7 @@ namespace Clinic.Forms
                 }
 
                 applicationDbContext!.SaveChanges();
+                RecalcStoreItems();
             }
             else
             {
@@ -228,12 +223,13 @@ namespace Clinic.Forms
             {
                 recipeBindingSource.RemoveCurrent();
                 applicationDbContext!.SaveChanges();
+                RecalcStoreItems();
             }
         }
 
         private void toolStripButtonExpenseAdd_Click(object sender, EventArgs e)
         {
-            expenseEditForm!.storeItems = GetStoreItems();
+            expenseEditForm!.storeItems = (List<StoreModel>?)storeBindingSource.DataSource;
             expenseEditForm!.expense = new Expense()
             {
                 Date = DateTime.Now,
@@ -257,6 +253,7 @@ namespace Clinic.Forms
                 }));
 
                 applicationDbContext!.SaveChanges();
+                RecalcStoreItems();
 
                 applicationDbContext!.Entry((Expense)expenseBindingSource.Current).Reload();
                 expenseItemsBindingSource.ResetBindings(false);
@@ -265,7 +262,7 @@ namespace Clinic.Forms
 
         private void toolStripButtonExpenseEdit_Click(object sender, EventArgs e)
         {
-            expenseEditForm!.storeItems = GetStoreItems();
+            expenseEditForm!.storeItems = (List<StoreModel>?)storeBindingSource.DataSource;
             expenseEditForm!.expense = (Expense)expenseBindingSource.Current;
 
             if (expenseEditForm.ShowDialog(this) == DialogResult.OK)
@@ -309,6 +306,7 @@ namespace Clinic.Forms
                 }
 
                 applicationDbContext!.SaveChanges();
+                RecalcStoreItems();
             }
             else
             {
@@ -327,6 +325,7 @@ namespace Clinic.Forms
             {
                 expenseBindingSource.RemoveCurrent();
                 applicationDbContext!.SaveChanges();
+                RecalcStoreItems();
             }
         }
 
