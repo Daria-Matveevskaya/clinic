@@ -54,6 +54,30 @@ namespace Clinic.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (!expenseItemModels!.Where(r => r.IsChecked)!.Any())
+            {
+                DialogResult result = MessageBox.Show("Не выбрано ни одного товара!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (expenseItemModels!.Where(r => r.IsChecked && r.UnitName == null)!.Any())
+            {
+                DialogResult result = MessageBox.Show("Не указаны единицы измерения!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (expenseItemModels!.Where(r => r.IsChecked && r.Quantity <= 0)!.Any())
+            {
+                DialogResult result = MessageBox.Show("Не введено количество!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (expenseItemModels!.Where(r => r.IsChecked && r.Quantity >= r.Balance)!.Any())
+            {
+                DialogResult result = MessageBox.Show("Количество превышает остаток!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult = DialogResult.OK;
             Close();
         }

@@ -2,6 +2,7 @@
 using Clinic.Data.Entities;
 using Clinic.Models;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 
 namespace Clinic.Forms
@@ -61,6 +62,24 @@ namespace Clinic.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(!recipeItemModels!.Where(r => r.IsChecked)!.Any())
+            {
+                DialogResult result = MessageBox.Show("Не выбрано ни одного товара!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (recipeItemModels!.Where(r => r.IsChecked && r.UnitName == null)!.Any())
+            {
+                DialogResult result = MessageBox.Show("Не указаны единицы измерения!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (recipeItemModels!.Where(r => r.IsChecked && r.Quantity <= 0)!.Any())
+            {
+                DialogResult result = MessageBox.Show("Не введено количество!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult = DialogResult.OK;
             Close();
         }

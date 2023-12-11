@@ -325,7 +325,7 @@ namespace Clinic.Forms
 
             if (result == DialogResult.Yes)
             {
-                recipeBindingSource.RemoveCurrent();
+                expenseBindingSource.RemoveCurrent();
                 applicationDbContext!.SaveChanges();
             }
         }
