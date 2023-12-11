@@ -15,6 +15,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Unit> Units { get; set; }
     public DbSet<Provider> Providers { get; set; }
     public DbSet<Employee> Employees { get; set; }
+    public DbSet<User> Users { get; set; }
     public DbSet<Recipe> Recipes { get; set; }
     public DbSet<RecipeItem> RecipeItems { get; set; }
     public DbSet<Expense> Expenses { get; set; }
@@ -53,6 +54,11 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Employee>().HasData(
             new Employee { Id = 1, Surname = "Иванов", FirstName = "Георгий", PatronymicName = "Владимирович", GenderAsString = "М", BirthDate = new DateTime(1982, 10, 20) },
             new Employee { Id = 2, Surname = "Петрова", FirstName = "Вероника", PatronymicName = "Алексеевна", GenderAsString = "Ж", BirthDate = new DateTime(1990, 3, 18) }
+            );
+
+        modelBuilder.Entity<User>().HasData(
+            new User { Login = "User1", Password = "User1", EmployeeId = 1 },
+            new User { Login = "User2", Password = "User2", EmployeeId = 2 }
             );
 
         modelBuilder.Entity<Recipe>().HasData(
