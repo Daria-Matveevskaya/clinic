@@ -51,7 +51,7 @@ namespace Clinic.Forms
                 ProductName = p
             }));
 
-            orderBindingSource.DataSource = recipeItemModels;
+            recipeItemModelBindingSource.DataSource = recipeItemModels;
 
             dataGridViewRecipeItems.AllowUserToAddRows = false;
             dataGridViewRecipeItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
@@ -69,6 +69,21 @@ namespace Clinic.Forms
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void dataGridViewRecipeItems_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0 && e.RowIndex >= 0)
+            {
+                if ((bool)dataGridViewRecipeItems.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue)
+                {
+                    dataGridViewRecipeItems.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
+                }
+                else
+                {
+                    dataGridViewRecipeItems.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                }
+            }
         }
     }
 }

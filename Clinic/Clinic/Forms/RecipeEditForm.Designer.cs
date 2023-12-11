@@ -40,19 +40,20 @@
             label1 = new Label();
             panel1 = new Panel();
             dataGridViewRecipeItems = new DataGridView();
-            isCheckedDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            productNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            unitNameDataGridViewTextBoxColumn = new DataGridViewComboBoxColumn();
+            dataGridViewCheckBoxColumn1 = new DataGridViewCheckBoxColumn();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewComboBoxColumn();
             unitBindingSource = new BindingSource(components);
-            expirationDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            quantityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            orderBindingSource = new BindingSource(components);
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            recipeItemModelBindingSource = new BindingSource(components);
             panel2.SuspendLayout();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewRecipeItems).BeginInit();
             ((System.ComponentModel.ISupportInitialize)unitBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)orderBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)recipeItemModelBindingSource).BeginInit();
             SuspendLayout();
             // 
             // panel2
@@ -149,8 +150,8 @@
             dataGridViewRecipeItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewRecipeItems.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewRecipeItems.ColumnHeadersHeight = 29;
-            dataGridViewRecipeItems.Columns.AddRange(new DataGridViewColumn[] { isCheckedDataGridViewCheckBoxColumn, productNameDataGridViewTextBoxColumn, unitNameDataGridViewTextBoxColumn, expirationDateDataGridViewTextBoxColumn, quantityDataGridViewTextBoxColumn });
-            dataGridViewRecipeItems.DataSource = orderBindingSource;
+            dataGridViewRecipeItems.Columns.AddRange(new DataGridViewColumn[] { dataGridViewCheckBoxColumn1, dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5 });
+            dataGridViewRecipeItems.DataSource = recipeItemModelBindingSource;
             dataGridViewRecipeItems.Dock = DockStyle.Fill;
             dataGridViewRecipeItems.Location = new Point(0, 0);
             dataGridViewRecipeItems.Name = "dataGridViewRecipeItems";
@@ -160,55 +161,65 @@
             dataGridViewRecipeItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewRecipeItems.Size = new Size(800, 340);
             dataGridViewRecipeItems.TabIndex = 0;
+            dataGridViewRecipeItems.CellContentClick += dataGridViewRecipeItems_CellContentClick;
             // 
-            // isCheckedDataGridViewCheckBoxColumn
+            // dataGridViewCheckBoxColumn1
             // 
-            isCheckedDataGridViewCheckBoxColumn.DataPropertyName = "IsChecked";
-            isCheckedDataGridViewCheckBoxColumn.HeaderText = "";
-            isCheckedDataGridViewCheckBoxColumn.MinimumWidth = 6;
-            isCheckedDataGridViewCheckBoxColumn.Name = "isCheckedDataGridViewCheckBoxColumn";
+            dataGridViewCheckBoxColumn1.DataPropertyName = "IsChecked";
+            dataGridViewCheckBoxColumn1.HeaderText = "";
+            dataGridViewCheckBoxColumn1.MinimumWidth = 6;
+            dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             // 
-            // productNameDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn1
             // 
-            productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
-            productNameDataGridViewTextBoxColumn.HeaderText = "Наименование";
-            productNameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
+            dataGridViewTextBoxColumn1.DataPropertyName = "ProductName";
+            dataGridViewTextBoxColumn1.HeaderText = "Наименование";
+            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // unitNameDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn2
             // 
-            unitNameDataGridViewTextBoxColumn.DataPropertyName = "UnitName";
-            unitNameDataGridViewTextBoxColumn.DataSource = unitBindingSource;
-            unitNameDataGridViewTextBoxColumn.DisplayMember = "Name";
-            unitNameDataGridViewTextBoxColumn.FlatStyle = FlatStyle.Flat;
-            unitNameDataGridViewTextBoxColumn.HeaderText = "Единицы измерения";
-            unitNameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            unitNameDataGridViewTextBoxColumn.Name = "unitNameDataGridViewTextBoxColumn";
-            unitNameDataGridViewTextBoxColumn.Resizable = DataGridViewTriState.True;
-            unitNameDataGridViewTextBoxColumn.SortMode = DataGridViewColumnSortMode.Automatic;
-            unitNameDataGridViewTextBoxColumn.ValueMember = "Name";
+            dataGridViewTextBoxColumn2.DataPropertyName = "UnitName";
+            dataGridViewTextBoxColumn2.DataSource = unitBindingSource;
+            dataGridViewTextBoxColumn2.DisplayMember = "Name";
+            dataGridViewTextBoxColumn2.FlatStyle = FlatStyle.Flat;
+            dataGridViewTextBoxColumn2.HeaderText = "Единицы измерения";
+            dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.Resizable = DataGridViewTriState.True;
+            dataGridViewTextBoxColumn2.SortMode = DataGridViewColumnSortMode.Automatic;
+            dataGridViewTextBoxColumn2.ValueMember = "Name";
             // 
             // unitBindingSource
             // 
             unitBindingSource.DataSource = typeof(Data.Entities.Unit);
             // 
-            // expirationDateDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn3
             // 
-            expirationDateDataGridViewTextBoxColumn.DataPropertyName = "ExpirationDate";
-            expirationDateDataGridViewTextBoxColumn.HeaderText = "Срок годности";
-            expirationDateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            expirationDateDataGridViewTextBoxColumn.Name = "expirationDateDataGridViewTextBoxColumn";
+            dataGridViewTextBoxColumn3.DataPropertyName = "ExpirationDate";
+            dataGridViewTextBoxColumn3.HeaderText = "Срок годности";
+            dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
-            // quantityDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn4
             // 
-            quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-            quantityDataGridViewTextBoxColumn.HeaderText = "Количество";
-            quantityDataGridViewTextBoxColumn.MinimumWidth = 6;
-            quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            dataGridViewTextBoxColumn4.DataPropertyName = "Quantity";
+            dataGridViewTextBoxColumn4.HeaderText = "Количество";
+            dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
-            // orderBindingSource
+            // dataGridViewTextBoxColumn5
             // 
-            orderBindingSource.DataSource = typeof(Classes.Order);
+            dataGridViewTextBoxColumn5.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn5.HeaderText = "Id";
+            dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.Visible = false;
+            // 
+            // recipeItemModelBindingSource
+            // 
+            recipeItemModelBindingSource.DataSource = typeof(Models.RecipeItemModel);
             // 
             // RecipeEditForm
             // 
@@ -226,7 +237,7 @@
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewRecipeItems).EndInit();
             ((System.ComponentModel.ISupportInitialize)unitBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)orderBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)recipeItemModelBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -242,12 +253,18 @@
         private Panel panel1;
         private DataGridView dataGridViewRecipeItems;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private BindingSource orderBindingSource;
         private BindingSource unitBindingSource;
         private DataGridViewCheckBoxColumn isCheckedDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
         private DataGridViewComboBoxColumn unitNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn expirationDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
+        private BindingSource recipeItemModelBindingSource;
+        private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewComboBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }

@@ -1,8 +1,9 @@
-﻿using Clinic.Classes;
-using Clinic.Data;
+﻿using Clinic.Data;
 using Clinic.Data.Entities;
+using Clinic.Models;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Clinic.Forms
 {
@@ -11,7 +12,6 @@ namespace Clinic.Forms
         private ApplicationDbContext? applicationDbContext;
         private RecipeEditForm? recipeEditForm;
         private ExpenseEditForm? expenseEditForm;
-        private List<Store> storeItems = new();
 
         public StoreForm()
         {
@@ -24,56 +24,59 @@ namespace Clinic.Forms
 
             applicationDbContext = new ApplicationDbContext();
 
+            LoadDataContext();
+            SetDataGridView();
+
+            recipeEditForm = new RecipeEditForm()
+            {
+                StartPosition = FormStartPosition.CenterParent,
+                units = applicationDbContext!.Units.Local.ToList(),
+                products = applicationDbContext!.Products.Local.ToList(),
+                providers = applicationDbContext!.Providers.Local.ToList(),
+            };
+
+            expenseEditForm = new ExpenseEditForm()
+            {
+                StartPosition = FormStartPosition.CenterParent,
+                units = applicationDbContext!.Units.Local.ToList(),
+                employees = applicationDbContext!.Employees.Local.ToList(),
+            };
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+
+            applicationDbContext!.Dispose();
+            applicationDbContext = null;
+
+            recipeEditForm!.Dispose();
+            expenseEditForm = null;
+        }
+
+        private void LoadDataContext()
+        {
             applicationDbContext!.Units.Load();
             applicationDbContext!.Products.Load();
             applicationDbContext!.Providers.Load();
+            applicationDbContext!.Employees.Load();
             applicationDbContext!.RecipeItems.Load();
+            applicationDbContext!.ExpenseItems.Load();
 
             applicationDbContext!.Recipes.Include(r => r.Provider).Load();
             applicationDbContext!.Expenses.Include(r => r.Employee).Load();
 
             recipeBindingSource.DataSource = applicationDbContext!.Recipes.Local.ToBindingList();
             expenseBindingSource.DataSource = applicationDbContext!.Expenses.Local.ToBindingList();
+        }
 
-            storeItems = applicationDbContext!.RecipeItems.Select(item => new Store
-            {
-                ProductName = item.ProductName,
-                ExpirationDate = item.ExpirationDate,
-                UnitName = item.UnitName,
-                Quantity = item.Quantity,
-            }).Union(applicationDbContext!.RecipeItems.Select(item => new Store
-            {
-                ProductName = item.ProductName,
-                ExpirationDate = item.ExpirationDate,
-                UnitName = item.UnitName,
-                Quantity = -item.Quantity,
-            })).GroupBy(item => new { item.ProductName, item.ExpirationDate, item.UnitName })
-               .Select(item => new Store
-               {
-                   ProductName = item.Key.ProductName,
-                   ExpirationDate = item.Key.ExpirationDate,
-                   UnitName = item.Key.UnitName,
-                   Quantity = item.Sum(item => item.Quantity),
-               }).ToList();
-
-            var recipeItemGroups = applicationDbContext!.RecipeItems.GroupBy(item => new { item.ProductName, item.ExpirationDate, item.UnitName });
-            var expenseItemGroups = applicationDbContext!.ExpenseItems.GroupBy(item => new { item.ProductName, item.ExpirationDate, item.UnitName });
-
-            storeItems = applicationDbContext!.RecipeItems
-                .GroupBy(rec => new { rec.ProductName, rec.ExpirationDate, rec.UnitName })
-                .Select(rec => new Store
-                {
-                    ProductName = rec.Key.ProductName,
-                    ExpirationDate = rec.Key.ExpirationDate,
-                    UnitName = rec.Key.UnitName,
-                    Quantity = rec.Sum(item => item.Quantity) - applicationDbContext!.ExpenseItems.Where(exp => exp.ProductName == rec.Key.ProductName).Sum(exp => exp.Quantity),
-                }).ToList();
-
-            dataGridViewStore.DataSource = storeItems;
+        private void SetDataGridView()
+        {
+            dataGridViewStore.DataSource = GetStoreItems();
             dataGridViewStore.Columns[0].HeaderText = "Наименование";
             dataGridViewStore.Columns[1].HeaderText = "Единицы измерения";
             dataGridViewStore.Columns[2].HeaderText = "Срок годности";
-            dataGridViewStore.Columns[3].HeaderText = "Количество";
+            dataGridViewStore.Columns[3].HeaderText = "Остаток";
             dataGridViewStore.Columns[4].Visible = false;
 
             dataGridViewStore.ReadOnly = true;
@@ -94,6 +97,7 @@ namespace Clinic.Forms
             dataGridViewRecipeItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewRecipeItems.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewRecipeItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewRecipeItems.Columns[0].Visible = false;
 
             dataGridViewExpenses.ReadOnly = true;
             dataGridViewExpenses.MultiSelect = false;
@@ -107,30 +111,28 @@ namespace Clinic.Forms
             dataGridViewExpenseItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewExpenseItems.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewExpenseItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
-            recipeEditForm = new RecipeEditForm()
-            {
-                StartPosition = FormStartPosition.CenterParent,
-                units = applicationDbContext!.Units.Local.ToList(),
-                products = applicationDbContext!.Products.Local.ToList(),
-                providers = applicationDbContext!.Providers.Local.ToList(),
-            };
-
-            expenseEditForm = new ExpenseEditForm()
-            {
-                StartPosition = FormStartPosition.CenterParent,
-            };
+            dataGridViewExpenseItems.Columns[0].Visible = false;
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        private List<StoreModel> GetStoreItems()
         {
-            base.OnClosing(e);
+            applicationDbContext!.RecipeItems.Load();
+            applicationDbContext!.ExpenseItems.Load();
 
-            applicationDbContext!.Dispose();
-            applicationDbContext = null;
+            var result = applicationDbContext!.RecipeItems
+                .GroupBy(rec => new { rec.ProductName, rec.ExpirationDate, rec.UnitName })
+                .Select(rec => new StoreModel
+                {
+                    ProductName = rec.Key.ProductName,
+                    ExpirationDate = rec.Key.ExpirationDate,
+                    UnitName = rec.Key.UnitName,
+                    Balance = rec.Sum(item => item.Quantity) -
+                    applicationDbContext!.ExpenseItems
+                    .Where(exp => exp.ProductName == rec.Key.ProductName && exp.ExpirationDate == rec.Key.ExpirationDate && exp.UnitName == rec.Key.UnitName)
+                    .Sum(exp => exp.Quantity),
+                }).ToList();
 
-            recipeEditForm!.Dispose();
-            expenseEditForm = null;
+            return result;
         }
 
         private void toolStripButtonRecipeAdd_Click(object sender, EventArgs e)
@@ -146,7 +148,7 @@ namespace Clinic.Forms
                 applicationDbContext!.Recipes.Add(recipeEditForm.recipe);
 
                 var recipeItemModelsToAdd = recipeEditForm!.recipeItemModels!.Where(r => r.IsChecked);
-                
+
                 applicationDbContext!.RecipeItems.AddRange(recipeItemModelsToAdd.Select(r => new RecipeItem
                 {
                     RecipeId = recipeEditForm.recipe.Id,
@@ -219,6 +221,105 @@ namespace Clinic.Forms
         }
 
         private void toolStripButtonRecipeRemove_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Удалить запись?", "Подтвердите действие", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                recipeBindingSource.RemoveCurrent();
+                applicationDbContext!.SaveChanges();
+            }
+        }
+
+        private void toolStripButtonExpenseAdd_Click(object sender, EventArgs e)
+        {
+            expenseEditForm!.storeItems = GetStoreItems();
+            expenseEditForm!.expense = new Expense()
+            {
+                Date = DateTime.Now,
+                Employee = expenseEditForm!.employees!.First(),
+            };
+
+            if (expenseEditForm!.ShowDialog(this) == DialogResult.OK)
+            {
+                applicationDbContext!.Expenses.Add(expenseEditForm.expense);
+
+                var expenseItemModelsToAdd = expenseEditForm!.expenseItemModels!.Where(r => r.IsChecked);
+
+                applicationDbContext!.ExpenseItems.AddRange(expenseItemModelsToAdd.Select(r => new ExpenseItem
+                {
+                    ExpenseId = expenseEditForm.expense.Id,
+                    Expense = expenseEditForm!.expense,
+                    UnitName = r.UnitName,
+                    ProductName = r.ProductName,
+                    ExpirationDate = r.ExpirationDate,
+                    Quantity = r.Quantity,
+                }));
+
+                applicationDbContext!.SaveChanges();
+
+                applicationDbContext!.Entry((Expense)expenseBindingSource.Current).Reload();
+                expenseItemsBindingSource.ResetBindings(false);
+            }
+        }
+
+        private void toolStripButtonExpenseEdit_Click(object sender, EventArgs e)
+        {
+            expenseEditForm!.storeItems = GetStoreItems();
+            expenseEditForm!.expense = (Expense)expenseBindingSource.Current;
+
+            if (expenseEditForm.ShowDialog(this) == DialogResult.OK)
+            {
+                var expenseId = expenseEditForm!.expense.Id;
+                var expenseItemModels = expenseEditForm!.expenseItemModels!.Where(r => r.IsChecked);
+                var expenseItemModelsToAdd = expenseItemModels.Where(r => !r.Id.HasValue);
+                var expenseItemModelsToUpdate = expenseItemModels.Where(r => r.Id.HasValue);
+                var expenseItemModelsToRemove = expenseEditForm!.expense.ExpenseItems.Where(r => !expenseItemModels.Select(ri => ri.Id).Contains(r.Id)).Select(r => r.Id);
+
+                if (expenseItemModelsToAdd != null)
+                {
+                    applicationDbContext!.ExpenseItems.AddRange(expenseItemModelsToAdd.Select(r => new ExpenseItem
+                    {
+                        ExpenseId = expenseId,
+                        Expense = expenseEditForm!.expense,
+                        UnitName = r.UnitName,
+                        ProductName = r.ProductName,
+                        ExpirationDate = r.ExpirationDate,
+                        Quantity = r.Quantity,
+                    }));
+                }
+
+                if (expenseItemModelsToUpdate != null)
+                {
+                    foreach (var expenseItemModel in expenseItemModelsToUpdate)
+                    {
+                        var expenseItemToUpdate = applicationDbContext!.ExpenseItems.First(expenseItem => expenseItem!.Id == expenseItemModel.Id);
+                        expenseItemToUpdate!.UnitName = expenseItemModel.UnitName;
+                        expenseItemToUpdate.ProductName = expenseItemModel.ProductName;
+                        expenseItemToUpdate.ExpirationDate = expenseItemModel.ExpirationDate;
+                        expenseItemToUpdate.Quantity = expenseItemModel.Quantity;
+
+                        applicationDbContext!.ExpenseItems.Update(expenseItemToUpdate);
+                    }
+                }
+
+                if (expenseItemModelsToRemove != null)
+                {
+                    applicationDbContext!.ExpenseItems.RemoveRange(applicationDbContext!.ExpenseItems.Where(r => expenseItemModelsToRemove.Contains(r.Id)));
+                }
+
+                applicationDbContext!.SaveChanges();
+            }
+            else
+            {
+                expenseBindingSource.CancelEdit();
+            }
+
+            applicationDbContext!.Entry((Expense)expenseBindingSource.Current).Reload();
+            expenseItemsBindingSource.ResetBindings(false);
+        }
+
+        private void toolStripButtonExpenseRemove_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Удалить запись?", "Подтвердите действие", MessageBoxButtons.YesNo);
 

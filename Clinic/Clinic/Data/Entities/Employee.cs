@@ -30,7 +30,8 @@ public class Employee
 
     public DateTime? BirthDate { get; set; }
 
-    public virtual string FullName { get => string.Concat($"{Surname} {FirstName[0]}.{PatronymicName![0]}", PatronymicName != null ? "." : ""); }
+    [NotMapped]
+    public string FullName { get => string.Concat($"{Surname} {FirstName[0]}.{PatronymicName![0]}", PatronymicName != null ? "." : ""); }
 
 }
 

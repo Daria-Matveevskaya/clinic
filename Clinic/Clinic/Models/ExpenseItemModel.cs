@@ -1,6 +1,6 @@
-﻿namespace Clinic.Classes
+﻿namespace Clinic.Models
 {
-    public class Order
+    public class ExpenseItemModel
     {
         public bool IsChecked { get; set; }
         public string ProductName { get; set; } = null!;
@@ -9,6 +9,10 @@
 
         public DateTime? ExpirationDate { get; set; }
 
+        public double Balance { get; set; }
+
         public double Quantity { get; set; }
+
+        public int? Id { get; set; }
     }
 }
