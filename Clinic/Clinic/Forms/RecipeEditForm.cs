@@ -64,19 +64,19 @@ namespace Clinic.Forms
         {
             if(!recipeItemModels!.Where(r => r.IsChecked)!.Any())
             {
-                DialogResult result = MessageBox.Show("Не выбрано ни одного товара!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Не выбрано ни одного товара!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (recipeItemModels!.Where(r => r.IsChecked && r.UnitName == null)!.Any())
             {
-                DialogResult result = MessageBox.Show("Не указаны единицы измерения!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Не указаны единицы измерения!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (recipeItemModels!.Where(r => r.IsChecked && r.Quantity <= 0)!.Any())
             {
-                DialogResult result = MessageBox.Show("Не введено количество!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Не введено количество!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

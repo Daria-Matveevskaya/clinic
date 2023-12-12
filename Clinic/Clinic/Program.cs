@@ -1,3 +1,5 @@
+using Clinic.Forms;
+
 namespace Clinic
 {
     internal static class Program
@@ -11,7 +13,16 @@ namespace Clinic
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+
+            using var loginForm = new LoginForm()
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+            };
+
+            if (loginForm.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new MainForm());
+            }
         }
     }
 }
