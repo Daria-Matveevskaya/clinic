@@ -57,7 +57,7 @@
             textBox2.Location = new Point(26, 104);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(291, 27);
-            textBox2.TabIndex = 5;
+            textBox2.TabIndex = 2;
             textBox2.UseSystemPasswordChar = true;
             // 
             // label1

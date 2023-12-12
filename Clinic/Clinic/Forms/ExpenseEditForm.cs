@@ -60,12 +60,6 @@ namespace Clinic.Forms
                 return;
             }
 
-            if (expenseItemModels!.Where(r => r.IsChecked && r.UnitName == null)!.Any())
-            {
-                MessageBox.Show("Не указаны единицы измерения!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             if (expenseItemModels!.Where(r => r.IsChecked && r.Quantity <= 0)!.Any())
             {
                 MessageBox.Show("Не введено количество!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);

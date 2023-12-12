@@ -2,8 +2,8 @@
 using Clinic.Data.Entities;
 using Clinic.Models;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Clinic.Forms
 {
@@ -62,7 +62,7 @@ namespace Clinic.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(!recipeItemModels!.Where(r => r.IsChecked)!.Any())
+            if (!recipeItemModels!.Where(r => r.IsChecked)!.Any())
             {
                 MessageBox.Show("Не выбрано ни одного товара!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -102,6 +102,15 @@ namespace Clinic.Forms
                 {
                     dataGridViewRecipeItems.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
                 }
+            }
+        }
+
+        private void dataGridViewRecipeItems_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if(e.ColumnIndex == 3)
+            {
+                e.ThrowException = false;
+                MessageBox.Show("Неправильный ввод даты!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

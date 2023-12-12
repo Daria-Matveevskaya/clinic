@@ -162,6 +162,7 @@
             dataGridViewRecipeItems.Size = new Size(800, 340);
             dataGridViewRecipeItems.TabIndex = 0;
             dataGridViewRecipeItems.CellContentClick += dataGridViewRecipeItems_CellContentClick;
+            dataGridViewRecipeItems.DataError += dataGridViewRecipeItems_DataError;
             // 
             // dataGridViewCheckBoxColumn1
             // 
