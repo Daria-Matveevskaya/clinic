@@ -21,7 +21,10 @@ namespace Clinic
 
             if (loginForm.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new MainForm());
+                var mainForm = new MainForm();
+                mainForm.user = loginForm.user;
+
+                Application.Run(mainForm);
             }
         }
     }

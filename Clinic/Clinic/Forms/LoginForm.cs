@@ -1,20 +1,15 @@
 ﻿using Clinic.Data;
+using Clinic.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Clinic.Forms
 {
     public partial class LoginForm : Form
     {
         private ApplicationDbContext? applicationDbContext;
+
+        public User? user = new();
 
         public LoginForm()
         {
@@ -27,7 +22,7 @@ namespace Clinic.Forms
 
             applicationDbContext = new ApplicationDbContext();
 
-            applicationDbContext!.Users.Load();
+            applicationDbContext!.Users.Include(r => r.Employee).Load();
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -40,7 +35,7 @@ namespace Clinic.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var user = applicationDbContext!.Users!.FirstOrDefault(u => u.Login == textBox1.Text && u.Password == textBox2.Text);
+            user = applicationDbContext!.Users!.FirstOrDefault(u => u.Login == textBox1.Text && u.Password == textBox2.Text);
 
             if(user == null)
             {
