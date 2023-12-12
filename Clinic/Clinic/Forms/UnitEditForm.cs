@@ -26,6 +26,18 @@ namespace Clinic.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (unit!.Name == null || unit!.Name == string.Empty || (unit!.Name != null && unit!.Name.Replace(" ", "") == string.Empty))
+            {
+                MessageBox.Show("Не указано наименование!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (unit!.Abbreviation == null || unit!.Abbreviation == string.Empty || (unit!.Abbreviation != null && unit!.Abbreviation.Replace(" ", "") == string.Empty))
+            {
+                MessageBox.Show("Не указано обозначение!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult = DialogResult.OK;
             Close();
         }

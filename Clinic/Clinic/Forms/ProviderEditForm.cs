@@ -27,6 +27,12 @@ namespace Clinic.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (provider!.Name == null || provider!.Name == string.Empty || (provider!.Name != null && provider!.Name.Replace(" ", "") == string.Empty))
+            {
+                MessageBox.Show("Не указано наименование!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult = DialogResult.OK;
             Close();
         }

@@ -30,6 +30,18 @@ namespace Clinic.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (employee!.Surname == null || employee!.Surname == string.Empty || (employee!.Surname != null && employee!.Surname.Replace(" ", "") == string.Empty))
+            {
+                MessageBox.Show("Не указана фамилия!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (employee!.FirstName == null || employee!.FirstName == string.Empty || (employee!.FirstName != null && employee!.FirstName.Replace(" ", "") == string.Empty))
+            {
+                MessageBox.Show("Не указано имя!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult = DialogResult.OK;
             Close();
         }

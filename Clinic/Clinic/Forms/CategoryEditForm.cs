@@ -1,4 +1,5 @@
 ﻿using Clinic.Data.Entities;
+using Clinic.Models;
 
 namespace Clinic.Forms
 {
@@ -22,6 +23,12 @@ namespace Clinic.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (category!.Name == null || category!.Name == string.Empty || (category!.Name != null && category!.Name.Replace(" ", "") == string.Empty))
+            {
+                MessageBox.Show("Не указано наименование!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult = DialogResult.OK;
             Close();
         }
