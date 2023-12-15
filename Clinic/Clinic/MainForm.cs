@@ -1,15 +1,11 @@
-using Clinic.Data;
 using Clinic.Data.Entities;
 using Clinic.Forms;
-using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace Clinic
 {
     public partial class MainForm : Form
     {
-        private ApplicationDbContext? applicationDbContext;
-
         public User? user = new();
 
         private readonly StoreForm storeForm = new StoreForm()
@@ -57,19 +53,12 @@ namespace Clinic
         {
             base.OnLoad(e);
 
-            applicationDbContext = new ApplicationDbContext();
-
-            applicationDbContext.Database.Migrate();
-
             toolStripStatusLabel1.Text = $"{user!.Employee.Surname} {user!.Employee.FirstName} {user!.Employee.PatronymicName}";
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-
-            applicationDbContext!.Dispose();
-            applicationDbContext = null;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)

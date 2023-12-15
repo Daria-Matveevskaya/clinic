@@ -1,4 +1,6 @@
+using Clinic.Data;
 using Clinic.Forms;
+using Microsoft.EntityFrameworkCore;
 
 namespace Clinic
 {
@@ -13,6 +15,9 @@ namespace Clinic
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+
+            using var applicationDbContext = new ApplicationDbContext();
+            applicationDbContext.Database.Migrate();
 
             using var loginForm = new LoginForm()
             {
