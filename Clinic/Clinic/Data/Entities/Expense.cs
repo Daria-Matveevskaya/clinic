@@ -2,23 +2,44 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Clinic.Data.Entities
+namespace Clinic.Data.Entities;
+
+/// <summary>
+/// Расход
+/// </summary>
+public class Expense
 {
-    public class Expense
-    {
-        [Key]
-        public int Id { get; set; }
+    /// <summary>
+    /// Идентификатор
+    /// </summary>
+    [Key]
+    public int Id { get; set; }
 
-        public DateTime Date { get; set; }
+    /// <summary>
+    /// Дата
+    /// </summary>
+    public DateTime Date { get; set; }
 
-        public int EmployeeId { get; set; }
+    /// <summary>
+    /// Идентификатор сотрудника
+    /// </summary>
+    public int EmployeeId { get; set; }
 
-        [ForeignKey("EmployeeId")]
-        public virtual Employee Employee { get; set; } = null!;
+    /// <summary>
+    /// Сотрудник
+    /// </summary>
+    [ForeignKey("EmployeeId")]
+    public virtual Employee Employee { get; set; } = null!;
 
-        [NotMapped]
-        public string EmployeeFullName { get => Employee.FullName; }
+    /// <summary>
+    /// Полное имя сотрудника
+    /// Вычисляемое поле (не хранится в БД)
+    /// </summary>
+    [NotMapped]
+    public string EmployeeFullName { get => Employee.FullName; }
 
-        public virtual ObservableCollectionListSource<ExpenseItem> ExpenseItems { get; } = new();
-    }
+    /// <summary>
+    /// Список позиций
+    /// </summary>
+    public virtual ObservableCollectionListSource<ExpenseItem> ExpenseItems { get; } = new();
 }

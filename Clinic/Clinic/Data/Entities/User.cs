@@ -1,19 +1,33 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Clinic.Data.Entities
+namespace Clinic.Data.Entities;
+
+/// <summary>
+/// Пользователь
+/// </summary>
+public class User
 {
-    public class User
-    {
-        [Key]
-        [StringLength(50)]
-        public string Login { get; set; } = null!;
+    /// <summary>
+    /// Логин
+    /// </summary>
+    [Key]
+    [StringLength(50)]
+    public string Login { get; set; } = null!;
 
-        public string Password { get; set; } = null!;
+    /// <summary>
+    /// Пароль
+    /// </summary>
+    public string Password { get; set; } = null!;
 
-        public int EmployeeId { get; set; }
+    /// <summary>
+    /// Идентификатор сотрудника
+    /// </summary>
+    public int EmployeeId { get; set; }
 
-        [ForeignKey("EmployeeId")]
-        public virtual Employee Employee { get; set; } = null!;
-    }
+    /// <summary>
+    /// Сотрудник
+    /// </summary>
+    [ForeignKey("EmployeeId")]
+    public virtual Employee Employee { get; set; } = null!;
 }
