@@ -6,6 +6,9 @@ dotnet ef migrations add --project Clinic --startup-project Clinic --output-dir 
 Накатить миграции на БД (при запуске проекта происходит автоматически):
 dotnet ef database update --project Clinic --startup-project Clinic
 
+Откат БД до миграции с именем 20231211103821_AddEntityUser
+dotnet ef database update 20231211103821_AddEntityUser --project Clinic
+
 Удалить последнюю миграцию
 dotnet ef migrations remove --project Clinic
 

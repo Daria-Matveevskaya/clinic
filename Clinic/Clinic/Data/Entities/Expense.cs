@@ -36,7 +36,7 @@ public class Expense
     /// Вычисляемое поле (не хранится в БД)
     /// </summary>
     [NotMapped]
-    public string EmployeeFullName { get => Employee.FullName; }
+    public string EmployeeFullName { get => Employee.ShortName; }
 
     /// <summary>
     /// Список позиций

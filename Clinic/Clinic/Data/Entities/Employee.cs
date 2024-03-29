@@ -56,12 +56,18 @@ public class Employee
     public DateTime? BirthDate { get; set; }
 
     /// <summary>
-    /// Полное имя
+    /// Фамилия и инициалы
     /// Вычисляемое поле (не хранится в БД)
     /// </summary>
     [NotMapped]
-    public string FullName { get => string.Concat($"{Surname} {FirstName[0]}.{PatronymicName![0]}", PatronymicName != null ? "." : ""); }
+    public string ShortName { get => string.Concat($"{Surname} {FirstName[0]}.{PatronymicName![0]}", PatronymicName != null ? "." : ""); }
 
+    /// <summary>
+    /// ФИО
+    /// Вычисляемое поле (не хранится в БД)
+    /// </summary>
+    [NotMapped]
+    public string FullName { get => $"{Surname} {FirstName} {PatronymicName}"; }
 }
 
 /// <summary>
