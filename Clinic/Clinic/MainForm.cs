@@ -1,4 +1,3 @@
-using Clinic.Data.Entities;
 using Clinic.Forms;
 using System.ComponentModel;
 
@@ -6,46 +5,34 @@ namespace Clinic
 {
     public partial class MainForm : Form
     {
-        public User? user = new();
+        //public User? user = new();
 
-        private readonly StoreForm storeForm = new StoreForm()
-        {
-            WindowState = FormWindowState.Maximized,
-            ControlBox = false,
-        };
+        private readonly UnitForm _unitForm;
+        private readonly UserForm _userForm;
+        private readonly StoreForm _storeForm;
+        private readonly ProductForm _productForm;
+        private readonly CategoryForm _categoryForm;
+        private readonly ProviderForm _providerForm;
+        private readonly EmployeeForm _employeeForm;
 
-        private readonly CategoryForm categoryForm = new CategoryForm()
-        {
-            WindowState = FormWindowState.Maximized,
-            ControlBox = false,
-        };
 
-        private readonly ProductForm productForm = new ProductForm()
+        public MainForm(
+            UnitForm unitForm,
+            UserForm userForm,
+            StoreForm storeForm,
+            ProductForm productForm,
+            CategoryForm categoryForm,
+            ProviderForm providerForm,
+            EmployeeForm employeeForm)
         {
-            WindowState = FormWindowState.Maximized,
-            ControlBox = false,
-        };
+            _unitForm = unitForm;
+            _userForm = userForm;
+            _storeForm = storeForm;
+            _productForm = productForm;
+            _categoryForm = categoryForm;
+            _providerForm = providerForm;
+            _employeeForm = employeeForm;
 
-        private readonly UnitForm unitForm = new UnitForm()
-        {
-            WindowState = FormWindowState.Maximized,
-            ControlBox = false
-        };
-
-        private readonly ProviderForm providerForm = new ProviderForm()
-        {
-            WindowState = FormWindowState.Maximized,
-            ControlBox = false
-        };
-
-        private readonly EmployeeForm employeeForm = new EmployeeForm()
-        {
-            WindowState = FormWindowState.Maximized,
-            ControlBox = false
-        };
-
-        public MainForm()
-        {
             InitializeComponent();
         }
 
@@ -53,7 +40,9 @@ namespace Clinic
         {
             base.OnLoad(e);
 
-            toolStripStatusLabel1.Text = $"{user!.Employee.Surname} {user!.Employee.FirstName} {user!.Employee.PatronymicName}";
+            //toolStripStatusLabel1.Text = $"{user!.Employee.Surname} {user!.Employee.FirstName} {user!.Employee.PatronymicName}";
+
+            //toolStripMenuItem10.Visible = user!.RoleName!.Equals(RoleType.Admin.ToString());
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -71,8 +60,11 @@ namespace Clinic
                     return;
                 }
             }
-            storeForm.MdiParent = this;
-            storeForm.Show();
+
+            _storeForm.WindowState = FormWindowState.Maximized;
+            _storeForm.ControlBox = false;
+            _storeForm.MdiParent = this;
+            _storeForm.Show();
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
@@ -86,8 +78,10 @@ namespace Clinic
                 }
             }
 
-            categoryForm.MdiParent = this;
-            categoryForm.Show();
+            _categoryForm.WindowState = FormWindowState.Maximized;
+            _categoryForm.ControlBox = false;
+            _categoryForm.MdiParent = this;
+            _categoryForm.Show();
         }
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
@@ -100,8 +94,11 @@ namespace Clinic
                     return;
                 }
             }
-            productForm.MdiParent = this;
-            productForm.Show();
+
+            _productForm.WindowState = FormWindowState.Maximized;
+            _productForm.ControlBox = false;
+            _productForm.MdiParent = this;
+            _productForm.Show();
         }
 
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
@@ -115,8 +112,10 @@ namespace Clinic
                 }
             }
 
-            unitForm.MdiParent = this;
-            unitForm.Show();
+            _unitForm.WindowState = FormWindowState.Maximized;
+            _unitForm.ControlBox = false;
+            _unitForm.MdiParent = this;
+            _unitForm.Show();
         }
 
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
@@ -130,8 +129,10 @@ namespace Clinic
                 }
             }
 
-            providerForm.MdiParent = this;
-            providerForm.Show();
+            _providerForm.WindowState = FormWindowState.Maximized;
+            _providerForm.ControlBox = false;
+            _providerForm.MdiParent = this;
+            _providerForm.Show();
         }
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
@@ -145,8 +146,27 @@ namespace Clinic
                 }
             }
 
-            employeeForm.MdiParent = this;
-            employeeForm.Show();
+            _employeeForm.WindowState = FormWindowState.Maximized;
+            _employeeForm.ControlBox = false;
+            _employeeForm.MdiParent = this;
+            _employeeForm.Show();
+        }
+
+        private void toolStripMenuItem10_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(UserForm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            _userForm.WindowState = FormWindowState.Maximized;
+            _userForm.ControlBox = false;
+            _userForm.MdiParent = this;
+            _userForm.Show();
         }
     }
 }

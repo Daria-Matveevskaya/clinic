@@ -14,6 +14,8 @@ namespace Clinic.Forms
 
         public ExpenseEditForm()
         {
+            StartPosition = FormStartPosition.CenterParent;
+
             InitializeComponent();
         }
 
@@ -30,7 +32,7 @@ namespace Clinic.Forms
             comboBox1.DataBindings.Add("SelectedValue", expense, "EmployeeId", true, DataSourceUpdateMode.OnPropertyChanged);
 
             comboBox1.DataSource = employees;
-            comboBox1.DisplayMember = "FullName";
+            comboBox1.DisplayMember = "ShortName";
             comboBox1.ValueMember = "Id";
             comboBox1.SelectedItem = expense!.Employee;
 

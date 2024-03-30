@@ -8,6 +8,8 @@ namespace Clinic.Forms
 
         public EmployeeEditForm()
         {
+            StartPosition = FormStartPosition.CenterParent;
+
             InitializeComponent();
         }
 

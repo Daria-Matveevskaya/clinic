@@ -8,6 +8,8 @@ namespace Clinic.Forms
 
         public UnitEditForm()
         {
+            StartPosition = FormStartPosition.CenterParent;
+
             InitializeComponent();
         }
 

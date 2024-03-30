@@ -218,9 +218,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(12, 22);
             label1.Name = "label1";
-            label1.Size = new Size(89, 20);
+            label1.Size = new Size(85, 20);
             label1.TabIndex = 4;
-            label1.Text = "Поставщик:";
+            label1.Text = "Сотрудник:";
             // 
             // ExpenseEditForm
             // 

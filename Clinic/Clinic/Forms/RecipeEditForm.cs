@@ -1,9 +1,7 @@
-﻿using Clinic.Data;
-using Clinic.Data.Entities;
+﻿using Clinic.Data.Entities;
 using Clinic.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Clinic.Forms
 {
@@ -17,6 +15,8 @@ namespace Clinic.Forms
 
         public RecipeEditForm()
         {
+            StartPosition = FormStartPosition.CenterParent;
+
             InitializeComponent();
         }
 

@@ -1,5 +1,6 @@
 ﻿using Clinic.Data;
-using Clinic.Data.Entities;
+using Clinic.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
@@ -7,12 +8,14 @@ namespace Clinic.Forms
 {
     public partial class LoginForm : Form
     {
-        private ApplicationDbContext? applicationDbContext;
+        private readonly ApplicationDbContext? _applicationDbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public User? user = new();
-
-        public LoginForm()
+        public LoginForm(ApplicationDbContext? applicationDbContext, UserManager<ApplicationUser> userManager)
         {
+            _applicationDbContext = applicationDbContext;
+            _userManager = userManager;
+
             InitializeComponent();
         }
 
@@ -20,27 +23,24 @@ namespace Clinic.Forms
         {
             base.OnLoad(e);
 
-            applicationDbContext = new ApplicationDbContext();
-
-            applicationDbContext!.Users.Include(r => r.Employee).Load();
+            _applicationDbContext!.Users.Include(r => r.Employee).Load();
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-
-            applicationDbContext!.Dispose();
-            applicationDbContext = null;
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            user = applicationDbContext!.Users!.FirstOrDefault(u => u.Login == textBox1.Text && u.Password == textBox2.Text);
+            var user = await _userManager.FindByNameAsync(textBox1.Text);
 
-            if(user == null)
+            if (user != null)
             {
-                MessageBox.Show("Неправильный логин или пароль!", "Ошибка входа!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (await _userManager.CheckPasswordAsync(user, textBox2.Text) == false)
+                {
+                    MessageBox.Show("Неправильный логин или пароль!", "Ошибка входа!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
             DialogResult = DialogResult.OK;

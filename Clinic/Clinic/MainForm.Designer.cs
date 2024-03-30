@@ -42,8 +42,9 @@
             toolStripMenuItem2 = new ToolStripMenuItem();
             toolStripMenuItem4 = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
             toolStripStatusLabel2 = new ToolStripStatusLabel();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            toolStripMenuItem10 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -58,11 +59,11 @@
             // 
             menuStrip1.Dock = DockStyle.Left;
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem3, toolStripMenuItem2, toolStripMenuItem4 });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem3, toolStripMenuItem2, toolStripMenuItem4, toolStripMenuItem10 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
-            menuStrip1.Size = new Size(136, 383);
+            menuStrip1.Size = new Size(155, 383);
             menuStrip1.TabIndex = 2;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -70,7 +71,7 @@
             // 
             toolStripMenuItem1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(125, 27);
+            toolStripMenuItem1.Size = new Size(144, 27);
             toolStripMenuItem1.Text = "Мой склад";
             toolStripMenuItem1.Click += toolStripMenuItem1_Click;
             // 
@@ -79,7 +80,7 @@
             toolStripMenuItem3.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem5, toolStripMenuItem6, toolStripMenuItem7, toolStripMenuItem8, toolStripMenuItem9 });
             toolStripMenuItem3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             toolStripMenuItem3.Name = "toolStripMenuItem3";
-            toolStripMenuItem3.Size = new Size(125, 27);
+            toolStripMenuItem3.Size = new Size(144, 27);
             toolStripMenuItem3.Text = "Справочники";
             // 
             // toolStripMenuItem5
@@ -121,25 +122,31 @@
             // 
             toolStripMenuItem2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(125, 27);
+            toolStripMenuItem2.Size = new Size(144, 27);
             toolStripMenuItem2.Text = "Отчеты";
             // 
             // toolStripMenuItem4
             // 
             toolStripMenuItem4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new Size(125, 27);
+            toolStripMenuItem4.Size = new Size(144, 27);
             toolStripMenuItem4.Text = "Помощь";
             // 
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel2, toolStripStatusLabel1 });
-            statusStrip1.Location = new Point(136, 357);
+            statusStrip1.Location = new Point(155, 357);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(564, 26);
+            statusStrip1.Size = new Size(545, 26);
             statusStrip1.TabIndex = 4;
             statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel2
+            // 
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new Size(379, 20);
+            toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel1
             // 
@@ -147,11 +154,13 @@
             toolStripStatusLabel1.Size = new Size(151, 20);
             toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
-            // toolStripStatusLabel2
+            // toolStripMenuItem10
             // 
-            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new Size(359, 20);
-            toolStripStatusLabel2.Spring = true;
+            toolStripMenuItem10.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            toolStripMenuItem10.Name = "toolStripMenuItem10";
+            toolStripMenuItem10.Size = new Size(144, 24);
+            toolStripMenuItem10.Text = "Администратор";
+            toolStripMenuItem10.Click += toolStripMenuItem10_Click;
             // 
             // MainForm
             // 
@@ -192,5 +201,6 @@
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripStatusLabel1;
         private ToolStripStatusLabel toolStripStatusLabel2;
+        private ToolStripMenuItem toolStripMenuItem10;
     }
 }

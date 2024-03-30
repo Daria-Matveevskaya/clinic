@@ -8,6 +8,8 @@ namespace Clinic.Forms
 
         public ProviderEditForm()
         {
+            StartPosition = FormStartPosition.CenterParent;
+
             InitializeComponent();
         }
         protected override void OnLoad(EventArgs e)

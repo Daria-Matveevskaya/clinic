@@ -7,14 +7,16 @@ namespace Clinic.Forms
 {
     public partial class ProductForm : Form
     {
-        private ApplicationDbContext? applicationDbContext;
-
-        private ProductEditForm? productEditForm;
+        private readonly ApplicationDbContext? _applicationDbContext;
+        private readonly ProductEditForm? _productEditForm;
 
         private List<Category>? categories;
 
-        public ProductForm()
+        public ProductForm(ApplicationDbContext? applicationDbContext, ProductEditForm? productEditForm)
         {
+            _applicationDbContext = applicationDbContext;
+            _productEditForm = productEditForm;
+
             InitializeComponent();
         }
 
@@ -22,12 +24,10 @@ namespace Clinic.Forms
         {
             base.OnLoad(e);
 
-            applicationDbContext = new ApplicationDbContext();
+            _applicationDbContext!.Products.Load();
 
-            applicationDbContext!.Products.Load();
-
-            productBindingSource.DataSource = applicationDbContext!.Products.Local.ToBindingList();
-            categories = applicationDbContext!.Categories.ToList();
+            productBindingSource.DataSource = _applicationDbContext!.Products.Local.ToBindingList();
+            categories = _applicationDbContext!.Categories.ToList();
 
             dataGridViewProducts.ReadOnly = true;
             dataGridViewProducts.AllowUserToAddRows = false;
@@ -35,50 +35,40 @@ namespace Clinic.Forms
             dataGridViewProducts.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
-            productEditForm = new ProductEditForm()
-            {
-                StartPosition = FormStartPosition.CenterParent,
-                categories = this.categories,
-            };
+            _productEditForm!.categories = this.categories;
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-
-            applicationDbContext!.Dispose();
-            applicationDbContext = null;
-
-            productEditForm!.Dispose();
-            productEditForm = null;
         }
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            productEditForm!.product = new Product()
+            _productEditForm!.product = new Product()
             {
                 Category = categories!.First(),
                 CategoryName = categories!.First().Name
             };
 
-            if (productEditForm.ShowDialog(this) == DialogResult.OK)
+            if (_productEditForm.ShowDialog(this) == DialogResult.OK)
             {
-                productBindingSource.Add(productEditForm.product);
-                applicationDbContext!.SaveChanges();
+                productBindingSource.Add(_productEditForm.product);
+                _applicationDbContext!.SaveChanges();
             }
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            productEditForm!.product = (Product)productBindingSource.Current;
-            if (productEditForm.ShowDialog(this) == DialogResult.OK)
+            _productEditForm!.product = (Product)productBindingSource.Current;
+            if (_productEditForm.ShowDialog(this) == DialogResult.OK)
             {
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
             }
             else
             {
                 productBindingSource.CancelEdit();
-                applicationDbContext!.Entry((Product)productBindingSource.Current).Reload();
+                _applicationDbContext!.Entry((Product)productBindingSource.Current).Reload();
             }
         }
 
@@ -89,7 +79,7 @@ namespace Clinic.Forms
             if (result == DialogResult.Yes)
             {
                 productBindingSource.RemoveCurrent();
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
             }
         }
     }

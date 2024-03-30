@@ -7,12 +7,14 @@ namespace Clinic.Forms
 {
     public partial class CategoryForm : Form
     {
-        private ApplicationDbContext? applicationDbContext;
+        private readonly ApplicationDbContext? _applicationDbContext;
+        private readonly CategoryEditForm? _categoryEditForm;
 
-        private CategoryEditForm? categoryEditForm;
-
-        public CategoryForm()
+        public CategoryForm(ApplicationDbContext? applicationDbContext, CategoryEditForm? categoryEditForm)
         {
+            _applicationDbContext = applicationDbContext;
+            _categoryEditForm = categoryEditForm;
+
             InitializeComponent();
         }
 
@@ -20,57 +22,45 @@ namespace Clinic.Forms
         {
             base.OnLoad(e);
 
-            applicationDbContext = new ApplicationDbContext();
-            applicationDbContext!.Categories.Load();
+            _applicationDbContext!.Categories.Load();
 
-            categoryBindingSource.DataSource = applicationDbContext!.Categories.Local.ToBindingList();
+            categoryBindingSource.DataSource = _applicationDbContext!.Categories.Local.ToBindingList();
 
             dataGridViewCategories.ReadOnly = true;
             dataGridViewCategories.AllowUserToAddRows = false;
             dataGridViewCategories.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewCategories.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
-            categoryEditForm = new CategoryEditForm
-            {
-                StartPosition = FormStartPosition.CenterParent,
-            };
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-
-            applicationDbContext!.Dispose();
-            applicationDbContext = null;
-
-            categoryEditForm!.Dispose();
-            categoryEditForm = null;
         }
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            categoryEditForm!.category = new Category();
+            _categoryEditForm!.category = new Category();
 
-            if (categoryEditForm.ShowDialog(this) == DialogResult.OK)
+            if (_categoryEditForm.ShowDialog(this) == DialogResult.OK)
             {
-                categoryBindingSource.Add(categoryEditForm.category);
-                applicationDbContext!.SaveChanges();
+                categoryBindingSource.Add(_categoryEditForm.category);
+                _applicationDbContext!.SaveChanges();
             }
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            categoryEditForm!.category = (Category)categoryBindingSource.Current;
+            _categoryEditForm!.category = (Category)categoryBindingSource.Current;
 
-            if (categoryEditForm.ShowDialog(this) == DialogResult.OK)
+            if (_categoryEditForm.ShowDialog(this) == DialogResult.OK)
             {
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
             }
             else
             {
                 categoryBindingSource.CancelEdit();
-                applicationDbContext!.Entry((Category)categoryBindingSource.Current).Reload();
+                _applicationDbContext!.Entry((Category)categoryBindingSource.Current).Reload();
             }
         }
 
@@ -81,7 +71,7 @@ namespace Clinic.Forms
             if (result == DialogResult.Yes)
             {
                 categoryBindingSource.RemoveCurrent();
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
             }
         }
     }

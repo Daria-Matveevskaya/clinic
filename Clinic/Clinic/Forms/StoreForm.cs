@@ -2,24 +2,24 @@
 using Clinic.Data.Entities;
 using Clinic.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace Clinic.Forms
 {
     public partial class StoreForm : Form
     {
-        private RecipeEditForm? recipeEditForm;
-        private ExpenseEditForm? expenseEditForm;
+        private readonly ApplicationDbContext? _applicationDbContext;
+        private readonly RecipeEditForm? _recipeEditForm;
+        private readonly ExpenseEditForm? _expenseEditForm;
 
-        private BindingSource storeBindingSource = new BindingSource();
+        private readonly BindingSource _storeBindingSource = new();
 
-        private ApplicationDbContext? applicationDbContext;
-
-        public StoreForm()
+        public StoreForm(ApplicationDbContext? applicationDbContext, RecipeEditForm? recipeEditForm, ExpenseEditForm? expenseEditForm)
         {
+            _applicationDbContext = applicationDbContext;
+            _recipeEditForm = recipeEditForm;
+            _expenseEditForm = expenseEditForm;
+
             InitializeComponent();
         }
 
@@ -27,23 +27,21 @@ namespace Clinic.Forms
         {
             base.OnLoad(e);
 
-            applicationDbContext = new ApplicationDbContext();
+            _applicationDbContext!.Units.Load();
+            _applicationDbContext!.Products.Load();
+            _applicationDbContext!.Providers.Load();
+            _applicationDbContext!.Employees.Load();
+            _applicationDbContext!.RecipeItems.Load();
+            _applicationDbContext!.ExpenseItems.Load();
 
-            applicationDbContext!.Units.Load();
-            applicationDbContext!.Products.Load();
-            applicationDbContext!.Providers.Load();
-            applicationDbContext!.Employees.Load();
-            applicationDbContext!.RecipeItems.Load();
-            applicationDbContext!.ExpenseItems.Load();
+            _applicationDbContext!.Recipes.Include(r => r.Provider).Load();
+            _applicationDbContext!.Expenses.Include(r => r.Employee).Load();
 
-            applicationDbContext!.Recipes.Include(r => r.Provider).Load();
-            applicationDbContext!.Expenses.Include(r => r.Employee).Load();
-
-            recipeBindingSource.DataSource = applicationDbContext!.Recipes.Local.ToBindingList();
-            expenseBindingSource.DataSource = applicationDbContext!.Expenses.Local.ToBindingList();
+            recipeBindingSource.DataSource = _applicationDbContext!.Recipes.Local.ToBindingList();
+            expenseBindingSource.DataSource = _applicationDbContext!.Expenses.Local.ToBindingList();
 
             RecalcStoreItems();
-            dataGridViewStore.DataSource = storeBindingSource;
+            dataGridViewStore.DataSource = _storeBindingSource;
 
             dataGridViewStore.Columns[0].HeaderText = "Наименование";
             dataGridViewStore.Columns[1].HeaderText = "Единицы измерения";
@@ -85,36 +83,22 @@ namespace Clinic.Forms
             dataGridViewExpenseItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewExpenseItems.Columns[0].Visible = false;
 
-            recipeEditForm = new RecipeEditForm()
-            {
-                StartPosition = FormStartPosition.CenterParent,
-                units = applicationDbContext!.Units.Local.ToList(),
-                products = applicationDbContext!.Products.Local.ToList(),
-                providers = applicationDbContext!.Providers.Local.ToList(),
-            };
+            _recipeEditForm!.units = _applicationDbContext!.Units.Local.ToList();
+            _recipeEditForm!.products = _applicationDbContext!.Products.Local.ToList();
+            _recipeEditForm!.providers = _applicationDbContext!.Providers.Local.ToList();
 
-            expenseEditForm = new ExpenseEditForm()
-            {
-                StartPosition = FormStartPosition.CenterParent,
-                units = applicationDbContext!.Units.Local.ToList(),
-                employees = applicationDbContext!.Employees.Local.ToList(),
-            };
+            _expenseEditForm!.units = _applicationDbContext!.Units.Local.ToList();
+            _expenseEditForm!.employees = _applicationDbContext!.Employees.Local.ToList();
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-
-            applicationDbContext!.Dispose();
-            applicationDbContext = null;
-
-            recipeEditForm!.Dispose();
-            expenseEditForm = null;
         }
 
         private void RecalcStoreItems()
         {
-            storeBindingSource.DataSource = applicationDbContext!.RecipeItems
+            _storeBindingSource.DataSource = _applicationDbContext!.RecipeItems
                 .GroupBy(rec => new { rec.ProductName, rec.ExpirationDate, rec.UnitName })
                 .Select(rec => new StoreModel
                 {
@@ -122,7 +106,7 @@ namespace Clinic.Forms
                     ExpirationDate = rec.Key.ExpirationDate,
                     UnitName = rec.Key.UnitName,
                     Balance = rec.Sum(item => item.Quantity) -
-                    applicationDbContext!.ExpenseItems
+                    _applicationDbContext!.ExpenseItems
                     .Where(exp => exp.ProductName == rec.Key.ProductName && exp.ExpirationDate == rec.Key.ExpirationDate && exp.UnitName == rec.Key.UnitName)
                     .Sum(exp => exp.Quantity),
                 }).OrderBy(r => r.ProductName).ThenBy(r => r.ExpirationDate).ToList();
@@ -130,53 +114,53 @@ namespace Clinic.Forms
 
         private void toolStripButtonRecipeAdd_Click(object sender, EventArgs e)
         {
-            recipeEditForm!.recipe = new Recipe()
+            _recipeEditForm!.recipe = new Recipe()
             {
                 Date = DateTime.Now,
-                Provider = recipeEditForm!.providers!.First(),
+                Provider = _recipeEditForm!.providers!.First(),
             };
 
-            if (recipeEditForm!.ShowDialog(this) == DialogResult.OK)
+            if (_recipeEditForm!.ShowDialog(this) == DialogResult.OK)
             {
-                applicationDbContext!.Recipes.Add(recipeEditForm.recipe);
+                _applicationDbContext!.Recipes.Add(_recipeEditForm.recipe);
 
-                var recipeItemModelsToAdd = recipeEditForm!.recipeItemModels!.Where(r => r.IsChecked);
+                var recipeItemModelsToAdd = _recipeEditForm!.recipeItemModels!.Where(r => r.IsChecked);
 
-                applicationDbContext!.RecipeItems.AddRange(recipeItemModelsToAdd.Select(r => new RecipeItem
+                _applicationDbContext!.RecipeItems.AddRange(recipeItemModelsToAdd.Select(r => new RecipeItem
                 {
-                    RecipeId = recipeEditForm.recipe.Id,
-                    Recipe = recipeEditForm!.recipe,
+                    RecipeId = _recipeEditForm.recipe.Id,
+                    Recipe = _recipeEditForm!.recipe,
                     UnitName = r.UnitName,
                     ProductName = r.ProductName,
                     ExpirationDate = r.ExpirationDate,
                     Quantity = r.Quantity,
                 }));
 
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
                 RecalcStoreItems();
 
-                applicationDbContext!.Entry((Recipe)recipeBindingSource.Current).Reload();
+                _applicationDbContext!.Entry((Recipe)recipeBindingSource.Current).Reload();
                 recipeItemsBindingSource.ResetBindings(false);
             }
         }
 
         private void toolStripButtonRecipeEdit_Click(object sender, EventArgs e)
         {
-            recipeEditForm!.recipe = (Recipe)recipeBindingSource.Current;
-            if (recipeEditForm.ShowDialog(this) == DialogResult.OK)
+            _recipeEditForm!.recipe = (Recipe)recipeBindingSource.Current;
+            if (_recipeEditForm.ShowDialog(this) == DialogResult.OK)
             {
-                var recipeId = recipeEditForm!.recipe.Id;
-                var recipeItemModels = recipeEditForm!.recipeItemModels!.Where(r => r.IsChecked);
+                var recipeId = _recipeEditForm!.recipe.Id;
+                var recipeItemModels = _recipeEditForm!.recipeItemModels!.Where(r => r.IsChecked);
                 var recipeItemModelsToAdd = recipeItemModels.Where(r => !r.Id.HasValue);
                 var recipeItemModelsToUpdate = recipeItemModels.Where(r => r.Id.HasValue);
-                var recipeItemModelsToRemove = recipeEditForm!.recipe.RecipeItems.Where(r => !recipeItemModels.Select(ri => ri.Id).Contains(r.Id)).Select(r => r.Id);
+                var recipeItemModelsToRemove = _recipeEditForm!.recipe.RecipeItems.Where(r => !recipeItemModels.Select(ri => ri.Id).Contains(r.Id)).Select(r => r.Id);
 
                 if (recipeItemModelsToAdd != null)
                 {
-                    applicationDbContext!.RecipeItems.AddRange(recipeItemModelsToAdd.Select(r => new RecipeItem
+                    _applicationDbContext!.RecipeItems.AddRange(recipeItemModelsToAdd.Select(r => new RecipeItem
                     {
                         RecipeId = recipeId,
-                        Recipe = recipeEditForm!.recipe,
+                        Recipe = _recipeEditForm!.recipe,
                         UnitName = r.UnitName,
                         ProductName = r.ProductName,
                         ExpirationDate = r.ExpirationDate,
@@ -188,22 +172,22 @@ namespace Clinic.Forms
                 {
                     foreach (var recipeItemModel in recipeItemModelsToUpdate)
                     {
-                        var recipeItemToUpdate = applicationDbContext!.RecipeItems.First(recipeItem => recipeItem!.Id == recipeItemModel.Id);
+                        var recipeItemToUpdate = _applicationDbContext!.RecipeItems.First(recipeItem => recipeItem!.Id == recipeItemModel.Id);
                         recipeItemToUpdate!.UnitName = recipeItemModel.UnitName;
                         recipeItemToUpdate.ProductName = recipeItemModel.ProductName;
                         recipeItemToUpdate.ExpirationDate = recipeItemModel.ExpirationDate;
                         recipeItemToUpdate.Quantity = recipeItemModel.Quantity;
 
-                        applicationDbContext!.RecipeItems.Update(recipeItemToUpdate);
+                        _applicationDbContext!.RecipeItems.Update(recipeItemToUpdate);
                     }
                 }
 
                 if (recipeItemModelsToRemove != null)
                 {
-                    applicationDbContext!.RecipeItems.RemoveRange(applicationDbContext!.RecipeItems.Where(r => recipeItemModelsToRemove.Contains(r.Id)));
+                    _applicationDbContext!.RecipeItems.RemoveRange(_applicationDbContext!.RecipeItems.Where(r => recipeItemModelsToRemove.Contains(r.Id)));
                 }
 
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
                 RecalcStoreItems();
             }
             else
@@ -211,7 +195,7 @@ namespace Clinic.Forms
                 recipeBindingSource.CancelEdit();
             }
 
-            applicationDbContext!.Entry((Recipe)recipeBindingSource.Current).Reload();
+            _applicationDbContext!.Entry((Recipe)recipeBindingSource.Current).Reload();
             recipeItemsBindingSource.ResetBindings(false);
         }
 
@@ -222,63 +206,63 @@ namespace Clinic.Forms
             if (result == DialogResult.Yes)
             {
                 recipeBindingSource.RemoveCurrent();
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
                 RecalcStoreItems();
             }
         }
 
         private void toolStripButtonExpenseAdd_Click(object sender, EventArgs e)
         {
-            expenseEditForm!.storeItems = (List<StoreModel>?)storeBindingSource.DataSource;
-            expenseEditForm!.expense = new Expense()
+            _expenseEditForm!.storeItems = (List<StoreModel>?)_storeBindingSource.DataSource;
+            _expenseEditForm!.expense = new Expense()
             {
                 Date = DateTime.Now,
-                Employee = expenseEditForm!.employees!.First(),
+                Employee = _expenseEditForm!.employees!.First(),
             };
 
-            if (expenseEditForm!.ShowDialog(this) == DialogResult.OK)
+            if (_expenseEditForm!.ShowDialog(this) == DialogResult.OK)
             {
-                applicationDbContext!.Expenses.Add(expenseEditForm.expense);
+                _applicationDbContext!.Expenses.Add(_expenseEditForm.expense);
 
-                var expenseItemModelsToAdd = expenseEditForm!.expenseItemModels!.Where(r => r.IsChecked);
+                var expenseItemModelsToAdd = _expenseEditForm!.expenseItemModels!.Where(r => r.IsChecked);
 
-                applicationDbContext!.ExpenseItems.AddRange(expenseItemModelsToAdd.Select(r => new ExpenseItem
+                _applicationDbContext!.ExpenseItems.AddRange(expenseItemModelsToAdd.Select(r => new ExpenseItem
                 {
-                    ExpenseId = expenseEditForm.expense.Id,
-                    Expense = expenseEditForm!.expense,
+                    ExpenseId = _expenseEditForm.expense.Id,
+                    Expense = _expenseEditForm!.expense,
                     UnitName = r.UnitName,
                     ProductName = r.ProductName,
                     ExpirationDate = r.ExpirationDate,
                     Quantity = r.Quantity,
                 }));
 
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
                 RecalcStoreItems();
 
-                applicationDbContext!.Entry((Expense)expenseBindingSource.Current).Reload();
+                _applicationDbContext!.Entry((Expense)expenseBindingSource.Current).Reload();
                 expenseItemsBindingSource.ResetBindings(false);
             }
         }
 
         private void toolStripButtonExpenseEdit_Click(object sender, EventArgs e)
         {
-            expenseEditForm!.storeItems = (List<StoreModel>?)storeBindingSource.DataSource;
-            expenseEditForm!.expense = (Expense)expenseBindingSource.Current;
+            _expenseEditForm!.storeItems = (List<StoreModel>?)_storeBindingSource.DataSource;
+            _expenseEditForm!.expense = (Expense)expenseBindingSource.Current;
 
-            if (expenseEditForm.ShowDialog(this) == DialogResult.OK)
+            if (_expenseEditForm.ShowDialog(this) == DialogResult.OK)
             {
-                var expenseId = expenseEditForm!.expense.Id;
-                var expenseItemModels = expenseEditForm!.expenseItemModels!.Where(r => r.IsChecked);
+                var expenseId = _expenseEditForm!.expense.Id;
+                var expenseItemModels = _expenseEditForm!.expenseItemModels!.Where(r => r.IsChecked);
                 var expenseItemModelsToAdd = expenseItemModels.Where(r => !r.Id.HasValue);
                 var expenseItemModelsToUpdate = expenseItemModels.Where(r => r.Id.HasValue);
-                var expenseItemModelsToRemove = expenseEditForm!.expense.ExpenseItems.Where(r => !expenseItemModels.Select(ri => ri.Id).Contains(r.Id)).Select(r => r.Id);
+                var expenseItemModelsToRemove = _expenseEditForm!.expense.ExpenseItems.Where(r => !expenseItemModels.Select(ri => ri.Id).Contains(r.Id)).Select(r => r.Id);
 
                 if (expenseItemModelsToAdd != null)
                 {
-                    applicationDbContext!.ExpenseItems.AddRange(expenseItemModelsToAdd.Select(r => new ExpenseItem
+                    _applicationDbContext!.ExpenseItems.AddRange(expenseItemModelsToAdd.Select(r => new ExpenseItem
                     {
                         ExpenseId = expenseId,
-                        Expense = expenseEditForm!.expense,
+                        Expense = _expenseEditForm!.expense,
                         UnitName = r.UnitName,
                         ProductName = r.ProductName,
                         ExpirationDate = r.ExpirationDate,
@@ -290,22 +274,22 @@ namespace Clinic.Forms
                 {
                     foreach (var expenseItemModel in expenseItemModelsToUpdate)
                     {
-                        var expenseItemToUpdate = applicationDbContext!.ExpenseItems.First(expenseItem => expenseItem!.Id == expenseItemModel.Id);
+                        var expenseItemToUpdate = _applicationDbContext!.ExpenseItems.First(expenseItem => expenseItem!.Id == expenseItemModel.Id);
                         expenseItemToUpdate!.UnitName = expenseItemModel.UnitName;
                         expenseItemToUpdate.ProductName = expenseItemModel.ProductName;
                         expenseItemToUpdate.ExpirationDate = expenseItemModel.ExpirationDate;
                         expenseItemToUpdate.Quantity = expenseItemModel.Quantity;
 
-                        applicationDbContext!.ExpenseItems.Update(expenseItemToUpdate);
+                        _applicationDbContext!.ExpenseItems.Update(expenseItemToUpdate);
                     }
                 }
 
                 if (expenseItemModelsToRemove != null)
                 {
-                    applicationDbContext!.ExpenseItems.RemoveRange(applicationDbContext!.ExpenseItems.Where(r => expenseItemModelsToRemove.Contains(r.Id)));
+                    _applicationDbContext!.ExpenseItems.RemoveRange(_applicationDbContext!.ExpenseItems.Where(r => expenseItemModelsToRemove.Contains(r.Id)));
                 }
 
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
                 RecalcStoreItems();
             }
             else
@@ -313,7 +297,7 @@ namespace Clinic.Forms
                 expenseBindingSource.CancelEdit();
             }
 
-            applicationDbContext!.Entry((Expense)expenseBindingSource.Current).Reload();
+            _applicationDbContext!.Entry((Expense)expenseBindingSource.Current).Reload();
             expenseItemsBindingSource.ResetBindings(false);
         }
 
@@ -324,33 +308,33 @@ namespace Clinic.Forms
             if (result == DialogResult.Yes)
             {
                 expenseBindingSource.RemoveCurrent();
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
                 RecalcStoreItems();
             }
         }
 
         private void dataGridViewRecipes_SelectionChanged(object sender, EventArgs e)
         {
-            if (applicationDbContext != null)
+            if (_applicationDbContext != null)
             {
                 var recipe = (Recipe?)dataGridViewRecipes.CurrentRow?.DataBoundItem;
 
                 if (recipe != null)
                 {
-                    applicationDbContext.Entry(recipe).Collection(e => e.RecipeItems).Load();
+                    _applicationDbContext.Entry(recipe).Collection(e => e.RecipeItems).Load();
                 }
             }
         }
 
         private void dataGridViewExpenses_SelectionChanged(object sender, EventArgs e)
         {
-            if (applicationDbContext != null)
+            if (_applicationDbContext != null)
             {
                 var expense = (Expense?)dataGridViewExpenses.CurrentRow?.DataBoundItem;
 
                 if (expense != null)
                 {
-                    applicationDbContext.Entry(expense).Collection(e => e.ExpenseItems).Load();
+                    _applicationDbContext.Entry(expense).Collection(e => e.ExpenseItems).Load();
                 }
             }
         }

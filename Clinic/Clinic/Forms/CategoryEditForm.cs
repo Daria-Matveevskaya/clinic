@@ -1,15 +1,18 @@
 ﻿using Clinic.Data.Entities;
-using Clinic.Models;
 
 namespace Clinic.Forms
 {
     public partial class CategoryEditForm : Form
     {
         public Category? category;
+
         public CategoryEditForm()
         {
+            StartPosition = FormStartPosition.CenterParent;
+
             InitializeComponent();
         }
+        
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);

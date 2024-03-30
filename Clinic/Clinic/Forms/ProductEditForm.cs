@@ -7,8 +7,11 @@ namespace Clinic.Forms
         public Product? product;
 
         public List<Category>? categories;
+
         public ProductEditForm()
         {
+            StartPosition = FormStartPosition.CenterParent;
+
             InitializeComponent();
         }
 

@@ -7,12 +7,14 @@ namespace Clinic.Forms
 {
     public partial class EmployeeForm : Form
     {
-        private ApplicationDbContext? applicationDbContext;
+        private readonly ApplicationDbContext? _applicationDbContext;
+        private readonly EmployeeEditForm? _employeeEditForm;
 
-        private EmployeeEditForm? employeeEditForm;
-
-        public EmployeeForm()
+        public EmployeeForm(ApplicationDbContext? applicationDbContext, EmployeeEditForm? employeeEditForm)
         {
+            _applicationDbContext = applicationDbContext;
+            _employeeEditForm = employeeEditForm;
+
             InitializeComponent();
         }
 
@@ -20,60 +22,48 @@ namespace Clinic.Forms
         {
             base.OnLoad(e);
 
-            applicationDbContext = new ApplicationDbContext();
+            _applicationDbContext!.Employees.Load();
 
-            applicationDbContext!.Employees.Load();
-
-            employeeBindingSource.DataSource = applicationDbContext!.Employees.Local.ToBindingList();
+            employeeBindingSource.DataSource = _applicationDbContext!.Employees.Local.ToBindingList();
 
             dataGridViewEmployees.ReadOnly = true;
             dataGridViewEmployees.AllowUserToAddRows = false;
             dataGridViewEmployees.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewEmployees.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
-            employeeEditForm = new EmployeeEditForm()
-            {
-                StartPosition = FormStartPosition.CenterParent,
-            };
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-
-            applicationDbContext!.Dispose();
-            applicationDbContext = null;
-
-            employeeEditForm!.Dispose();
-            employeeEditForm = null;
         }
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            employeeEditForm!.employee = new Employee()
+            _employeeEditForm!.employee = new Employee()
             {
                 BirthDate = DateTime.Today,
             };
 
-            if (employeeEditForm.ShowDialog(this) == DialogResult.OK)
+            if (_employeeEditForm.ShowDialog(this) == DialogResult.OK)
             {
-                employeeBindingSource.Add(employeeEditForm.employee);
-                applicationDbContext!.SaveChanges();
+                employeeBindingSource.Add(_employeeEditForm.employee);
+                _applicationDbContext!.SaveChanges();
             }
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            employeeEditForm!.employee = (Employee)employeeBindingSource.Current;
-            if (employeeEditForm.ShowDialog(this) == DialogResult.OK)
+            _employeeEditForm!.employee = (Employee)employeeBindingSource.Current;
+
+            if (_employeeEditForm.ShowDialog(this) == DialogResult.OK)
             {
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
             }
             else
             {
                 employeeBindingSource.CancelEdit();
-                applicationDbContext!.Entry((Employee)employeeBindingSource.Current).Reload();
+                _applicationDbContext!.Entry((Employee)employeeBindingSource.Current).Reload();
             }
         }
 
@@ -84,7 +74,7 @@ namespace Clinic.Forms
             if (result == DialogResult.Yes)
             {
                 employeeBindingSource.RemoveCurrent();
-                applicationDbContext!.SaveChanges();
+                _applicationDbContext!.SaveChanges();
             }
         }
     }
