@@ -11,6 +11,8 @@ namespace Clinic.Forms
         private readonly ApplicationDbContext? _applicationDbContext;
         private readonly UserManager<ApplicationUser> _userManager;
 
+        public ApplicationUser? user;
+
         public LoginForm(ApplicationDbContext? applicationDbContext, UserManager<ApplicationUser> userManager)
         {
             _applicationDbContext = applicationDbContext;
@@ -32,7 +34,7 @@ namespace Clinic.Forms
         }
         private async void button1_Click(object sender, EventArgs e)
         {
-            var user = await _userManager.FindByNameAsync(textBox1.Text);
+            user = await _userManager.FindByNameAsync(textBox1.Text);
 
             if (user != null)
             {

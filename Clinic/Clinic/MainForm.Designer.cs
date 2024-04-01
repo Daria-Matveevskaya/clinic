@@ -41,10 +41,10 @@
             toolStripMenuItem9 = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
             toolStripMenuItem4 = new ToolStripMenuItem();
+            toolStripMenuItem10 = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel2 = new ToolStripStatusLabel();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
-            toolStripMenuItem10 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -132,6 +132,14 @@
             toolStripMenuItem4.Size = new Size(144, 27);
             toolStripMenuItem4.Text = "Помощь";
             // 
+            // toolStripMenuItem10
+            // 
+            toolStripMenuItem10.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            toolStripMenuItem10.Name = "toolStripMenuItem10";
+            toolStripMenuItem10.Size = new Size(144, 27);
+            toolStripMenuItem10.Text = "Админ. панель";
+            toolStripMenuItem10.Click += toolStripMenuItem10_Click;
+            // 
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
@@ -153,14 +161,6 @@
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             toolStripStatusLabel1.Size = new Size(151, 20);
             toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // toolStripMenuItem10
-            // 
-            toolStripMenuItem10.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            toolStripMenuItem10.Name = "toolStripMenuItem10";
-            toolStripMenuItem10.Size = new Size(144, 24);
-            toolStripMenuItem10.Text = "Администратор";
-            toolStripMenuItem10.Click += toolStripMenuItem10_Click;
             // 
             // MainForm
             // 

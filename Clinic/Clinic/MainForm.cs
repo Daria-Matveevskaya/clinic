@@ -1,12 +1,11 @@
 using Clinic.Forms;
+using Clinic.Identity;
 using System.ComponentModel;
 
 namespace Clinic
 {
     public partial class MainForm : Form
     {
-        //public User? user = new();
-
         private readonly UnitForm _unitForm;
         private readonly UserForm _userForm;
         private readonly StoreForm _storeForm;
@@ -14,6 +13,8 @@ namespace Clinic
         private readonly CategoryForm _categoryForm;
         private readonly ProviderForm _providerForm;
         private readonly EmployeeForm _employeeForm;
+
+        public ApplicationUser? currentUser;
 
 
         public MainForm(
@@ -40,7 +41,9 @@ namespace Clinic
         {
             base.OnLoad(e);
 
-            //toolStripStatusLabel1.Text = $"{user!.Employee.Surname} {user!.Employee.FirstName} {user!.Employee.PatronymicName}";
+            toolStripStatusLabel1.Text = currentUser?.EmployeeFullName ?? string.Empty;
+
+
 
             //toolStripMenuItem10.Visible = user!.RoleName!.Equals(RoleType.Admin.ToString());
         }
