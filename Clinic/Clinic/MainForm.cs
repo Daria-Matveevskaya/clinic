@@ -1,11 +1,14 @@
+using Clinic.Common;
 using Clinic.Forms;
 using Clinic.Identity;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel;
 
 namespace Clinic
 {
     public partial class MainForm : Form
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly UnitForm _unitForm;
         private readonly AdministratorForm _userForm;
         private readonly StoreForm _storeForm;
@@ -18,6 +21,7 @@ namespace Clinic
 
 
         public MainForm(
+            UserManager<ApplicationUser> userManager,
             UnitForm unitForm,
             AdministratorForm userForm,
             StoreForm storeForm,
@@ -26,6 +30,7 @@ namespace Clinic
             ProviderForm providerForm,
             EmployeeForm employeeForm)
         {
+            _userManager = userManager;
             _unitForm = unitForm;
             _userForm = userForm;
             _storeForm = storeForm;
@@ -43,9 +48,9 @@ namespace Clinic
 
             toolStripStatusLabel1.Text = currentUser?.EmployeeFullName ?? string.Empty;
 
+            var userRoles = _userManager.GetRolesAsync(currentUser!).Result;
 
-
-            //toolStripMenuItem10.Visible = user!.RoleName!.Equals(RoleType.Admin.ToString());
+            toolStripMenuItem10.Visible = userRoles.Contains(RoleTypeEnum.Administrator.ToString());
         }
 
         protected override void OnClosing(CancelEventArgs e)

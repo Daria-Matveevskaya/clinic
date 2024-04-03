@@ -81,6 +81,7 @@ namespace Clinic.Forms
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            _roleEditForm!.user = (ApplicationUser)userBindingSource.Current;
             _roleEditForm!.ShowDialog(this);
         }
     }
