@@ -1,15 +1,7 @@
 ﻿using Clinic.Data;
 using Clinic.Identity;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebUtilities;
-using System.Security.Policy;
-using System.Text.Encodings.Web;
-using System.Text;
 using Clinic.Common;
-using System.Collections.Generic;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using Microsoft.VisualBasic.ApplicationServices;
-using System.Linq;
 
 namespace Clinic.Forms
 {
@@ -19,6 +11,7 @@ namespace Clinic.Forms
         private readonly UserManager<ApplicationUser> _userManager;
 
         public ApplicationUser? user;
+        public bool isNewUser = false;
 
         public UserEditForm(ApplicationDbContext? applicationDbContext, UserManager<ApplicationUser> userManager)
         {
@@ -54,17 +47,20 @@ namespace Clinic.Forms
             base.OnLoad(e);
 
             textBox1.DataBindings.Clear();
-            textBox2.DataBindings.Clear();
-            textBox3.DataBindings.Clear();
             comboBox1.DataBindings.Clear();
 
-            textBox1.DataBindings.Add("Text", user, "UserName", true, DataSourceUpdateMode.OnPropertyChanged);
-            comboBox1.DataBindings.Add("SelectedValue", user, "EmployeeId", true, DataSourceUpdateMode.OnPropertyChanged);
+            textBox2.Clear();
+            textBox3.Clear();
 
+            comboBox1.DataBindings.Add("SelectedValue", user, "EmployeeId", true, DataSourceUpdateMode.OnPropertyChanged);
             comboBox1.DataSource = _applicationDbContext!.Employees.Local.ToList();
             comboBox1.DisplayMember = "FullName";
             comboBox1.ValueMember = "Id";
             comboBox1.SelectedItem = user!.Employee;
+            comboBox1.Enabled = isNewUser;
+
+            textBox1.DataBindings.Add("Text", user, "UserName", true, DataSourceUpdateMode.OnPropertyChanged);
+            textBox1.Enabled = isNewUser;
 
             listView1.Items.Clear();
 
@@ -75,9 +71,9 @@ namespace Clinic.Forms
             }
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void button1_ClickAsync(object sender, EventArgs e)
         {
-            if (user!.UserName == null || user!.UserName == string.Empty || (user!.UserName != null && user!.UserName.Replace(" ", "") == string.Empty))
+            if (isNewUser && (user!.UserName == null || user!.UserName == string.Empty || (user!.UserName != null && user!.UserName.Replace(" ", "") == string.Empty)))
             {
                 MessageBox.Show("Введите логин!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -95,11 +91,24 @@ namespace Clinic.Forms
                 return;
             }
 
-            var result = await _userManager.CreateAsync(user!, textBox2.Text);
+            IdentityResult? result = null;
 
-            if (result.Succeeded)
+            if (isNewUser)
             {
-                MessageBox.Show("Пользователь успешно создан", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                result = await _userManager.CreateAsync(user!, textBox2.Text);
+            }
+            else
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user!);
+
+                result = await _userManager.ResetPasswordAsync(user!, token, textBox2.Text);
+            }
+
+            if (result!.Succeeded)
+            {
+                var message = isNewUser ? "Пользователь добавлен" : "Пароль обновлен";
+
+                MessageBox.Show(message, "", MessageBoxButtons.OK, MessageBoxIcon.None);
                 DialogResult = DialogResult.OK;
                 Close();
                 return;

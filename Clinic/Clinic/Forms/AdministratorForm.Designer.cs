@@ -1,6 +1,6 @@
 ﻿namespace Clinic.Forms
 {
-    partial class UserForm
+    partial class AdministratorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministratorForm));
             toolStrip1 = new ToolStrip();
             toolStripButtonAdd = new ToolStripButton();
             toolStripButtonEdit = new ToolStripButton();
             toolStripButtonRemove = new ToolStripButton();
+            toolStripButton1 = new ToolStripButton();
             dataGridViewUsers = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
@@ -62,7 +63,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonAdd, toolStripButtonEdit, toolStripButtonRemove });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButtonAdd, toolStripButtonEdit, toolStripButtonRemove, toolStripButton1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 27);
@@ -77,7 +78,7 @@
             toolStripButtonAdd.Size = new Size(100, 24);
             toolStripButtonAdd.Text = "Добавить";
             toolStripButtonAdd.ToolTipText = "Добавить";
-            toolStripButtonAdd.Click += toolStripButtonAdd_Click;
+            toolStripButtonAdd.Click += toolStripButtonUserAdd_Click;
             // 
             // toolStripButtonEdit
             // 
@@ -85,9 +86,9 @@
             toolStripButtonEdit.ImageTransparentColor = Color.Magenta;
             toolStripButtonEdit.Name = "toolStripButtonEdit";
             toolStripButtonEdit.RightToLeft = RightToLeft.No;
-            toolStripButtonEdit.Size = new Size(157, 24);
-            toolStripButtonEdit.Text = "Изменить пароль";
-            toolStripButtonEdit.Click += toolStripButtonEdit_Click;
+            toolStripButtonEdit.Size = new Size(135, 24);
+            toolStripButtonEdit.Text = "Редактировать";
+            toolStripButtonEdit.Click += toolStripButtonUserEdit_Click;
             // 
             // toolStripButtonRemove
             // 
@@ -96,7 +97,17 @@
             toolStripButtonRemove.Name = "toolStripButtonRemove";
             toolStripButtonRemove.Size = new Size(89, 24);
             toolStripButtonRemove.Text = "Удалить";
-            toolStripButtonRemove.Click += toolStripButtonRemove_Click;
+            toolStripButtonRemove.Click += toolStripButtonUserRemoveAsync_Click;
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.Alignment = ToolStripItemAlignment.Right;
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(167, 24);
+            toolStripButton1.Text = "Роли пользователя";
+            toolStripButton1.Click += toolStripButton1_Click;
             // 
             // dataGridViewUsers
             // 
@@ -262,14 +273,14 @@
             // 
             userBindingSource.DataSource = typeof(Identity.ApplicationUser);
             // 
-            // UserForm
+            // AdministratorForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(dataGridViewUsers);
             Controls.Add(toolStrip1);
-            Name = "UserForm";
+            Name = "AdministratorForm";
             Text = "Пользователи";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -310,5 +321,6 @@
         private DataGridViewTextBoxColumn lockoutEndDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn lockoutEnabledDataGridViewCheckBoxColumn;
         private DataGridViewTextBoxColumn accessFailedCountDataGridViewTextBoxColumn;
+        private ToolStripButton toolStripButton1;
     }
 }

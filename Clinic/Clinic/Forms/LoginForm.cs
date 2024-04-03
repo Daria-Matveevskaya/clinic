@@ -32,7 +32,7 @@ namespace Clinic.Forms
         {
             base.OnClosing(e);
         }
-        private async void button1_Click(object sender, EventArgs e)
+        private async void button1_ClickAsync(object sender, EventArgs e)
         {
             user = await _userManager.FindByNameAsync(textBox1.Text);
 

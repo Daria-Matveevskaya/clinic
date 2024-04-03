@@ -1,22 +1,24 @@
 ﻿using Clinic.Data;
 using Clinic.Identity;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.ApplicationServices;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace Clinic.Forms
 {
-    public partial class UserForm : Form
+    public partial class AdministratorForm : Form
     {
         private readonly ApplicationDbContext? _applicationDbContext;
         private readonly UserEditForm? _userEditForm;
+        private readonly RoleEditForm? _roleEditForm;
 
-        public UserForm(ApplicationDbContext? applicationDbContext, UserEditForm? userEditForm)
+        public AdministratorForm(
+            ApplicationDbContext? applicationDbContext,
+            UserEditForm? userEditForm,
+            RoleEditForm? roleEditForm)
         {
             _applicationDbContext = applicationDbContext;
             _userEditForm = userEditForm;
+            _roleEditForm = roleEditForm;
 
             InitializeComponent();
         }
@@ -41,29 +43,33 @@ namespace Clinic.Forms
             base.OnClosing(e);
         }
 
-        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        private void toolStripButtonUserAdd_Click(object sender, EventArgs e)
         {
             _userEditForm!.user = new ApplicationUser
             {
                 Employee = _applicationDbContext!.Employees.First(),
             };
 
+            _userEditForm.isNewUser = true;
+
             _userEditForm.ShowDialog(this);
 
             userBindingSource.DataSource = _applicationDbContext!.Users.Local.ToBindingList().OrderBy(u => u.EmployeeFullName);
         }
 
-        private void toolStripButtonEdit_Click(object sender, EventArgs e)
+        private void toolStripButtonUserEdit_Click(object sender, EventArgs e)
         {
-            //_userEditForm!.user = (ApplicationUser)userBindingSource.Current;
-            //_userEditForm.ShowDialog(this);
+            _userEditForm!.user = (ApplicationUser)userBindingSource.Current;
+            _userEditForm.isNewUser = false;
 
-            //userBindingSource.DataSource = _applicationDbContext!.Users.Local.ToBindingList().OrderBy(u => u.EmployeeFullName);
+            _userEditForm.ShowDialog(this);
+
+            userBindingSource.DataSource = _applicationDbContext!.Users.Local.ToBindingList().OrderBy(u => u.EmployeeFullName);
         }
 
-        private async void toolStripButtonRemove_Click(object sender, EventArgs e)
+        private async void toolStripButtonUserRemoveAsync_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Удалить запись?", "Подтвердите действие", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("Удалить пользователя?", "Подтвердите действие", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
@@ -71,6 +77,11 @@ namespace Clinic.Forms
 
                 userBindingSource.DataSource = _applicationDbContext!.Users.Local.ToBindingList().OrderBy(u => u.EmployeeFullName);
             }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            _roleEditForm!.ShowDialog(this);
         }
     }
 }

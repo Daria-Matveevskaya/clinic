@@ -50,7 +50,7 @@
             button1.TabIndex = 4;
             button1.Text = "Вход";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Click += button1_ClickAsync;
             // 
             // textBox2
             // 

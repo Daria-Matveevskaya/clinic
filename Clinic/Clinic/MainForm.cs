@@ -7,7 +7,7 @@ namespace Clinic
     public partial class MainForm : Form
     {
         private readonly UnitForm _unitForm;
-        private readonly UserForm _userForm;
+        private readonly AdministratorForm _userForm;
         private readonly StoreForm _storeForm;
         private readonly ProductForm _productForm;
         private readonly CategoryForm _categoryForm;
@@ -19,7 +19,7 @@ namespace Clinic
 
         public MainForm(
             UnitForm unitForm,
-            UserForm userForm,
+            AdministratorForm userForm,
             StoreForm storeForm,
             ProductForm productForm,
             CategoryForm categoryForm,
@@ -159,7 +159,7 @@ namespace Clinic
         {
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(UserForm))
+                if (form.GetType() == typeof(AdministratorForm))
                 {
                     form.Activate();
                     return;

@@ -53,6 +53,7 @@ namespace Clinic
                 .AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddErrorDescriber<CustomIdentityErrorDescriber>()
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
                 services.AddAuthentication();
@@ -78,8 +79,9 @@ namespace Clinic
                 .AddTransient<MainForm>()
                 .AddTransient<UnitForm>()
                 .AddTransient<UnitEditForm>()
-                .AddTransient<UserForm>()
+                .AddTransient<AdministratorForm>()
                 .AddTransient<UserEditForm>()
+                .AddTransient<RoleEditForm>()
                 .AddTransient<StoreForm>()
                 .AddTransient<ProductForm>()
                 .AddTransient<ProductEditForm>()
