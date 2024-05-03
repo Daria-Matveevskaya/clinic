@@ -16,9 +16,14 @@ public class Expense
     public int Id { get; set; }
 
     /// <summary>
-    /// Дата
+    /// Дата создания
     /// </summary>
     public DateTime Date { get; set; }
+
+    /// <summary>
+    /// Дата выдачи
+    /// </summary>
+    public DateTime? ExpDate { get; set; }
 
     /// <summary>
     /// Идентификатор сотрудника
