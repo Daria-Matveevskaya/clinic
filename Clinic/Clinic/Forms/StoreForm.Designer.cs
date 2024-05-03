@@ -35,6 +35,7 @@
             panel1 = new Panel();
             dataGridViewStore = new DataGridView();
             toolStrip1 = new ToolStrip();
+            toolStripButton1 = new ToolStripButton();
             tabPage2 = new TabPage();
             splitter1 = new Splitter();
             panel3 = new Panel();
@@ -65,10 +66,24 @@
             splitter2 = new Splitter();
             panel5 = new Panel();
             dataGridViewExpenseItems = new DataGridView();
+            idDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            expenseIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            productNameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            unitNameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            expirationDateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            quantityDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            expenseDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            productDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            unitDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             expenseBindingSource = new BindingSource(components);
             expenseItemsBindingSource = new BindingSource(components);
             panel4 = new Panel();
             dataGridViewExpenses = new DataGridView();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            employeeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            employeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            employeeFullNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             toolStrip3 = new ToolStrip();
             toolStripButtonExpenseAdd = new ToolStripButton();
             toolStripButtonExpenseEdit = new ToolStripButton();
@@ -83,24 +98,13 @@
             expenseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             productDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             unitDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            employeeIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            employeeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            employeeFullNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            idDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            expenseIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            productNameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            unitNameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            expirationDateDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            quantityDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            expenseDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            productDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            unitDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            toolStripButton2 = new ToolStripButton();
+            toolStripButton3 = new ToolStripButton();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewStore).BeginInit();
+            toolStrip1.SuspendLayout();
             tabPage2.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewRecipeItems).BeginInit();
@@ -147,9 +151,9 @@
             // 
             panel1.Controls.Add(dataGridViewStore);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(3, 28);
+            panel1.Location = new Point(3, 30);
             panel1.Name = "panel1";
-            panel1.Size = new Size(786, 386);
+            panel1.Size = new Size(786, 384);
             panel1.TabIndex = 3;
             // 
             // dataGridViewStore
@@ -164,18 +168,29 @@
             dataGridViewStore.RowHeadersWidth = 51;
             dataGridViewStore.RowTemplate.Height = 29;
             dataGridViewStore.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewStore.Size = new Size(786, 386);
+            dataGridViewStore.Size = new Size(786, 384);
             dataGridViewStore.TabIndex = 2;
             dataGridViewStore.RowPrePaint += dataGridViewStore_RowPrePaint;
             // 
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1 });
             toolStrip1.Location = new Point(3, 3);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(786, 25);
+            toolStrip1.Size = new Size(786, 27);
             toolStrip1.TabIndex = 2;
             toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.Alignment = ToolStripItemAlignment.Right;
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(139, 24);
+            toolStripButton1.Text = "Экспорт в Excel";
+            toolStripButton1.Click += toolStripButton1_Click_1;
             // 
             // tabPage2
             // 
@@ -372,7 +387,7 @@
             // toolStrip2
             // 
             toolStrip2.ImageScalingSize = new Size(20, 20);
-            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripButtonRecipeAdd, toolStripButtonRecipeEdit, toolStripButtonRecipeRemove });
+            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripButtonRecipeAdd, toolStripButtonRecipeEdit, toolStripButtonRecipeRemove, toolStripButton2 });
             toolStrip2.Location = new Point(3, 3);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Size = new Size(786, 27);
@@ -457,6 +472,74 @@
             dataGridViewExpenseItems.Size = new Size(386, 384);
             dataGridViewExpenseItems.TabIndex = 0;
             // 
+            // idDataGridViewTextBoxColumn3
+            // 
+            idDataGridViewTextBoxColumn3.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn3.HeaderText = "Id";
+            idDataGridViewTextBoxColumn3.MinimumWidth = 6;
+            idDataGridViewTextBoxColumn3.Name = "idDataGridViewTextBoxColumn3";
+            idDataGridViewTextBoxColumn3.Visible = false;
+            // 
+            // expenseIdDataGridViewTextBoxColumn1
+            // 
+            expenseIdDataGridViewTextBoxColumn1.DataPropertyName = "ExpenseId";
+            expenseIdDataGridViewTextBoxColumn1.HeaderText = "ExpenseId";
+            expenseIdDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            expenseIdDataGridViewTextBoxColumn1.Name = "expenseIdDataGridViewTextBoxColumn1";
+            expenseIdDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // productNameDataGridViewTextBoxColumn1
+            // 
+            productNameDataGridViewTextBoxColumn1.DataPropertyName = "ProductName";
+            productNameDataGridViewTextBoxColumn1.HeaderText = "Наименование";
+            productNameDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            productNameDataGridViewTextBoxColumn1.Name = "productNameDataGridViewTextBoxColumn1";
+            // 
+            // unitNameDataGridViewTextBoxColumn1
+            // 
+            unitNameDataGridViewTextBoxColumn1.DataPropertyName = "UnitName";
+            unitNameDataGridViewTextBoxColumn1.HeaderText = "Единицы измерения";
+            unitNameDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            unitNameDataGridViewTextBoxColumn1.Name = "unitNameDataGridViewTextBoxColumn1";
+            // 
+            // expirationDateDataGridViewTextBoxColumn1
+            // 
+            expirationDateDataGridViewTextBoxColumn1.DataPropertyName = "ExpirationDate";
+            expirationDateDataGridViewTextBoxColumn1.HeaderText = "Срок годности";
+            expirationDateDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            expirationDateDataGridViewTextBoxColumn1.Name = "expirationDateDataGridViewTextBoxColumn1";
+            // 
+            // quantityDataGridViewTextBoxColumn1
+            // 
+            quantityDataGridViewTextBoxColumn1.DataPropertyName = "Quantity";
+            quantityDataGridViewTextBoxColumn1.HeaderText = "Количество";
+            quantityDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            quantityDataGridViewTextBoxColumn1.Name = "quantityDataGridViewTextBoxColumn1";
+            // 
+            // expenseDataGridViewTextBoxColumn1
+            // 
+            expenseDataGridViewTextBoxColumn1.DataPropertyName = "Expense";
+            expenseDataGridViewTextBoxColumn1.HeaderText = "Expense";
+            expenseDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            expenseDataGridViewTextBoxColumn1.Name = "expenseDataGridViewTextBoxColumn1";
+            expenseDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // productDataGridViewTextBoxColumn3
+            // 
+            productDataGridViewTextBoxColumn3.DataPropertyName = "Product";
+            productDataGridViewTextBoxColumn3.HeaderText = "Product";
+            productDataGridViewTextBoxColumn3.MinimumWidth = 6;
+            productDataGridViewTextBoxColumn3.Name = "productDataGridViewTextBoxColumn3";
+            productDataGridViewTextBoxColumn3.Visible = false;
+            // 
+            // unitDataGridViewTextBoxColumn3
+            // 
+            unitDataGridViewTextBoxColumn3.DataPropertyName = "Unit";
+            unitDataGridViewTextBoxColumn3.HeaderText = "Unit";
+            unitDataGridViewTextBoxColumn3.MinimumWidth = 6;
+            unitDataGridViewTextBoxColumn3.Name = "unitDataGridViewTextBoxColumn3";
+            unitDataGridViewTextBoxColumn3.Visible = false;
+            // 
             // expenseItemsBindingSource
             // 
             expenseItemsBindingSource.DataMember = "ExpenseItems";
@@ -494,10 +577,48 @@
             dataGridViewExpenses.TabIndex = 0;
             dataGridViewExpenses.SelectionChanged += dataGridViewExpenses_SelectionChanged;
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Номер";
+            idDataGridViewTextBoxColumn.MinimumWidth = 6;
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // dateDataGridViewTextBoxColumn1
+            // 
+            dateDataGridViewTextBoxColumn1.DataPropertyName = "Date";
+            dateDataGridViewTextBoxColumn1.HeaderText = "Дата";
+            dateDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dateDataGridViewTextBoxColumn1.Name = "dateDataGridViewTextBoxColumn1";
+            // 
+            // employeeIdDataGridViewTextBoxColumn
+            // 
+            employeeIdDataGridViewTextBoxColumn.DataPropertyName = "EmployeeId";
+            employeeIdDataGridViewTextBoxColumn.HeaderText = "EmployeeId";
+            employeeIdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            employeeIdDataGridViewTextBoxColumn.Name = "employeeIdDataGridViewTextBoxColumn";
+            employeeIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // employeeDataGridViewTextBoxColumn
+            // 
+            employeeDataGridViewTextBoxColumn.DataPropertyName = "Employee";
+            employeeDataGridViewTextBoxColumn.HeaderText = "Employee";
+            employeeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            employeeDataGridViewTextBoxColumn.Name = "employeeDataGridViewTextBoxColumn";
+            employeeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // employeeFullNameDataGridViewTextBoxColumn
+            // 
+            employeeFullNameDataGridViewTextBoxColumn.DataPropertyName = "EmployeeFullName";
+            employeeFullNameDataGridViewTextBoxColumn.HeaderText = "Получатель";
+            employeeFullNameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            employeeFullNameDataGridViewTextBoxColumn.Name = "employeeFullNameDataGridViewTextBoxColumn";
+            employeeFullNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // toolStrip3
             // 
             toolStrip3.ImageScalingSize = new Size(20, 20);
-            toolStrip3.Items.AddRange(new ToolStripItem[] { toolStripButtonExpenseAdd, toolStripButtonExpenseEdit, toolStripButtonExpenseRemove });
+            toolStrip3.Items.AddRange(new ToolStripItem[] { toolStripButtonExpenseAdd, toolStripButtonExpenseEdit, toolStripButtonExpenseRemove, toolStripButton3 });
             toolStrip3.Location = new Point(3, 3);
             toolStrip3.Name = "toolStrip3";
             toolStrip3.Size = new Size(786, 27);
@@ -613,111 +734,25 @@
             unitDataGridViewTextBoxColumn1.Name = "unitDataGridViewTextBoxColumn1";
             unitDataGridViewTextBoxColumn1.Width = 125;
             // 
-            // idDataGridViewTextBoxColumn
+            // toolStripButton2
             // 
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Номер";
-            idDataGridViewTextBoxColumn.MinimumWidth = 6;
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            toolStripButton2.Alignment = ToolStripItemAlignment.Right;
+            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
+            toolStripButton2.ImageTransparentColor = Color.Magenta;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new Size(139, 24);
+            toolStripButton2.Text = "Экспорт в Excel";
+            toolStripButton2.Click += toolStripButton2_Click;
             // 
-            // dateDataGridViewTextBoxColumn1
+            // toolStripButton3
             // 
-            dateDataGridViewTextBoxColumn1.DataPropertyName = "Date";
-            dateDataGridViewTextBoxColumn1.HeaderText = "Дата";
-            dateDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dateDataGridViewTextBoxColumn1.Name = "dateDataGridViewTextBoxColumn1";
-            // 
-            // employeeIdDataGridViewTextBoxColumn
-            // 
-            employeeIdDataGridViewTextBoxColumn.DataPropertyName = "EmployeeId";
-            employeeIdDataGridViewTextBoxColumn.HeaderText = "EmployeeId";
-            employeeIdDataGridViewTextBoxColumn.MinimumWidth = 6;
-            employeeIdDataGridViewTextBoxColumn.Name = "employeeIdDataGridViewTextBoxColumn";
-            employeeIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // employeeDataGridViewTextBoxColumn
-            // 
-            employeeDataGridViewTextBoxColumn.DataPropertyName = "Employee";
-            employeeDataGridViewTextBoxColumn.HeaderText = "Employee";
-            employeeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            employeeDataGridViewTextBoxColumn.Name = "employeeDataGridViewTextBoxColumn";
-            employeeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // employeeFullNameDataGridViewTextBoxColumn
-            // 
-            employeeFullNameDataGridViewTextBoxColumn.DataPropertyName = "EmployeeFullName";
-            employeeFullNameDataGridViewTextBoxColumn.HeaderText = "Получатель";
-            employeeFullNameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            employeeFullNameDataGridViewTextBoxColumn.Name = "employeeFullNameDataGridViewTextBoxColumn";
-            employeeFullNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idDataGridViewTextBoxColumn3
-            // 
-            idDataGridViewTextBoxColumn3.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn3.HeaderText = "Id";
-            idDataGridViewTextBoxColumn3.MinimumWidth = 6;
-            idDataGridViewTextBoxColumn3.Name = "idDataGridViewTextBoxColumn3";
-            idDataGridViewTextBoxColumn3.Visible = false;
-            // 
-            // expenseIdDataGridViewTextBoxColumn1
-            // 
-            expenseIdDataGridViewTextBoxColumn1.DataPropertyName = "ExpenseId";
-            expenseIdDataGridViewTextBoxColumn1.HeaderText = "ExpenseId";
-            expenseIdDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            expenseIdDataGridViewTextBoxColumn1.Name = "expenseIdDataGridViewTextBoxColumn1";
-            expenseIdDataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // productNameDataGridViewTextBoxColumn1
-            // 
-            productNameDataGridViewTextBoxColumn1.DataPropertyName = "ProductName";
-            productNameDataGridViewTextBoxColumn1.HeaderText = "Наименование";
-            productNameDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            productNameDataGridViewTextBoxColumn1.Name = "productNameDataGridViewTextBoxColumn1";
-            // 
-            // unitNameDataGridViewTextBoxColumn1
-            // 
-            unitNameDataGridViewTextBoxColumn1.DataPropertyName = "UnitName";
-            unitNameDataGridViewTextBoxColumn1.HeaderText = "Единицы измерения";
-            unitNameDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            unitNameDataGridViewTextBoxColumn1.Name = "unitNameDataGridViewTextBoxColumn1";
-            // 
-            // expirationDateDataGridViewTextBoxColumn1
-            // 
-            expirationDateDataGridViewTextBoxColumn1.DataPropertyName = "ExpirationDate";
-            expirationDateDataGridViewTextBoxColumn1.HeaderText = "Срок годности";
-            expirationDateDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            expirationDateDataGridViewTextBoxColumn1.Name = "expirationDateDataGridViewTextBoxColumn1";
-            // 
-            // quantityDataGridViewTextBoxColumn1
-            // 
-            quantityDataGridViewTextBoxColumn1.DataPropertyName = "Quantity";
-            quantityDataGridViewTextBoxColumn1.HeaderText = "Количество";
-            quantityDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            quantityDataGridViewTextBoxColumn1.Name = "quantityDataGridViewTextBoxColumn1";
-            // 
-            // expenseDataGridViewTextBoxColumn1
-            // 
-            expenseDataGridViewTextBoxColumn1.DataPropertyName = "Expense";
-            expenseDataGridViewTextBoxColumn1.HeaderText = "Expense";
-            expenseDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            expenseDataGridViewTextBoxColumn1.Name = "expenseDataGridViewTextBoxColumn1";
-            expenseDataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // productDataGridViewTextBoxColumn3
-            // 
-            productDataGridViewTextBoxColumn3.DataPropertyName = "Product";
-            productDataGridViewTextBoxColumn3.HeaderText = "Product";
-            productDataGridViewTextBoxColumn3.MinimumWidth = 6;
-            productDataGridViewTextBoxColumn3.Name = "productDataGridViewTextBoxColumn3";
-            productDataGridViewTextBoxColumn3.Visible = false;
-            // 
-            // unitDataGridViewTextBoxColumn3
-            // 
-            unitDataGridViewTextBoxColumn3.DataPropertyName = "Unit";
-            unitDataGridViewTextBoxColumn3.HeaderText = "Unit";
-            unitDataGridViewTextBoxColumn3.MinimumWidth = 6;
-            unitDataGridViewTextBoxColumn3.Name = "unitDataGridViewTextBoxColumn3";
-            unitDataGridViewTextBoxColumn3.Visible = false;
+            toolStripButton3.Alignment = ToolStripItemAlignment.Right;
+            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
+            toolStripButton3.ImageTransparentColor = Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new Size(139, 24);
+            toolStripButton3.Text = "Экспорт в Excel";
+            toolStripButton3.Click += toolStripButton3_Click;
             // 
             // StoreForm
             // 
@@ -732,6 +767,8 @@
             tabPage1.PerformLayout();
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewStore).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
             panel3.ResumeLayout(false);
@@ -824,5 +861,8 @@
         private DataGridViewTextBoxColumn expenseDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn productDataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn unitDataGridViewTextBoxColumn3;
+        private ToolStripButton toolStripButton1;
+        private ToolStripButton toolStripButton2;
+        private ToolStripButton toolStripButton3;
     }
 }

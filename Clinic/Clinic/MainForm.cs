@@ -68,6 +68,7 @@ namespace Clinic
                     return;
                 }
             }
+            _storeForm.currentUser = currentUser;
 
             _storeForm.WindowState = FormWindowState.Maximized;
             _storeForm.ControlBox = false;

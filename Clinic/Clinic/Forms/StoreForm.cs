@@ -1,8 +1,11 @@
 ﻿using Clinic.Data;
 using Clinic.Data.Entities;
 using Clinic.Models;
+using System.Data;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
+using Clinic.Common;
+using Clinic.Identity;
 
 namespace Clinic.Forms
 {
@@ -13,6 +16,8 @@ namespace Clinic.Forms
         private readonly ExpenseEditForm? _expenseEditForm;
 
         private readonly BindingSource _storeBindingSource = new();
+
+        public ApplicationUser? currentUser;
 
         public StoreForm(ApplicationDbContext? applicationDbContext, RecipeEditForm? recipeEditForm, ExpenseEditForm? expenseEditForm)
         {
@@ -51,35 +56,35 @@ namespace Clinic.Forms
 
             dataGridViewStore.ReadOnly = true;
             dataGridViewStore.AllowUserToAddRows = false;
-            dataGridViewStore.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
-            dataGridViewStore.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewStore.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
+            dataGridViewStore.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewStore.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             dataGridViewRecipes.ReadOnly = true;
             dataGridViewRecipes.MultiSelect = false;
             dataGridViewRecipes.AllowUserToAddRows = false;
-            dataGridViewRecipes.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
-            dataGridViewRecipes.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewRecipes.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
+            dataGridViewRecipes.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewRecipes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             dataGridViewRecipeItems.ReadOnly = true;
             dataGridViewRecipeItems.AllowUserToAddRows = false;
-            dataGridViewRecipeItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
-            dataGridViewRecipeItems.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewRecipeItems.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
+            dataGridViewRecipeItems.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewRecipeItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewRecipeItems.Columns[0].Visible = false;
 
             dataGridViewExpenses.ReadOnly = true;
             dataGridViewExpenses.MultiSelect = false;
             dataGridViewExpenses.AllowUserToAddRows = false;
-            dataGridViewExpenses.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
-            dataGridViewExpenses.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewExpenses.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
+            dataGridViewExpenses.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewExpenses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             dataGridViewExpenseItems.ReadOnly = true;
             dataGridViewExpenseItems.AllowUserToAddRows = false;
-            dataGridViewExpenseItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
-            dataGridViewExpenseItems.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dataGridViewExpenseItems.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
+            dataGridViewExpenseItems.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewExpenseItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewExpenseItems.Columns[0].Visible = false;
 
@@ -343,9 +348,45 @@ namespace Clinic.Forms
         {
             if ((bool)dataGridViewStore.Rows[e.RowIndex].Cells[4].Value)
             {
-                dataGridViewStore.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightPink;
-                dataGridViewStore.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightPink;
+                dataGridViewStore.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.LightPink;
+                dataGridViewStore.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightPink;
             }
+        }
+
+        private void toolStripButton1_Click_1(object sender, EventArgs e)
+        {
+            List<string> captions = new()
+            {
+                $"Остаток товаров на дату: {DateTime.Now:dd/MM/yyyy}",
+            };
+
+            dataGridViewStore.ExportToExcel("Остаток", captions, currentUser?.EmployeeFullName ?? string.Empty);
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            Recipe recipe = (Recipe)recipeBindingSource.Current;
+            List<string> captions = new()
+            {
+                $"Приход №{recipe.Id}",
+                $"Дата: {recipe.Date:dd/MM/yyyy}",
+                $"Поставщик: {recipe.ProviderName}",
+            };
+
+            dataGridViewRecipeItems.ExportToExcel("Приход", captions, currentUser?.EmployeeFullName ?? string.Empty);
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            Expense expence = (Expense)expenseBindingSource.Current;
+            List<string> captions = new()
+            {
+                $"Расход №{expence.Id}",
+                $"Дата: {expence.Date:dd/MM/yyyy}",
+                $"Получатель: {expence.EmployeeFullName}",
+            };
+
+            dataGridViewExpenseItems.ExportToExcel("Расход", captions, currentUser?.EmployeeFullName ?? string.Empty);
         }
     }
 }
