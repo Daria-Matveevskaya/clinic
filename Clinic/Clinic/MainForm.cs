@@ -16,6 +16,7 @@ namespace Clinic
         private readonly CategoryForm _categoryForm;
         private readonly ProviderForm _providerForm;
         private readonly EmployeeForm _employeeForm;
+        private readonly RequestForm _requestForm;
 
         public ApplicationUser? currentUser;
 
@@ -28,7 +29,8 @@ namespace Clinic
             ProductForm productForm,
             CategoryForm categoryForm,
             ProviderForm providerForm,
-            EmployeeForm employeeForm)
+            EmployeeForm employeeForm,
+            RequestForm requestForm)
         {
             _userManager = userManager;
             _unitForm = unitForm;
@@ -38,6 +40,7 @@ namespace Clinic
             _categoryForm = categoryForm;
             _providerForm = providerForm;
             _employeeForm = employeeForm;
+            _requestForm = requestForm;
 
             InitializeComponent();
         }
@@ -74,6 +77,25 @@ namespace Clinic
             _storeForm.ControlBox = false;
             _storeForm.MdiParent = this;
             _storeForm.Show();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(RequestForm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            _requestForm.currentUser = currentUser;
+
+            _requestForm.WindowState = FormWindowState.Maximized;
+            _requestForm.ControlBox = false;
+            _requestForm.MdiParent = this;
+            _requestForm.Show();
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)

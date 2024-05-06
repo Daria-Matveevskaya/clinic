@@ -91,6 +91,8 @@ namespace Clinic
                 .AddTransient<ProviderEditForm>()
                 .AddTransient<EmployeeForm>()
                 .AddTransient<EmployeeEditForm>()
+                .AddTransient<RequestForm>()
+                .AddTransient<RequestEditForm>()
                 .AddTransient<ExpenseEditForm>()
                 .AddTransient<RecipeEditForm>();
             });
