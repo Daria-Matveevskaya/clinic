@@ -187,7 +187,7 @@ namespace Clinic.Forms
                 $"Получатель: {expence.EmployeeFullName}",
             };
 
-            dataGridViewExpenseItems.ExportToExcel("Расход", captions, currentUser?.EmployeeFullName ?? string.Empty);
+            dataGridViewExpenseItems.ExportToExcel("Заявка", captions, currentUser?.EmployeeFullName ?? string.Empty);
         }
 
         private void dataGridViewExpenses_SelectionChanged(object sender, EventArgs e)

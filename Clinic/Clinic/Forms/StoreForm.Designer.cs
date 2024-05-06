@@ -842,7 +842,6 @@
         private ToolStripButton toolStripButtonExpenseAdd;
         private ToolStripButton toolStripButtonExpenseEdit;
         private ToolStripButton toolStripButtonExpenseRemove;
-        private DataGridViewTextBoxColumn employeeNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn recipeIdDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;

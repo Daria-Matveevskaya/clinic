@@ -295,12 +295,6 @@
         private ToolStripButton toolStripButtonAdd;
         private ToolStripButton toolStripButtonEdit;
         private ToolStripButton toolStripButtonRemove;
-        private DataGridViewTextBoxColumn loginDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn roleNameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn employeeIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn employeeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn roleDataGridViewTextBoxColumn;
         private DataGridView dataGridViewUsers;
         private BindingSource userBindingSource;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;

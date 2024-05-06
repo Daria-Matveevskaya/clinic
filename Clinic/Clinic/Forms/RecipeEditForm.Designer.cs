@@ -253,13 +253,7 @@
         private Label label1;
         private Panel panel1;
         private DataGridView dataGridViewRecipeItems;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private BindingSource unitBindingSource;
-        private DataGridViewCheckBoxColumn isCheckedDataGridViewCheckBoxColumn;
-        private DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
-        private DataGridViewComboBoxColumn unitNameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn expirationDateDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private BindingSource recipeItemModelBindingSource;
         private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
