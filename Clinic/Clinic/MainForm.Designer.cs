@@ -33,14 +33,13 @@
             contextMenuStrip1 = new ContextMenuStrip(components);
             menuStrip1 = new MenuStrip();
             toolStripMenuItem1 = new ToolStripMenuItem();
+            toolStripMenuItem2 = new ToolStripMenuItem();
             toolStripMenuItem3 = new ToolStripMenuItem();
             toolStripMenuItem5 = new ToolStripMenuItem();
             toolStripMenuItem6 = new ToolStripMenuItem();
             toolStripMenuItem7 = new ToolStripMenuItem();
             toolStripMenuItem8 = new ToolStripMenuItem();
             toolStripMenuItem9 = new ToolStripMenuItem();
-            toolStripMenuItem2 = new ToolStripMenuItem();
-            toolStripMenuItem4 = new ToolStripMenuItem();
             toolStripMenuItem10 = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel2 = new ToolStripStatusLabel();
@@ -59,7 +58,7 @@
             // 
             menuStrip1.Dock = DockStyle.Left;
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem4, toolStripMenuItem10 });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2, toolStripMenuItem3, toolStripMenuItem10 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
@@ -75,10 +74,18 @@
             toolStripMenuItem1.Text = "Мой склад";
             toolStripMenuItem1.Click += toolStripMenuItem1_Click;
             // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(144, 27);
+            toolStripMenuItem2.Text = "Мои заявки";
+            toolStripMenuItem2.Click += toolStripMenuItem2_Click;
+            // 
             // toolStripMenuItem3
             // 
             toolStripMenuItem3.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem5, toolStripMenuItem6, toolStripMenuItem7, toolStripMenuItem8, toolStripMenuItem9 });
-            toolStripMenuItem3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            toolStripMenuItem3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             toolStripMenuItem3.Name = "toolStripMenuItem3";
             toolStripMenuItem3.Size = new Size(144, 27);
             toolStripMenuItem3.Text = "Справочники";
@@ -118,24 +125,9 @@
             toolStripMenuItem9.Text = "Сотрудники";
             toolStripMenuItem9.Click += toolStripMenuItem9_Click;
             // 
-            // toolStripMenuItem2
-            // 
-            toolStripMenuItem2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(144, 27);
-            toolStripMenuItem2.Text = "Мои заявки";
-            toolStripMenuItem2.Click += toolStripMenuItem2_Click;
-            // 
-            // toolStripMenuItem4
-            // 
-            toolStripMenuItem4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            toolStripMenuItem4.Name = "toolStripMenuItem4";
-            toolStripMenuItem4.Size = new Size(144, 27);
-            toolStripMenuItem4.Text = "Отчеты";
-            // 
             // toolStripMenuItem10
             // 
-            toolStripMenuItem10.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            toolStripMenuItem10.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             toolStripMenuItem10.Name = "toolStripMenuItem10";
             toolStripMenuItem10.Size = new Size(144, 27);
             toolStripMenuItem10.Text = "Админ. панель";
@@ -193,7 +185,6 @@
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem toolStripMenuItem3;
-        private ToolStripMenuItem toolStripMenuItem4;
         private ToolStripMenuItem toolStripMenuItem5;
         private ToolStripMenuItem toolStripMenuItem6;
         private ToolStripMenuItem toolStripMenuItem7;

@@ -53,7 +53,30 @@ namespace Clinic
 
             var userRoles = _userManager.GetRolesAsync(currentUser!).Result;
 
+            // Настройка доступов
+            toolStripMenuItem1.Visible = userRoles.Contains(RoleTypeEnum.Store.ToString());
+            toolStripMenuItem3.Visible = userRoles.Contains(RoleTypeEnum.Store.ToString());
+            toolStripMenuItem2.Visible = userRoles.Contains(RoleTypeEnum.User.ToString());
             toolStripMenuItem10.Visible = userRoles.Contains(RoleTypeEnum.Administrator.ToString());
+
+            if (userRoles.Contains(RoleTypeEnum.Store.ToString()))
+            {
+                ShowStoreForm();
+            }
+            else
+            {
+                if (userRoles.Contains(RoleTypeEnum.User.ToString()))
+                {
+                    ShowRequestForm();
+                }
+                else
+                {
+                    if (userRoles.Contains(RoleTypeEnum.Administrator.ToString()))
+                    {
+                        ShowAdministratorForm();
+                    }
+                }
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -62,6 +85,11 @@ namespace Clinic
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ShowStoreForm();
+        }
+
+        private void ShowStoreForm()
         {
             foreach (Form form in Application.OpenForms)
             {
@@ -80,6 +108,11 @@ namespace Clinic
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ShowRequestForm();
+        }
+
+        private void ShowRequestForm()
         {
             foreach (Form form in Application.OpenForms)
             {
@@ -184,6 +217,11 @@ namespace Clinic
         }
 
         private void toolStripMenuItem10_Click(object sender, EventArgs e)
+        {
+            ShowAdministratorForm();
+        }
+
+        private void ShowAdministratorForm()
         {
             foreach (Form form in Application.OpenForms)
             {
