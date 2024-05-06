@@ -32,6 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RequestForm));
             panel5 = new Panel();
             dataGridViewExpenseItems = new DataGridView();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            expenseIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            productNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            unitNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            expirationDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            quantityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            expenseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            productDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            unitDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             expenseBindingSource = new BindingSource(components);
             expenseItemsBindingSource = new BindingSource(components);
             splitter2 = new Splitter();
@@ -47,15 +56,6 @@
             dataGridViewTextBoxColumn20 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn21 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn22 = new DataGridViewTextBoxColumn();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            expenseIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            productNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            unitNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            expirationDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            quantityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            expenseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            productDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            unitDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenseItems).BeginInit();
             ((System.ComponentModel.ISupportInitialize)expenseItemsBindingSource).BeginInit();
@@ -84,145 +84,14 @@
             dataGridViewExpenseItems.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, expenseIdDataGridViewTextBoxColumn, productNameDataGridViewTextBoxColumn, unitNameDataGridViewTextBoxColumn, expirationDateDataGridViewTextBoxColumn, quantityDataGridViewTextBoxColumn, expenseDataGridViewTextBoxColumn, productDataGridViewTextBoxColumn, unitDataGridViewTextBoxColumn });
             dataGridViewExpenseItems.DataSource = expenseItemsBindingSource;
             dataGridViewExpenseItems.Dock = DockStyle.Fill;
-            dataGridViewExpenseItems.Location = new Point(487, 0);
+            dataGridViewExpenseItems.Location = new Point(404, 0);
             dataGridViewExpenseItems.Name = "dataGridViewExpenseItems";
             dataGridViewExpenseItems.RowHeadersVisible = false;
             dataGridViewExpenseItems.RowHeadersWidth = 51;
             dataGridViewExpenseItems.RowTemplate.Height = 29;
             dataGridViewExpenseItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewExpenseItems.Size = new Size(313, 423);
+            dataGridViewExpenseItems.Size = new Size(396, 423);
             dataGridViewExpenseItems.TabIndex = 5;
-            // 
-            // expenseItemsBindingSource
-            // 
-            expenseItemsBindingSource.DataMember = "ExpenseItems";
-            expenseItemsBindingSource.DataSource = expenseBindingSource;
-            // 
-            // expenseBindingSource
-            // 
-            expenseBindingSource.DataSource = typeof(Data.Entities.Expense);
-            // 
-            // splitter2
-            // 
-            splitter2.Location = new Point(483, 0);
-            splitter2.Name = "splitter2";
-            splitter2.Size = new Size(4, 423);
-            splitter2.TabIndex = 4;
-            splitter2.TabStop = false;
-            // 
-            // dataGridViewExpenses
-            // 
-            dataGridViewExpenses.AutoGenerateColumns = false;
-            dataGridViewExpenses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewExpenses.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridViewExpenses.ColumnHeadersHeight = 29;
-            dataGridViewExpenses.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn17, dataGridViewTextBoxColumn18, dataGridViewTextBoxColumn19, dataGridViewTextBoxColumn20, dataGridViewTextBoxColumn21, dataGridViewTextBoxColumn22 });
-            dataGridViewExpenses.DataSource = expenseBindingSource;
-            dataGridViewExpenses.Dock = DockStyle.Left;
-            dataGridViewExpenses.Location = new Point(0, 0);
-            dataGridViewExpenses.Name = "dataGridViewExpenses";
-            dataGridViewExpenses.RowHeadersVisible = false;
-            dataGridViewExpenses.RowHeadersWidth = 51;
-            dataGridViewExpenses.RowTemplate.Height = 29;
-            dataGridViewExpenses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewExpenses.Size = new Size(483, 423);
-            dataGridViewExpenses.TabIndex = 1;
-            dataGridViewExpenses.SelectionChanged += dataGridViewExpenses_SelectionChanged;
-            // 
-            // toolStrip3
-            // 
-            toolStrip3.ImageScalingSize = new Size(20, 20);
-            toolStrip3.Items.AddRange(new ToolStripItem[] { toolStripButtonExpenseAdd, toolStripButtonExpenseEdit, toolStripButtonExpenseRemove, toolStripButton3 });
-            toolStrip3.Location = new Point(0, 0);
-            toolStrip3.Name = "toolStrip3";
-            toolStrip3.Size = new Size(800, 27);
-            toolStrip3.TabIndex = 3;
-            toolStrip3.Text = "toolStrip3";
-            // 
-            // toolStripButtonExpenseAdd
-            // 
-            toolStripButtonExpenseAdd.Image = (Image)resources.GetObject("toolStripButtonExpenseAdd.Image");
-            toolStripButtonExpenseAdd.ImageTransparentColor = Color.Magenta;
-            toolStripButtonExpenseAdd.Name = "toolStripButtonExpenseAdd";
-            toolStripButtonExpenseAdd.Size = new Size(100, 24);
-            toolStripButtonExpenseAdd.Text = "Добавить";
-            toolStripButtonExpenseAdd.ToolTipText = "Добавить";
-            toolStripButtonExpenseAdd.Click += toolStripButtonExpenseAdd_Click;
-            // 
-            // toolStripButtonExpenseEdit
-            // 
-            toolStripButtonExpenseEdit.Image = (Image)resources.GetObject("toolStripButtonExpenseEdit.Image");
-            toolStripButtonExpenseEdit.ImageTransparentColor = Color.Magenta;
-            toolStripButtonExpenseEdit.Name = "toolStripButtonExpenseEdit";
-            toolStripButtonExpenseEdit.RightToLeft = RightToLeft.No;
-            toolStripButtonExpenseEdit.Size = new Size(135, 24);
-            toolStripButtonExpenseEdit.Text = "Редактировать";
-            toolStripButtonExpenseEdit.Click += toolStripButtonExpenseEdit_Click;
-            // 
-            // toolStripButtonExpenseRemove
-            // 
-            toolStripButtonExpenseRemove.Image = (Image)resources.GetObject("toolStripButtonExpenseRemove.Image");
-            toolStripButtonExpenseRemove.ImageTransparentColor = Color.Magenta;
-            toolStripButtonExpenseRemove.Name = "toolStripButtonExpenseRemove";
-            toolStripButtonExpenseRemove.Size = new Size(89, 24);
-            toolStripButtonExpenseRemove.Text = "Удалить";
-            toolStripButtonExpenseRemove.Click += toolStripButtonExpenseRemove_Click;
-            // 
-            // toolStripButton3
-            // 
-            toolStripButton3.Alignment = ToolStripItemAlignment.Right;
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(139, 24);
-            toolStripButton3.Text = "Экспорт в Excel";
-            toolStripButton3.Click += toolStripButton3_Click;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            dataGridViewTextBoxColumn17.DataPropertyName = "Id";
-            dataGridViewTextBoxColumn17.HeaderText = "Номер";
-            dataGridViewTextBoxColumn17.MinimumWidth = 6;
-            dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            dataGridViewTextBoxColumn18.DataPropertyName = "Date";
-            dataGridViewTextBoxColumn18.HeaderText = "Дата создания";
-            dataGridViewTextBoxColumn18.MinimumWidth = 6;
-            dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            dataGridViewTextBoxColumn19.DataPropertyName = "ExpDate";
-            dataGridViewTextBoxColumn19.HeaderText = "Дата выдачи";
-            dataGridViewTextBoxColumn19.MinimumWidth = 6;
-            dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            dataGridViewTextBoxColumn20.DataPropertyName = "EmployeeId";
-            dataGridViewTextBoxColumn20.HeaderText = "EmployeeId";
-            dataGridViewTextBoxColumn20.MinimumWidth = 6;
-            dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            dataGridViewTextBoxColumn20.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            dataGridViewTextBoxColumn21.DataPropertyName = "Employee";
-            dataGridViewTextBoxColumn21.HeaderText = "Employee";
-            dataGridViewTextBoxColumn21.MinimumWidth = 6;
-            dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            dataGridViewTextBoxColumn21.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            dataGridViewTextBoxColumn22.DataPropertyName = "EmployeeFullName";
-            dataGridViewTextBoxColumn22.HeaderText = "EmployeeFullName";
-            dataGridViewTextBoxColumn22.MinimumWidth = 6;
-            dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            dataGridViewTextBoxColumn22.ReadOnly = true;
-            dataGridViewTextBoxColumn22.Visible = false;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -291,6 +160,137 @@
             unitDataGridViewTextBoxColumn.MinimumWidth = 6;
             unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
             unitDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // expenseItemsBindingSource
+            // 
+            expenseItemsBindingSource.DataMember = "ExpenseItems";
+            expenseItemsBindingSource.DataSource = expenseBindingSource;
+            // 
+            // expenseBindingSource
+            // 
+            expenseBindingSource.DataSource = typeof(Data.Entities.Expense);
+            // 
+            // splitter2
+            // 
+            splitter2.Location = new Point(400, 0);
+            splitter2.Name = "splitter2";
+            splitter2.Size = new Size(4, 423);
+            splitter2.TabIndex = 4;
+            splitter2.TabStop = false;
+            // 
+            // dataGridViewExpenses
+            // 
+            dataGridViewExpenses.AutoGenerateColumns = false;
+            dataGridViewExpenses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewExpenses.BackgroundColor = SystemColors.ButtonHighlight;
+            dataGridViewExpenses.ColumnHeadersHeight = 29;
+            dataGridViewExpenses.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn17, dataGridViewTextBoxColumn18, dataGridViewTextBoxColumn19, dataGridViewTextBoxColumn20, dataGridViewTextBoxColumn21, dataGridViewTextBoxColumn22 });
+            dataGridViewExpenses.DataSource = expenseBindingSource;
+            dataGridViewExpenses.Dock = DockStyle.Left;
+            dataGridViewExpenses.Location = new Point(0, 0);
+            dataGridViewExpenses.Name = "dataGridViewExpenses";
+            dataGridViewExpenses.RowHeadersVisible = false;
+            dataGridViewExpenses.RowHeadersWidth = 51;
+            dataGridViewExpenses.RowTemplate.Height = 29;
+            dataGridViewExpenses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewExpenses.Size = new Size(400, 423);
+            dataGridViewExpenses.TabIndex = 1;
+            dataGridViewExpenses.SelectionChanged += dataGridViewExpenses_SelectionChanged;
+            // 
+            // toolStrip3
+            // 
+            toolStrip3.ImageScalingSize = new Size(20, 20);
+            toolStrip3.Items.AddRange(new ToolStripItem[] { toolStripButtonExpenseAdd, toolStripButtonExpenseEdit, toolStripButtonExpenseRemove, toolStripButton3 });
+            toolStrip3.Location = new Point(0, 0);
+            toolStrip3.Name = "toolStrip3";
+            toolStrip3.Size = new Size(800, 27);
+            toolStrip3.TabIndex = 3;
+            toolStrip3.Text = "toolStrip3";
+            // 
+            // toolStripButtonExpenseAdd
+            // 
+            toolStripButtonExpenseAdd.Image = (Image)resources.GetObject("toolStripButtonExpenseAdd.Image");
+            toolStripButtonExpenseAdd.ImageTransparentColor = Color.Magenta;
+            toolStripButtonExpenseAdd.Name = "toolStripButtonExpenseAdd";
+            toolStripButtonExpenseAdd.Size = new Size(100, 24);
+            toolStripButtonExpenseAdd.Text = "Добавить";
+            toolStripButtonExpenseAdd.ToolTipText = "Добавить";
+            toolStripButtonExpenseAdd.Click += toolStripButtonExpenseAdd_Click;
+            // 
+            // toolStripButtonExpenseEdit
+            // 
+            toolStripButtonExpenseEdit.Image = (Image)resources.GetObject("toolStripButtonExpenseEdit.Image");
+            toolStripButtonExpenseEdit.ImageTransparentColor = Color.Magenta;
+            toolStripButtonExpenseEdit.Name = "toolStripButtonExpenseEdit";
+            toolStripButtonExpenseEdit.RightToLeft = RightToLeft.No;
+            toolStripButtonExpenseEdit.Size = new Size(135, 24);
+            toolStripButtonExpenseEdit.Text = "Редактировать";
+            toolStripButtonExpenseEdit.Click += toolStripButtonExpenseEdit_Click;
+            // 
+            // toolStripButtonExpenseRemove
+            // 
+            toolStripButtonExpenseRemove.Image = (Image)resources.GetObject("toolStripButtonExpenseRemove.Image");
+            toolStripButtonExpenseRemove.ImageTransparentColor = Color.Magenta;
+            toolStripButtonExpenseRemove.Name = "toolStripButtonExpenseRemove";
+            toolStripButtonExpenseRemove.Size = new Size(89, 24);
+            toolStripButtonExpenseRemove.Text = "Удалить";
+            toolStripButtonExpenseRemove.Click += toolStripButtonExpenseRemove_Click;
+            // 
+            // toolStripButton3
+            // 
+            toolStripButton3.Alignment = ToolStripItemAlignment.Right;
+            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
+            toolStripButton3.ImageTransparentColor = Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new Size(139, 24);
+            toolStripButton3.Text = "Экспорт в Excel";
+            toolStripButton3.Click += toolStripButton3_Click;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            dataGridViewTextBoxColumn17.DataPropertyName = "Id";
+            dataGridViewTextBoxColumn17.HeaderText = "Номер";
+            dataGridViewTextBoxColumn17.MinimumWidth = 6;
+            dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            dataGridViewTextBoxColumn18.DataPropertyName = "Date";
+            dataGridViewTextBoxColumn18.HeaderText = "Создан";
+            dataGridViewTextBoxColumn18.MinimumWidth = 6;
+            dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            dataGridViewTextBoxColumn19.DataPropertyName = "ExpDate";
+            dataGridViewTextBoxColumn19.HeaderText = "Выдан";
+            dataGridViewTextBoxColumn19.MinimumWidth = 6;
+            dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            dataGridViewTextBoxColumn20.DataPropertyName = "EmployeeId";
+            dataGridViewTextBoxColumn20.HeaderText = "EmployeeId";
+            dataGridViewTextBoxColumn20.MinimumWidth = 6;
+            dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            dataGridViewTextBoxColumn20.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            dataGridViewTextBoxColumn21.DataPropertyName = "Employee";
+            dataGridViewTextBoxColumn21.HeaderText = "Employee";
+            dataGridViewTextBoxColumn21.MinimumWidth = 6;
+            dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            dataGridViewTextBoxColumn21.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            dataGridViewTextBoxColumn22.DataPropertyName = "EmployeeFullName";
+            dataGridViewTextBoxColumn22.HeaderText = "EmployeeFullName";
+            dataGridViewTextBoxColumn22.MinimumWidth = 6;
+            dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            dataGridViewTextBoxColumn22.ReadOnly = true;
+            dataGridViewTextBoxColumn22.Visible = false;
             // 
             // RequestForm
             // 
