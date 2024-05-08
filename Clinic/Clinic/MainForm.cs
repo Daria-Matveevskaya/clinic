@@ -19,7 +19,7 @@ namespace Clinic
         private readonly RequestForm _requestForm;
 
         public ApplicationUser? currentUser;
-
+        public IList<string> userRoles = new List<string>();
 
         public MainForm(
             UserManager<ApplicationUser> userManager,
@@ -51,13 +51,12 @@ namespace Clinic
 
             toolStripStatusLabel1.Text = currentUser?.EmployeeFullName ?? string.Empty;
 
-            var userRoles = _userManager.GetRolesAsync(currentUser!).Result;
+            userRoles = _userManager.GetRolesAsync(currentUser!).Result;
 
             // Настройка доступов
             toolStripMenuItem1.Visible = userRoles.Contains(RoleTypeEnum.Store.ToString());
-            toolStripMenuItem3.Visible = userRoles.Contains(RoleTypeEnum.Store.ToString());
             toolStripMenuItem2.Visible = userRoles.Contains(RoleTypeEnum.User.ToString());
-            toolStripMenuItem10.Visible = userRoles.Contains(RoleTypeEnum.Administrator.ToString());
+            toolStripMenuItem3.Visible = userRoles.Contains(RoleTypeEnum.Administrator.ToString());
 
             if (userRoles.Contains(RoleTypeEnum.Store.ToString()))
             {
@@ -131,92 +130,7 @@ namespace Clinic
             _requestForm.Show();
         }
 
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(CategoryForm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-
-            _categoryForm.WindowState = FormWindowState.Maximized;
-            _categoryForm.ControlBox = false;
-            _categoryForm.MdiParent = this;
-            _categoryForm.Show();
-        }
-
-        private void toolStripMenuItem6_Click(object sender, EventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(ProductForm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-
-            _productForm.WindowState = FormWindowState.Maximized;
-            _productForm.ControlBox = false;
-            _productForm.MdiParent = this;
-            _productForm.Show();
-        }
-
-        private void toolStripMenuItem7_Click(object sender, EventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(UnitForm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-
-            _unitForm.WindowState = FormWindowState.Maximized;
-            _unitForm.ControlBox = false;
-            _unitForm.MdiParent = this;
-            _unitForm.Show();
-        }
-
-        private void toolStripMenuItem8_Click(object sender, EventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(ProviderForm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-
-            _providerForm.WindowState = FormWindowState.Maximized;
-            _providerForm.ControlBox = false;
-            _providerForm.MdiParent = this;
-            _providerForm.Show();
-        }
-
-        private void toolStripMenuItem9_Click(object sender, EventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(EmployeeForm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-
-            _employeeForm.WindowState = FormWindowState.Maximized;
-            _employeeForm.ControlBox = false;
-            _employeeForm.MdiParent = this;
-            _employeeForm.Show();
-        }
-
-        private void toolStripMenuItem10_Click(object sender, EventArgs e)
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
             ShowAdministratorForm();
         }
@@ -236,6 +150,101 @@ namespace Clinic
             _userForm.ControlBox = false;
             _userForm.MdiParent = this;
             _userForm.Show();
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(EmployeeForm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            _employeeForm.toolStrip1.Visible = userRoles.Contains(RoleTypeEnum.Administrator.ToString());
+
+            _employeeForm.WindowState = FormWindowState.Maximized;
+            _employeeForm.ControlBox = false;
+            _employeeForm.MdiParent = this;
+            _employeeForm.Show();
+        }
+
+        private void toolStripMenuItem5_Click_1(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(ProviderForm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            _providerForm.toolStrip1.Visible = userRoles.Contains(RoleTypeEnum.Administrator.ToString()) || userRoles.Contains(RoleTypeEnum.Store.ToString());
+
+            _providerForm.WindowState = FormWindowState.Maximized;
+            _providerForm.ControlBox = false;
+            _providerForm.MdiParent = this;
+            _providerForm.Show();
+        }
+
+        private void toolStripMenuItem6_Click_1(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(CategoryForm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            _categoryForm.toolStrip1.Visible = userRoles.Contains(RoleTypeEnum.Administrator.ToString()) || userRoles.Contains(RoleTypeEnum.Store.ToString());
+
+            _categoryForm.WindowState = FormWindowState.Maximized;
+            _categoryForm.ControlBox = false;
+            _categoryForm.MdiParent = this;
+            _categoryForm.Show();
+        }
+
+        private void toolStripMenuItem7_Click_1(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(ProductForm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            _productForm.toolStrip1.Visible = userRoles.Contains(RoleTypeEnum.Administrator.ToString()) || userRoles.Contains(RoleTypeEnum.Store.ToString());
+
+            _productForm.WindowState = FormWindowState.Maximized;
+            _productForm.ControlBox = false;
+            _productForm.MdiParent = this;
+            _productForm.Show();
+        }
+
+        private void toolStripMenuItem8_Click_1(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(UnitForm))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+
+            _unitForm.toolStrip1.Visible = userRoles.Contains(RoleTypeEnum.Administrator.ToString()) || userRoles.Contains(RoleTypeEnum.Store.ToString());
+
+            _unitForm.WindowState = FormWindowState.Maximized;
+            _unitForm.ControlBox = false;
+            _unitForm.MdiParent = this;
+            _unitForm.Show();
         }
     }
 }

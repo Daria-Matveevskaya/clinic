@@ -162,7 +162,6 @@
         #endregion
 
         private DataGridView dataGridViewProducts;
-        private ToolStrip toolStrip1;
         private ToolStripButton toolStripButtonAdd;
         private ToolStripButton toolStripButtonEdit;
         private ToolStripButton toolStripButtonRemove;
@@ -172,5 +171,7 @@
         private DataGridViewTextBoxColumn createDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn categoryNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
+
+        public ToolStrip toolStrip1;
     }
 }

@@ -163,7 +163,6 @@
 
         private DataGridView dataGridViewProviders;
         private BindingSource providerBindingSource;
-        private ToolStrip toolStrip1;
         private ToolStripButton toolStripButtonAdd;
         private ToolStripButton toolStripButtonEdit;
         private ToolStripButton toolStripButtonRemove;
@@ -172,5 +171,7 @@
         private DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
+
+        public ToolStrip toolStrip1;
     }
 }

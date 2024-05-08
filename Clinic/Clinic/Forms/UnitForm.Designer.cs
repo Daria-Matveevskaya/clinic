@@ -137,12 +137,13 @@
         #endregion
 
         private DataGridView dataGridViewUnits;
-        private ToolStrip toolStrip1;
         private ToolStripButton toolStripButtonAdd;
         private ToolStripButton toolStripButtonEdit;
         private ToolStripButton toolStripButtonRemove;
         private BindingSource unitBindingSource;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn abbreviationDataGridViewTextBoxColumn;
+
+        public ToolStrip toolStrip1;
     }
 }

@@ -178,7 +178,6 @@
 
         #endregion
 
-        private ToolStrip toolStrip1;
         private ToolStripButton toolStripButtonAdd;
         private ToolStripButton toolStripButtonEdit;
         private ToolStripButton toolStripButtonRemove;
@@ -191,5 +190,7 @@
         private DataGridViewTextBoxColumn genderAsStringDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn genderDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn birthDateDataGridViewTextBoxColumn;
+
+        public ToolStrip toolStrip1;
     }
 }
