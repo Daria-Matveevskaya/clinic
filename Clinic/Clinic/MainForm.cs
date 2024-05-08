@@ -60,18 +60,21 @@ namespace Clinic
 
             if (userRoles.Contains(RoleTypeEnum.Store.ToString()))
             {
+                toolStripMenuItem1.BackColor = Color.LightBlue;
                 ShowStoreForm();
             }
             else
             {
                 if (userRoles.Contains(RoleTypeEnum.User.ToString()))
                 {
+                    toolStripMenuItem2.BackColor = Color.LightBlue;
                     ShowRequestForm();
                 }
                 else
                 {
                     if (userRoles.Contains(RoleTypeEnum.Administrator.ToString()))
                     {
+                        toolStripMenuItem3.BackColor = Color.LightBlue;
                         ShowAdministratorForm();
                     }
                 }
@@ -245,6 +248,17 @@ namespace Clinic
             _unitForm.ControlBox = false;
             _unitForm.MdiParent = this;
             _unitForm.Show();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            foreach (ToolStripMenuItem item in ((ToolStrip)sender).Items)
+            {
+                if (item != e.ClickedItem)
+                    item.BackColor = menuStrip1.BackColor;
+                else
+                    item.BackColor = Color.LightBlue;
+            }
         }
     }
 }

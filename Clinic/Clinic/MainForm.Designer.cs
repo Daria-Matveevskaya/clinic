@@ -64,10 +64,11 @@
             menuStrip1.Size = new Size(155, 383);
             menuStrip1.TabIndex = 2;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // toolStripMenuItem1
             // 
-            toolStripMenuItem1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            toolStripMenuItem1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(144, 27);
             toolStripMenuItem1.Text = "Склад";
@@ -75,7 +76,7 @@
             // 
             // toolStripMenuItem2
             // 
-            toolStripMenuItem2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            toolStripMenuItem2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             toolStripMenuItem2.Name = "toolStripMenuItem2";
             toolStripMenuItem2.Size = new Size(144, 27);
             toolStripMenuItem2.Text = "Заявки";
@@ -83,7 +84,7 @@
             // 
             // toolStripMenuItem3
             // 
-            toolStripMenuItem3.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            toolStripMenuItem3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             toolStripMenuItem3.Name = "toolStripMenuItem3";
             toolStripMenuItem3.Size = new Size(144, 27);
             toolStripMenuItem3.Text = "Пользователи";
