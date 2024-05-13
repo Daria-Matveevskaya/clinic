@@ -4,7 +4,6 @@ using Clinic.Data.Entities;
 using Clinic.Identity;
 using Clinic.Models;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
 using System.Data;
 
 namespace Clinic.Forms
@@ -34,7 +33,7 @@ namespace Clinic.Forms
             _applicationDbContext!.Products.Load();
             _applicationDbContext!.ExpenseItems.Load();
 
-            _applicationDbContext!.Expenses.Include(r => r.Employee).Load();
+            _applicationDbContext!.Expenses.Where(_ => _.EmployeeId == currentUser!.EmployeeId).Include(r => r.Employee).Load();
 
             expenseBindingSource.DataSource = _applicationDbContext!.Expenses.Local.ToBindingList();
 
@@ -55,11 +54,6 @@ namespace Clinic.Forms
             dataGridViewExpenseItems.Columns[0].Visible = false;
 
             _requestEditForm!.units = _applicationDbContext!.Units.Local.ToList();
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
         }
 
         private void RecalcStoreItems()
@@ -104,8 +98,9 @@ namespace Clinic.Forms
                 }));
 
                 _applicationDbContext!.SaveChanges();
+                RecalcStoreItems();
 
-                _applicationDbContext!.Entry((Expense)expenseBindingSource.Current).Reload();
+                _applicationDbContext!.Entry((Expense)expenseBindingSource.Current)?.Reload();
                 expenseItemsBindingSource.ResetBindings(false);
             }
         }
@@ -156,6 +151,7 @@ namespace Clinic.Forms
                 }
 
                 _applicationDbContext!.SaveChanges();
+                RecalcStoreItems();
             }
             else
             {
@@ -174,6 +170,7 @@ namespace Clinic.Forms
             {
                 expenseBindingSource.RemoveCurrent();
                 _applicationDbContext!.SaveChanges();
+                RecalcStoreItems();
             }
         }
 
@@ -194,7 +191,7 @@ namespace Clinic.Forms
         {
             if (_applicationDbContext != null)
             {
-                var expense = (Expense?)dataGridViewExpenses.CurrentRow?.DataBoundItem;
+                var expense = (Expense?)dataGridViewExpenses?.CurrentRow?.DataBoundItem;
 
                 if (expense != null)
                 {
