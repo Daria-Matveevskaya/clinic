@@ -33,11 +33,6 @@ namespace Clinic.Forms
             dataGridViewProviders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         }
 
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
-        }
-
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
             _providerEditForm!.provider = new Provider();

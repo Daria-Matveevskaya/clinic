@@ -3,7 +3,6 @@ using Clinic.Data.Entities;
 using Clinic.Models;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
 using Clinic.Common;
 using Clinic.Identity;
 
@@ -94,11 +93,6 @@ namespace Clinic.Forms
 
             _expenseEditForm!.units = _applicationDbContext!.Units.Local.ToList();
             _expenseEditForm!.employees = _applicationDbContext!.Employees.Local.ToList();
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
         }
 
         private void RecalcStoreItems()

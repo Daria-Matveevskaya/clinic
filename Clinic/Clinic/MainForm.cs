@@ -2,7 +2,6 @@ using Clinic.Common;
 using Clinic.Forms;
 using Clinic.Identity;
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel;
 
 namespace Clinic
 {
@@ -79,11 +78,6 @@ namespace Clinic
                     }
                 }
             }
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)

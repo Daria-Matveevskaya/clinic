@@ -1,7 +1,6 @@
 ﻿using Clinic.Data;
 using Clinic.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
 
 namespace Clinic.Forms
 {
@@ -36,11 +35,6 @@ namespace Clinic.Forms
             dataGridViewUsers.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             dataGridViewUsers.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
         }
 
         private void toolStripButtonUserAdd_Click(object sender, EventArgs e)

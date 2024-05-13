@@ -1,7 +1,6 @@
 ﻿using Clinic.Data;
 using Clinic.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
 
 namespace Clinic.Forms
 {
@@ -36,11 +35,6 @@ namespace Clinic.Forms
             dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             _productEditForm!.categories = this.categories;
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
         }
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
