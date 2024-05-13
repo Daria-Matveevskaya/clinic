@@ -2,7 +2,6 @@
 using Clinic.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
 
 namespace Clinic.Forms
 {
@@ -28,17 +27,13 @@ namespace Clinic.Forms
             _applicationDbContext!.Users.Include(r => r.Employee).Load();
         }
 
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
-        }
         private async void button1_ClickAsync(object sender, EventArgs e)
         {
             user = await _userManager.FindByNameAsync(textBox1.Text);
 
-            if (user != null)
+            if (user == null || (user != null && await _userManager.CheckPasswordAsync(user, textBox2.Text) == false))
             {
-                if (await _userManager.CheckPasswordAsync(user, textBox2.Text) == false)
+                if (await _userManager.CheckPasswordAsync(user!, textBox2.Text) == false)
                 {
                     MessageBox.Show("Неправильный логин или пароль!", "Ошибка входа!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
