@@ -53,6 +53,11 @@
             recipeItemsBindingSource = new BindingSource(components);
             panel2 = new Panel();
             dataGridViewRecipes = new DataGridView();
+            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            providerIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            providerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            providerNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             toolStrip2 = new ToolStrip();
             toolStripButtonRecipeAdd = new ToolStripButton();
             toolStripButtonRecipeEdit = new ToolStripButton();
@@ -96,11 +101,6 @@
             expenseDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             productDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             unitDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            providerIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            providerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            providerNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             panel1.SuspendLayout();
@@ -347,6 +347,45 @@
             dataGridViewRecipes.TabIndex = 0;
             dataGridViewRecipes.SelectionChanged += dataGridViewRecipes_SelectionChanged;
             // 
+            // idDataGridViewTextBoxColumn1
+            // 
+            idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn1.HeaderText = "Номер";
+            idDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
+            dateDataGridViewTextBoxColumn.HeaderText = "Создан";
+            dateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            // 
+            // providerIdDataGridViewTextBoxColumn
+            // 
+            providerIdDataGridViewTextBoxColumn.DataPropertyName = "ProviderId";
+            providerIdDataGridViewTextBoxColumn.HeaderText = "ProviderId";
+            providerIdDataGridViewTextBoxColumn.MinimumWidth = 6;
+            providerIdDataGridViewTextBoxColumn.Name = "providerIdDataGridViewTextBoxColumn";
+            providerIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // providerDataGridViewTextBoxColumn
+            // 
+            providerDataGridViewTextBoxColumn.DataPropertyName = "Provider";
+            providerDataGridViewTextBoxColumn.HeaderText = "Provider";
+            providerDataGridViewTextBoxColumn.MinimumWidth = 6;
+            providerDataGridViewTextBoxColumn.Name = "providerDataGridViewTextBoxColumn";
+            providerDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // providerNameDataGridViewTextBoxColumn
+            // 
+            providerNameDataGridViewTextBoxColumn.DataPropertyName = "ProviderName";
+            providerNameDataGridViewTextBoxColumn.FillWeight = 200F;
+            providerNameDataGridViewTextBoxColumn.HeaderText = "Поставщик";
+            providerNameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            providerNameDataGridViewTextBoxColumn.Name = "providerNameDataGridViewTextBoxColumn";
+            providerNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // toolStrip2
             // 
             toolStrip2.ImageScalingSize = new Size(20, 20);
@@ -548,6 +587,7 @@
             dataGridViewExpenses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewExpenses.Size = new Size(480, 384);
             dataGridViewExpenses.TabIndex = 0;
+            dataGridViewExpenses.RowPrePaint += dataGridViewExpenses_RowPrePaint;
             dataGridViewExpenses.SelectionChanged += dataGridViewExpenses_SelectionChanged;
             // 
             // idDataGridViewTextBoxColumn
@@ -724,45 +764,6 @@
             unitDataGridViewTextBoxColumn1.MinimumWidth = 6;
             unitDataGridViewTextBoxColumn1.Name = "unitDataGridViewTextBoxColumn1";
             unitDataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // idDataGridViewTextBoxColumn1
-            // 
-            idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn1.HeaderText = "Номер";
-            idDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-            dateDataGridViewTextBoxColumn.HeaderText = "Создан";
-            dateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            // 
-            // providerIdDataGridViewTextBoxColumn
-            // 
-            providerIdDataGridViewTextBoxColumn.DataPropertyName = "ProviderId";
-            providerIdDataGridViewTextBoxColumn.HeaderText = "ProviderId";
-            providerIdDataGridViewTextBoxColumn.MinimumWidth = 6;
-            providerIdDataGridViewTextBoxColumn.Name = "providerIdDataGridViewTextBoxColumn";
-            providerIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // providerDataGridViewTextBoxColumn
-            // 
-            providerDataGridViewTextBoxColumn.DataPropertyName = "Provider";
-            providerDataGridViewTextBoxColumn.HeaderText = "Provider";
-            providerDataGridViewTextBoxColumn.MinimumWidth = 6;
-            providerDataGridViewTextBoxColumn.Name = "providerDataGridViewTextBoxColumn";
-            providerDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // providerNameDataGridViewTextBoxColumn
-            // 
-            providerNameDataGridViewTextBoxColumn.DataPropertyName = "ProviderName";
-            providerNameDataGridViewTextBoxColumn.FillWeight = 200F;
-            providerNameDataGridViewTextBoxColumn.HeaderText = "Поставщик";
-            providerNameDataGridViewTextBoxColumn.MinimumWidth = 6;
-            providerNameDataGridViewTextBoxColumn.Name = "providerNameDataGridViewTextBoxColumn";
-            providerNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // StoreForm
             // 

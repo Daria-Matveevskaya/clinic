@@ -42,14 +42,14 @@ namespace Clinic.Forms
             dataGridViewExpenses.ReadOnly = true;
             dataGridViewExpenses.MultiSelect = false;
             dataGridViewExpenses.AllowUserToAddRows = false;
-            dataGridViewExpenses.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
-            dataGridViewExpenses.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewExpenses.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+            dataGridViewExpenses.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewExpenses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             dataGridViewExpenseItems.ReadOnly = true;
             dataGridViewExpenseItems.AllowUserToAddRows = false;
-            dataGridViewExpenseItems.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
-            dataGridViewExpenseItems.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewExpenseItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+            dataGridViewExpenseItems.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewExpenseItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewExpenseItems.Columns[0].Visible = false;
 

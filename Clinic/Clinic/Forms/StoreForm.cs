@@ -55,35 +55,35 @@ namespace Clinic.Forms
 
             dataGridViewStore.ReadOnly = true;
             dataGridViewStore.AllowUserToAddRows = false;
-            dataGridViewStore.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
-            dataGridViewStore.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewStore.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+            dataGridViewStore.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewStore.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             dataGridViewRecipes.ReadOnly = true;
             dataGridViewRecipes.MultiSelect = false;
             dataGridViewRecipes.AllowUserToAddRows = false;
-            dataGridViewRecipes.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
-            dataGridViewRecipes.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewRecipes.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+            dataGridViewRecipes.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewRecipes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             dataGridViewRecipeItems.ReadOnly = true;
             dataGridViewRecipeItems.AllowUserToAddRows = false;
-            dataGridViewRecipeItems.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
-            dataGridViewRecipeItems.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewRecipeItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+            dataGridViewRecipeItems.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewRecipeItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewRecipeItems.Columns[0].Visible = false;
 
             dataGridViewExpenses.ReadOnly = true;
             dataGridViewExpenses.MultiSelect = false;
             dataGridViewExpenses.AllowUserToAddRows = false;
-            dataGridViewExpenses.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
-            dataGridViewExpenses.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewExpenses.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+            dataGridViewExpenses.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewExpenses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
             dataGridViewExpenseItems.ReadOnly = true;
             dataGridViewExpenseItems.AllowUserToAddRows = false;
-            dataGridViewExpenseItems.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
-            dataGridViewExpenseItems.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewExpenseItems.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+            dataGridViewExpenseItems.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewExpenseItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewExpenseItems.Columns[0].Visible = false;
 
@@ -109,6 +109,14 @@ namespace Clinic.Forms
                     .Where(exp => exp.ProductName == rec.Key.ProductName && exp.ExpirationDate == rec.Key.ExpirationDate && exp.UnitName == rec.Key.UnitName)
                     .Sum(exp => exp.Quantity),
                 }).OrderBy(r => r.ProductName).ThenBy(r => r.ExpirationDate).ToList();
+
+            SetTabControlPageText();
+        }
+
+        private void SetTabControlPageText()
+        {
+            var newExpensesCount = _applicationDbContext!.Expenses.Where(_ => _.ExpDate == null)?.Count() ?? 0;
+            tabControl1.TabPages[2].Text = $"Расходы{(newExpensesCount > 0 ? $" ({newExpensesCount})" : string.Empty)}";
         }
 
         private void toolStripButtonRecipeAdd_Click(object sender, EventArgs e)
@@ -247,6 +255,7 @@ namespace Clinic.Forms
         {
             _expenseEditForm!.storeItems = (List<StoreModel>?)_storeBindingSource.DataSource;
             _expenseEditForm!.expense = (Expense)expenseBindingSource.Current;
+            _expenseEditForm!.expense.ExpDate = _expenseEditForm!.expense.ExpDate ?? DateTime.Now;
 
             if (_expenseEditForm.ShowDialog(this) == DialogResult.OK)
             {
@@ -338,15 +347,6 @@ namespace Clinic.Forms
             }
         }
 
-        private void dataGridViewStore_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            if ((bool)dataGridViewStore.Rows[e.RowIndex].Cells[4].Value)
-            {
-                dataGridViewStore.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.LightPink;
-                dataGridViewStore.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightPink;
-            }
-        }
-
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
             List<string> captions = new()
@@ -381,6 +381,32 @@ namespace Clinic.Forms
             };
 
             dataGridViewExpenseItems.ExportToExcel("Расход", captions, currentUser?.EmployeeFullName ?? string.Empty);
+        }
+
+        private void dataGridViewStore_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if ((bool)dataGridViewStore.Rows[e.RowIndex].Cells[4].Value)
+            {
+                dataGridViewStore.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightPink;
+                dataGridViewStore.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightPink;
+            }
+        }
+
+        private void dataGridViewExpenses_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (dataGridViewExpenses.Rows[e.RowIndex].Cells[2].Value == null)
+            {
+                dataGridViewExpenses.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightPink;
+                dataGridViewExpenses.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightPink;
+            }
+            else
+            {
+                if (dataGridViewExpenses.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.LightPink)
+                {
+                    dataGridViewExpenses.Rows[e.RowIndex].DefaultCellStyle.BackColor = dataGridViewExpenses.BackgroundColor;
+                    dataGridViewExpenses.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+                }
+            }
         }
     }
 }

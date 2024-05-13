@@ -43,14 +43,10 @@
             quantityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             expenseItemModelBindingSource = new BindingSource(components);
-            panel3 = new Panel();
-            label2 = new Label();
-            dateTimePicker1 = new DateTimePicker();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenseItems).BeginInit();
             ((System.ComponentModel.ISupportInitialize)unitBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)expenseItemModelBindingSource).BeginInit();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel2
@@ -96,13 +92,13 @@
             dataGridViewExpenseItems.Columns.AddRange(new DataGridViewColumn[] { isCheckedDataGridViewCheckBoxColumn, productNameDataGridViewTextBoxColumn, unitNameDataGridViewTextBoxColumn, expirationDateDataGridViewTextBoxColumn, Balance, quantityDataGridViewTextBoxColumn, idDataGridViewTextBoxColumn });
             dataGridViewExpenseItems.DataSource = expenseItemModelBindingSource;
             dataGridViewExpenseItems.Dock = DockStyle.Fill;
-            dataGridViewExpenseItems.Location = new Point(0, 56);
+            dataGridViewExpenseItems.Location = new Point(0, 0);
             dataGridViewExpenseItems.Name = "dataGridViewExpenseItems";
             dataGridViewExpenseItems.RowHeadersVisible = false;
             dataGridViewExpenseItems.RowHeadersWidth = 51;
             dataGridViewExpenseItems.RowTemplate.Height = 29;
             dataGridViewExpenseItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewExpenseItems.Size = new Size(800, 394);
+            dataGridViewExpenseItems.Size = new Size(800, 450);
             dataGridViewExpenseItems.TabIndex = 6;
             dataGridViewExpenseItems.CellContentClick += dataGridViewExpenseItems_CellContentClick;
             dataGridViewExpenseItems.RowPrePaint += dataGridViewExpenseItems_RowPrePaint;
@@ -175,32 +171,6 @@
             // 
             expenseItemModelBindingSource.DataSource = typeof(Models.ExpenseItemModel);
             // 
-            // panel3
-            // 
-            panel3.Controls.Add(label2);
-            panel3.Controls.Add(dateTimePicker1);
-            panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(0, 0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(800, 56);
-            panel3.TabIndex = 8;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(488, 22);
-            label2.Name = "label2";
-            label2.Size = new Size(44, 20);
-            label2.TabIndex = 6;
-            label2.Text = "Дата:";
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(538, 15);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 27);
-            dateTimePicker1.TabIndex = 5;
-            // 
             // RequestEditForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -208,15 +178,12 @@
             ClientSize = new Size(800, 450);
             Controls.Add(panel2);
             Controls.Add(dataGridViewExpenseItems);
-            Controls.Add(panel3);
             Name = "RequestEditForm";
             Text = "Заявка";
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewExpenseItems).EndInit();
             ((System.ComponentModel.ISupportInitialize)unitBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)expenseItemModelBindingSource).EndInit();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -226,9 +193,6 @@
         private Button button2;
         private Button button1;
         private DataGridView dataGridViewExpenseItems;
-        private Panel panel3;
-        private Label label2;
-        private DateTimePicker dateTimePicker1;
         private BindingSource expenseItemModelBindingSource;
         private BindingSource unitBindingSource;
         private DataGridViewCheckBoxColumn isCheckedDataGridViewCheckBoxColumn;

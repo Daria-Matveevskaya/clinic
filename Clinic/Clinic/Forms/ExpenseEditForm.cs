@@ -28,7 +28,7 @@ namespace Clinic.Forms
             dateTimePicker1.DataBindings.Clear();
             comboBox1.DataBindings.Clear();
 
-            dateTimePicker1.DataBindings.Add("Text", expense, "Date", true, DataSourceUpdateMode.OnPropertyChanged);
+            dateTimePicker1.DataBindings.Add("Text", expense, "ExpDate", true, DataSourceUpdateMode.OnPropertyChanged);
             comboBox1.DataBindings.Add("SelectedValue", expense, "EmployeeId", true, DataSourceUpdateMode.OnPropertyChanged);
 
             comboBox1.DataSource = employees;

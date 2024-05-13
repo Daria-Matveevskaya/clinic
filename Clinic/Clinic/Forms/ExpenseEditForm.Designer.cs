@@ -192,31 +192,31 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(107, 14);
+            comboBox1.Location = new Point(94, 14);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(364, 28);
+            comboBox1.Size = new Size(304, 28);
             comboBox1.TabIndex = 7;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(488, 22);
+            label2.Location = new Point(418, 22);
             label2.Name = "label2";
-            label2.Size = new Size(44, 20);
+            label2.Size = new Size(100, 20);
             label2.TabIndex = 6;
-            label2.Text = "Дата:";
+            label2.Text = "Дата выдачи:";
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(538, 15);
+            dateTimePicker1.Location = new Point(524, 15);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 27);
+            dateTimePicker1.Size = new Size(273, 27);
             dateTimePicker1.TabIndex = 5;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 22);
+            label1.Location = new Point(3, 22);
             label1.Name = "label1";
             label1.Size = new Size(85, 20);
             label1.TabIndex = 4;

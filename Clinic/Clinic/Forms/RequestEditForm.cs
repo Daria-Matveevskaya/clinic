@@ -24,10 +24,6 @@ namespace Clinic.Forms
 
             unitBindingSource.DataSource = units;
 
-            dateTimePicker1.DataBindings.Clear();
-
-            dateTimePicker1.DataBindings.Add("Text", expense, "Date", true, DataSourceUpdateMode.OnPropertyChanged);
-
             expenseItemModels = storeItems!.Select(p => new ExpenseItemModel
             {
                 ProductName = p.ProductName,
